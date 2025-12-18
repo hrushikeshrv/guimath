@@ -1,4 +1,6 @@
 // Draws the editor UI and canvas inside the given div
+import * as ExpressionBackend from './expression-backend.js';
+import Cursor from './cursor.js';
 
 const symbolLatexMap = {
     // Lowercase greek letters
@@ -110,16 +112,16 @@ const symbolLatexMap = {
 };
 
 const functionComponentMap = {
-    lim: Limit,
-    sqrt: Sqrt,
-    nsqrt: NthRoot,
-    sub: Subscript,
-    sup: Superscript,
-    subsup: SubSupRight,
-    frac: Fraction,
+    lim: ExpressionBackend.Limit,
+    sqrt: ExpressionBackend.Sqrt,
+    nsqrt: ExpressionBackend.NthRoot,
+    sub: ExpressionBackend.Subscript,
+    sup: ExpressionBackend.Superscript,
+    subsup: ExpressionBackend.SubSupRight,
+    frac: ExpressionBackend.Fraction,
 };
 
-class GuiMath {
+export default class GuiMath {
     constructor(
         elementSelector,
         successCallback = function (latex, instance) {},
@@ -132,7 +134,7 @@ class GuiMath {
         this.isPersistent = options.isPersistent || false;
         this.successCallback = successCallback;
         this.eqnHistory = [];
-        this.expression = new Expression();
+        this.expression = new ExpressionBackend.Expression();
         this.isMobileDevice = 'ontouchstart' in document.documentElement;
         this.pseudoMobileKeyboard = null;
         this.showUI = () => {
@@ -179,7 +181,7 @@ class GuiMath {
         symbols.forEach(symbol => {
             symbol.addEventListener('click', () => {
                 if (symbol.dataset.latexData in symbolLatexMap) {
-                    let _ = new GuiMathSymbol(
+                    let _ = new ExpressionBackend.GuiMathSymbol(
                         this.cursor.block,
                         symbolLatexMap[symbol.dataset.latexData],
                     );
@@ -194,15 +196,16 @@ class GuiMath {
                 let _;
                 if (func.dataset.templateType !== 'null') {
                     if (func.dataset.templateType === 'three') {
-                        _ = new TemplateThreeBlockComponent(
+                        _ = new ExpressionBackend.TemplateThreeBlockComponent(
                             this.cursor.block,
                             func.dataset.latexData,
                         );
                     } else if (func.dataset.templateType === 'trigonometric') {
-                        _ = new TrigonometricTwoBlockComponent(
-                            this.cursor.block,
-                            func.dataset.latexData,
-                        );
+                        _ =
+                            new ExpressionBackend.TrigonometricTwoBlockComponent(
+                                this.cursor.block,
+                                func.dataset.latexData,
+                            );
                     }
                 } else {
                     _ = new functionComponentMap[func.dataset.functionId](
@@ -302,7 +305,7 @@ class GuiMath {
     clearEquation() {
         // push this entire expression onto the eqnHistory array so the user can access it again
         this.eqnHistory.push(this.expression);
-        this.expression = new Expression();
+        this.expression = new ExpressionBackend.Expression();
         this.cursor.expression = this.expression;
         this.cursor.block = null;
         this.cursor.component = null;
@@ -387,7 +390,10 @@ class GuiMath {
         if (typeset) MathJax.typesetPromise([el]).then(() => {});
 
         el.addEventListener('click', () => {
-            let _ = new GuiMathSymbol(this.cursor.block, latexData);
+            let _ = new ExpressionBackend.GuiMathSymbol(
+                this.cursor.block,
+                latexData,
+            );
             this.cursor.addComponent(_);
             this.cursor.updateDisplay();
         });
@@ -455,3 +461,5 @@ class GuiMath {
         }
     }
 }
+
+GuiMath.ExpressionBackend = ExpressionBackend;

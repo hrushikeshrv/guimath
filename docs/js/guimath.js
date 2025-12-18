@@ -6,7 +6,7 @@
  * Thin wrapper around the Component class that collects all the components together in an Expression
  * that can be easily rendered and converted to LaTeX.
  **/
-class Expression {
+export class Expression {
     constructor(nestingDepth = 0) {
         this.components = [];
         this.nestingDepth = nestingDepth;
@@ -43,7 +43,7 @@ class Expression {
  * have a variable number of 'children'. An element in a Block's children array can either be a string
  * or another Component, allowing for nesting of Components.
  */
-class Block {
+export class Block {
     constructor(parent) {
         /**
          * @param parent: The component to which this block belongs
@@ -87,7 +87,7 @@ class Block {
  * to customize the LaTeX generated. You can define your own child classes to add support for
  * LaTeX syntax not yet supported.
  */
-class Component {
+export class Component {
     constructor(blocks = [], parent = null) {
         /**
          * @param blocks: The blocks contained by the component
@@ -122,7 +122,7 @@ class Component {
  * @class
  * A component with one block
  */
-class OneBlockComponent extends Component {
+export class OneBlockComponent extends Component {
     constructor(parent) {
         let b1 = new Block();
         super([b1], parent);
@@ -134,7 +134,7 @@ class OneBlockComponent extends Component {
  * @class
  * A component with two blocks
  */
-class TwoBlockComponent extends Component {
+export class TwoBlockComponent extends Component {
     constructor(parent) {
         let b1 = new Block();
         let b2 = new Block();
@@ -150,7 +150,7 @@ class TwoBlockComponent extends Component {
  * takes in some LaTeX data, since that is mostly the only thing that varies between functions, and that would
  * make this file much DRYer
  */
-class ThreeBlockComponent extends Component {
+export class ThreeBlockComponent extends Component {
     constructor(parent) {
         let b1 = new Block();
         let b2 = new Block();
@@ -169,7 +169,7 @@ class ThreeBlockComponent extends Component {
  * We don't define a two block template component because the LaTeX generation for two block components
  * differs significantly from component to component.
  */
-class TemplateThreeBlockComponent extends ThreeBlockComponent {
+export class TemplateThreeBlockComponent extends ThreeBlockComponent {
     constructor(parent, latexData) {
         super(parent);
         this.latexData = latexData;
@@ -189,7 +189,7 @@ class TemplateThreeBlockComponent extends ThreeBlockComponent {
  * empty block while rendering, so users will be able to raise the function to any power without us having to
  * define a separate template component to support exponents for trigonometric components.
  */
-class TrigonometricTwoBlockComponent extends TwoBlockComponent {
+export class TrigonometricTwoBlockComponent extends TwoBlockComponent {
     constructor(parent, latexData) {
         super(parent);
         this.latexData = latexData;
@@ -207,7 +207,7 @@ class TrigonometricTwoBlockComponent extends TwoBlockComponent {
  * A component with only text and no symbol, function of other LaTeX data. Safe to assume that
  * it only has one block with a string inside. Equivalent to a single block.
  */
-class TextComponent extends Component {
+export class TextComponent extends Component {
     constructor(parent) {
         let b1 = new Block();
         super([b1], parent);
@@ -224,7 +224,7 @@ class TextComponent extends Component {
  * A symbol which is just some latex with no arguments to be inserted into the expression.
  */
 // TODO - Add support for the backslash character as a symbol
-class GuiMathSymbol extends Component {
+export class GuiMathSymbol extends Component {
     constructor(parent, latexData) {
         super([], parent);
         this.latexData = latexData;
@@ -239,7 +239,7 @@ class GuiMathSymbol extends Component {
  * @class
  * A framebox
  */
-class FrameBox extends OneBlockComponent {
+export class FrameBox extends OneBlockComponent {
     toLatex() {
         return `\\boxed{${this.blocks[0].toLatex()}}`;
     }
@@ -249,7 +249,7 @@ class FrameBox extends OneBlockComponent {
  * @class
  * The limit function
  */
-class Limit extends TwoBlockComponent {
+export class Limit extends TwoBlockComponent {
     toLatex() {
         return `\\lim_{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
     }
@@ -259,7 +259,7 @@ class Limit extends TwoBlockComponent {
  * @class
  * A fraction
  */
-class Fraction extends TwoBlockComponent {
+export class Fraction extends TwoBlockComponent {
     toLatex() {
         return `\\frac{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
     }
@@ -269,7 +269,7 @@ class Fraction extends TwoBlockComponent {
  * @class
  * Subscript
  */
-class Subscript extends TwoBlockComponent {
+export class Subscript extends TwoBlockComponent {
     toLatex() {
         return `{${this.blocks[0].toLatex()}}_{${this.blocks[1].toLatex()}}`;
     }
@@ -280,7 +280,7 @@ class Subscript extends TwoBlockComponent {
  * Superscript
  */
 
-class Superscript extends TwoBlockComponent {
+export class Superscript extends TwoBlockComponent {
     toLatex() {
         return `{${this.blocks[0].toLatex()}}^{${this.blocks[1].toLatex()}}`;
     }
@@ -290,7 +290,7 @@ class Superscript extends TwoBlockComponent {
  * @class
  * Some text with both a subscript as well as a superscript on the left side
  */
-class SubSupRight extends ThreeBlockComponent {
+export class SubSupRight extends ThreeBlockComponent {
     toLatex() {
         return `{${this.blocks[0].toLatex()}}_{${this.blocks[1].toLatex()}}^{${this.blocks[2].toLatex()}}`;
     }
@@ -300,7 +300,7 @@ class SubSupRight extends ThreeBlockComponent {
  * @class
  * The square root function
  */
-class Sqrt extends OneBlockComponent {
+export class Sqrt extends OneBlockComponent {
     toLatex() {
         return `\\sqrt{${this.blocks[0].toLatex()}}`;
     }
@@ -310,11 +310,13 @@ class Sqrt extends OneBlockComponent {
  * @class
  * The nth root function
  */
-class NthRoot extends TwoBlockComponent {
+export class NthRoot extends TwoBlockComponent {
     toLatex() {
         return `\\sqrt[${this.blocks[0].toLatex()}]{${this.blocks[1].toLatex()}}`;
     }
 }
+
+import * as ExpressionBackend from './expression-backend';
 // Listens for keypress and modifies the Expression accordingly
 
 const characters = new Set();
@@ -326,7 +328,7 @@ for (let char of 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
  * @class
  *
  */
-class Cursor {
+export default class Cursor {
     constructor(expression, display) {
         this.expression = expression;
         this.block = null;
@@ -343,7 +345,7 @@ class Cursor {
         if (this.block === null) {
             // Safe to assume we are not in any block and are between two components in the
             // Expression or at the start or end of the Expression.
-            const _ = new TextComponent(this.block);
+            const _ = new ExpressionBackend.TextComponent(this.block);
             _.blocks[0].addChild(text);
             this.expression.add(_, Math.ceil(this.position));
 
@@ -352,7 +354,7 @@ class Cursor {
         } else {
             // We are in some Block in some Component of the Expression.
             // The child we are in changes, the component, block, and position remain the same
-            const _ = new TextComponent(this.block);
+            const _ = new ExpressionBackend.TextComponent(this.block);
             _.blocks[0].addChild(text);
             this.block.addChild(_, Math.ceil(this.child));
             this.child++;
@@ -368,8 +370,8 @@ class Cursor {
             this.expression.add(component, Math.ceil(this.position));
             this.position = Math.ceil(this.position);
             if (
-                component instanceof GuiMathSymbol ||
-                component instanceof TextComponent
+                component instanceof ExpressionBackend.GuiMathSymbol ||
+                component instanceof ExpressionBackend.TextComponent
             ) {
                 this.block = null;
                 this.component = null;
@@ -385,8 +387,8 @@ class Cursor {
             this.block.addChild(component, Math.ceil(this.child));
             // this.child += 0.5;
             if (
-                component instanceof GuiMathSymbol ||
-                component instanceof TextComponent
+                component instanceof ExpressionBackend.GuiMathSymbol ||
+                component instanceof ExpressionBackend.TextComponent
             ) {
                 // If the component we just inserted is a Symbol or Text, don't move into it and increment
                 // this.child by 0.5 again
@@ -407,8 +409,8 @@ class Cursor {
             let prevComponent =
                 this.expression.components[Math.floor(this.position)];
             if (
-                prevComponent instanceof TextComponent ||
-                prevComponent instanceof GuiMathSymbol
+                prevComponent instanceof ExpressionBackend.TextComponent ||
+                prevComponent instanceof ExpressionBackend.GuiMathSymbol
             ) {
                 this.position = Math.floor(this.position);
                 this.component = prevComponent;
@@ -456,13 +458,19 @@ class Cursor {
         } else if (event.key === 'Enter') {
             document.getElementById('guimath_save_equation').click();
         } else if (event.key === ' ') {
-            let _ = new GuiMathSymbol(this.block, '\\:\\:');
+            let _ = new ExpressionBackend.GuiMathSymbol(this.block, '\\:\\:');
             this.addComponent(_);
         } else if (event.key === '\\') {
-            let _ = new GuiMathSymbol(this.block, '\\backslash');
+            let _ = new ExpressionBackend.GuiMathSymbol(
+                this.block,
+                '\\backslash',
+            );
             this.addComponent(_);
         } else if (['$', '#', '%', '&', '_', '{', '}'].includes(event.key)) {
-            let _ = new GuiMathSymbol(this.block, `\\${event.key}`);
+            let _ = new ExpressionBackend.GuiMathSymbol(
+                this.block,
+                `\\${event.key}`,
+            );
             this.addComponent(_);
         }
         this.updateDisplay();
@@ -476,9 +484,9 @@ class Cursor {
             // If the component at this index is a GuiMathSymbol or a TextComponent, skip it and go to the next
             if (
                 this.expression.components[this.position] instanceof
-                    TextComponent ||
+                    ExpressionBackend.TextComponent ||
                 this.expression.components[this.position] instanceof
-                    GuiMathSymbol
+                    ExpressionBackend.GuiMathSymbol
             ) {
                 // If the component to the right of the cursor is a TextComponent, we skip it and
                 // move one more position to the right and into the space between two components
@@ -526,8 +534,8 @@ class Cursor {
                 // Detect the component to the right
                 let nextComponent = this.block.children[Math.ceil(this.child)];
                 if (
-                    nextComponent instanceof TextComponent ||
-                    nextComponent instanceof GuiMathSymbol
+                    nextComponent instanceof ExpressionBackend.TextComponent ||
+                    nextComponent instanceof ExpressionBackend.GuiMathSymbol
                 ) {
                     // If it is a TextComponent or Symbol, skip it and move on
                     this.child++;
@@ -547,9 +555,9 @@ class Cursor {
             // If the component at this index is a GuiMathSymbol or a TextComponent, we skip this component and go one more step backward
             if (
                 this.expression.components[this.position] instanceof
-                    TextComponent ||
+                    ExpressionBackend.TextComponent ||
                 this.expression.components[this.position] instanceof
-                    GuiMathSymbol
+                    ExpressionBackend.GuiMathSymbol
             ) {
                 // If the component to the left of the cursor is a TextComponent, we skip it and
                 // move one more position to the left and into the space between two components
@@ -598,8 +606,8 @@ class Cursor {
                 // Detect the component to the left
                 let prevComponent = this.block.children[Math.floor(this.child)];
                 if (
-                    prevComponent instanceof TextComponent ||
-                    prevComponent instanceof GuiMathSymbol
+                    prevComponent instanceof ExpressionBackend.TextComponent ||
+                    prevComponent instanceof ExpressionBackend.GuiMathSymbol
                 ) {
                     // If it is a TextComponent or Symbol, skip it and move on
                     this.child--;
@@ -623,8 +631,8 @@ class Cursor {
             let prevComponent =
                 this.expression.components[Math.floor(this.position)];
             if (
-                prevComponent instanceof TextComponent ||
-                prevComponent instanceof GuiMathSymbol
+                prevComponent instanceof ExpressionBackend.TextComponent ||
+                prevComponent instanceof ExpressionBackend.GuiMathSymbol
             ) {
                 this.removeComponent();
             } else {
@@ -662,10 +670,10 @@ class Cursor {
         // Generate LaTeX to show in the display by adding a caret character to the expression.
         // This is not the real LaTeX of the expression but the LaTeX resulting after we add
         // a caret as a | character in the expression
-        let caret = new TextComponent(this.block);
+        let caret = new ExpressionBackend.TextComponent(this.block);
         caret.blocks[0].addChild('|');
 
-        let frame = new FrameBox(this.block);
+        let frame = new ExpressionBackend.FrameBox(this.block);
 
         if (this.block === null) {
             // If we are not in any block, we just add the caret, generate latex
@@ -709,6 +717,8 @@ class Cursor {
 }
 
 // Draws the editor UI and canvas inside the given div
+import * as ExpressionBackend from './expression-backend.js';
+import Cursor from './cursor.js';
 
 const symbolLatexMap = {
     // Lowercase greek letters
@@ -820,16 +830,16 @@ const symbolLatexMap = {
 };
 
 const functionComponentMap = {
-    lim: Limit,
-    sqrt: Sqrt,
-    nsqrt: NthRoot,
-    sub: Subscript,
-    sup: Superscript,
-    subsup: SubSupRight,
-    frac: Fraction,
+    lim: ExpressionBackend.Limit,
+    sqrt: ExpressionBackend.Sqrt,
+    nsqrt: ExpressionBackend.NthRoot,
+    sub: ExpressionBackend.Subscript,
+    sup: ExpressionBackend.Superscript,
+    subsup: ExpressionBackend.SubSupRight,
+    frac: ExpressionBackend.Fraction,
 };
 
-class GuiMath {
+export default class GuiMath {
     constructor(
         elementSelector,
         successCallback = function (latex, instance) {},
@@ -842,7 +852,7 @@ class GuiMath {
         this.isPersistent = options.isPersistent || false;
         this.successCallback = successCallback;
         this.eqnHistory = [];
-        this.expression = new Expression();
+        this.expression = new ExpressionBackend.Expression();
         this.isMobileDevice = 'ontouchstart' in document.documentElement;
         this.pseudoMobileKeyboard = null;
         this.showUI = () => {
@@ -889,7 +899,7 @@ class GuiMath {
         symbols.forEach(symbol => {
             symbol.addEventListener('click', () => {
                 if (symbol.dataset.latexData in symbolLatexMap) {
-                    let _ = new GuiMathSymbol(
+                    let _ = new ExpressionBackend.GuiMathSymbol(
                         this.cursor.block,
                         symbolLatexMap[symbol.dataset.latexData],
                     );
@@ -904,15 +914,16 @@ class GuiMath {
                 let _;
                 if (func.dataset.templateType !== 'null') {
                     if (func.dataset.templateType === 'three') {
-                        _ = new TemplateThreeBlockComponent(
+                        _ = new ExpressionBackend.TemplateThreeBlockComponent(
                             this.cursor.block,
                             func.dataset.latexData,
                         );
                     } else if (func.dataset.templateType === 'trigonometric') {
-                        _ = new TrigonometricTwoBlockComponent(
-                            this.cursor.block,
-                            func.dataset.latexData,
-                        );
+                        _ =
+                            new ExpressionBackend.TrigonometricTwoBlockComponent(
+                                this.cursor.block,
+                                func.dataset.latexData,
+                            );
                     }
                 } else {
                     _ = new functionComponentMap[func.dataset.functionId](
@@ -1012,7 +1023,7 @@ class GuiMath {
     clearEquation() {
         // push this entire expression onto the eqnHistory array so the user can access it again
         this.eqnHistory.push(this.expression);
-        this.expression = new Expression();
+        this.expression = new ExpressionBackend.Expression();
         this.cursor.expression = this.expression;
         this.cursor.block = null;
         this.cursor.component = null;
@@ -1097,7 +1108,10 @@ class GuiMath {
         if (typeset) MathJax.typesetPromise([el]).then(() => {});
 
         el.addEventListener('click', () => {
-            let _ = new GuiMathSymbol(this.cursor.block, latexData);
+            let _ = new ExpressionBackend.GuiMathSymbol(
+                this.cursor.block,
+                latexData,
+            );
             this.cursor.addComponent(_);
             this.cursor.updateDisplay();
         });
@@ -1165,3 +1179,5 @@ class GuiMath {
         }
     }
 }
+
+GuiMath.ExpressionBackend = ExpressionBackend;

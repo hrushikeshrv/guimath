@@ -2,13 +2,21 @@
   "name": "guimath",
   "version": "0.1.0",
   "description": "Create mathematical equations on webpages using a GUI",
-  "main": "index.js",
+  "main": "dist/guimath.umd.js",
+  "module": "dist/guimath.esm.js",
+  "unpkg": "dist/guimath.min.js",
+  "style": "dist/guimath.css",
+  "files": [
+    "dist"
+  ],
   "directories": {
     "doc": "docs"
   },
   "scripts": {
     "test": "webpack",
-    "build": "webpack"
+    "build:src": "grunt",
+    "build:dist": "rollup -c rollup.config.js",
+    "build": "npm run build:src && npm run build:dist"
   },
   "repository": {
     "type": "git",
@@ -33,6 +41,8 @@
     "grunt-contrib-htmlmin": "^3.1.0",
     "grunt-contrib-jshint": "^3.1.1",
     "grunt-contrib-uglify": "^5.0.1",
+    "rollup": "^4.53.5",
+    "rollup-plugin-copy": "^3.5.0",
     "webpack": "^5.56.1",
     "webpack-cli": "^4.8.0"
   }

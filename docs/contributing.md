@@ -155,3 +155,18 @@ Once you have finished working on your patch and verified that your issue has be
 The GuiMath bundle is created by combining the constituent source files - `cursor.js`, `expression-backend.js`, and `ui.js` into `guimath.js`. This process is automated using Grunt, and a Gruntfile has been configured in the repository root. 
 
 However, you **do not** need to generate and push these files to your patch. Only modify and push changes to the relevant source files.
+
+## Building GuiMath
+
+{: .note}
+> You do not need to do this step to submit a patch. This is only needed if you want to create your own production build of GuiMath for distribution.
+
+To create a production build of GuiMath, make sure you have [Grunt installed](https://gruntjs.com/getting-started) and run the following command from the repository root -
+
+```bash
+npm run build
+```
+
+This will create the production build files in the `dist/` directory.
+
+If you have made changes to the editor or form input HTML, see the sections above on [Working With The Editor's HTML](#working-with-the-editors-html) and [Working With The Form Input's HTML](#working-with-the-form-inputs-html) to inject the updated HTML into the source files before running the build command.

@@ -22,14 +22,6 @@ module.exports = function (grunt) {
             },
         },
         concat: {
-            build: {
-                src: [
-                    'src/modules/expression-backend.js',
-                    'src/modules/cursor.js',
-                    'src/modules/ui.js',
-                ],
-                dest: 'src/guimath.js',
-            },
             buildExample: {
                 src: [
                     'src/modules/expression-backend.js',
@@ -44,7 +36,7 @@ module.exports = function (grunt) {
                 banner: '/*! guimath <%= grunt.template.today("yyyy-mm-dd") %> | (C) Hrushikesh Vaidya (@hrushikeshrv) | MIT License */',
             },
             build: {
-                src: 'src/guimath.js',
+                src: 'src/index.js',
                 dest: 'src/guimath.min.js',
             },
         },

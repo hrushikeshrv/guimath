@@ -7,9 +7,7 @@ nav_order: 1
 # What is GuiMath?
 GuiMath allows your users to create mathematical equations on webpages using a GUI.
 
-{: .warning}
-> Note
-> 
+{: .note}
 > This project was previously developed as MJXGUI and distributed as a standalone script. With this release, the library has been renamed and repackaged as GuiMath, starting from a new release cycle at v0.1.0.
 > 
 > GuiMath v0.1.0 is equivalent to MJXGUI v2.1.0
