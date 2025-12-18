@@ -28,7 +28,7 @@ module.exports = function (grunt) {
                     'src/modules/cursor.js',
                     'src/modules/ui.js',
                 ],
-                dest: 'src/mjxgui.js',
+                dest: 'src/guimath.js',
             },
             buildExample: {
                 src: [
@@ -36,7 +36,7 @@ module.exports = function (grunt) {
                     'src/modules/cursor.js',
                     'src/modules/ui.js',
                 ],
-                dest: 'docs/js/mjxgui.js',
+                dest: 'docs/js/guimath.js',
             },
         },
         uglify: {
@@ -44,8 +44,8 @@ module.exports = function (grunt) {
                 banner: '/*! guimath <%= grunt.template.today("yyyy-mm-dd") %> | (C) Hrushikesh Vaidya (@hrushikeshrv) | MIT License */',
             },
             build: {
-                src: 'src/mjxgui.js',
-                dest: 'src/mjxgui.min.js',
+                src: 'src/guimath.js',
+                dest: 'src/guimath.min.js',
             },
         },
     });

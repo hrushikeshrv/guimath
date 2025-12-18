@@ -51,7 +51,7 @@ class Cursor {
             this.expression.add(component, Math.ceil(this.position));
             this.position = Math.ceil(this.position);
             if (
-                component instanceof MJXGUISymbol ||
+                component instanceof GuiMathSymbol ||
                 component instanceof TextComponent
             ) {
                 this.block = null;
@@ -68,7 +68,7 @@ class Cursor {
             this.block.addChild(component, Math.ceil(this.child));
             // this.child += 0.5;
             if (
-                component instanceof MJXGUISymbol ||
+                component instanceof GuiMathSymbol ||
                 component instanceof TextComponent
             ) {
                 // If the component we just inserted is a Symbol or Text, don't move into it and increment
@@ -91,7 +91,7 @@ class Cursor {
                 this.expression.components[Math.floor(this.position)];
             if (
                 prevComponent instanceof TextComponent ||
-                prevComponent instanceof MJXGUISymbol
+                prevComponent instanceof GuiMathSymbol
             ) {
                 this.position = Math.floor(this.position);
                 this.component = prevComponent;
@@ -137,15 +137,15 @@ class Cursor {
         } else if (event.key === 'Backspace') {
             this.backspace();
         } else if (event.key === 'Enter') {
-            document.getElementById('mjxgui_save_equation').click();
+            document.getElementById('guimath_save_equation').click();
         } else if (event.key === ' ') {
-            let _ = new MJXGUISymbol(this.block, '\\:\\:');
+            let _ = new GuiMathSymbol(this.block, '\\:\\:');
             this.addComponent(_);
         } else if (event.key === '\\') {
-            let _ = new MJXGUISymbol(this.block, '\\backslash');
+            let _ = new GuiMathSymbol(this.block, '\\backslash');
             this.addComponent(_);
         } else if (['$', '#', '%', '&', '_', '{', '}'].includes(event.key)) {
-            let _ = new MJXGUISymbol(this.block, `\\${event.key}`);
+            let _ = new GuiMathSymbol(this.block, `\\${event.key}`);
             this.addComponent(_);
         }
         this.updateDisplay();
@@ -156,12 +156,12 @@ class Cursor {
         if (this.position >= maxPos) return;
         else if (this.block === null) {
             this.position += 0.5;
-            // If the component at this index is a MJXGUISymbol or a TextComponent, skip it and go to the next
+            // If the component at this index is a GuiMathSymbol or a TextComponent, skip it and go to the next
             if (
                 this.expression.components[this.position] instanceof
                     TextComponent ||
                 this.expression.components[this.position] instanceof
-                    MJXGUISymbol
+                    GuiMathSymbol
             ) {
                 // If the component to the right of the cursor is a TextComponent, we skip it and
                 // move one more position to the right and into the space between two components
@@ -210,7 +210,7 @@ class Cursor {
                 let nextComponent = this.block.children[Math.ceil(this.child)];
                 if (
                     nextComponent instanceof TextComponent ||
-                    nextComponent instanceof MJXGUISymbol
+                    nextComponent instanceof GuiMathSymbol
                 ) {
                     // If it is a TextComponent or Symbol, skip it and move on
                     this.child++;
@@ -227,12 +227,12 @@ class Cursor {
         if (this.position <= -0.5) return;
         else if (this.block === null) {
             this.position -= 0.5;
-            // If the component at this index is a MJXGUISymbol or a TextComponent, we skip this component and go one more step backward
+            // If the component at this index is a GuiMathSymbol or a TextComponent, we skip this component and go one more step backward
             if (
                 this.expression.components[this.position] instanceof
                     TextComponent ||
                 this.expression.components[this.position] instanceof
-                    MJXGUISymbol
+                    GuiMathSymbol
             ) {
                 // If the component to the left of the cursor is a TextComponent, we skip it and
                 // move one more position to the left and into the space between two components
@@ -282,7 +282,7 @@ class Cursor {
                 let prevComponent = this.block.children[Math.floor(this.child)];
                 if (
                     prevComponent instanceof TextComponent ||
-                    prevComponent instanceof MJXGUISymbol
+                    prevComponent instanceof GuiMathSymbol
                 ) {
                     // If it is a TextComponent or Symbol, skip it and move on
                     this.child--;
@@ -307,7 +307,7 @@ class Cursor {
                 this.expression.components[Math.floor(this.position)];
             if (
                 prevComponent instanceof TextComponent ||
-                prevComponent instanceof MJXGUISymbol
+                prevComponent instanceof GuiMathSymbol
             ) {
                 this.removeComponent();
             } else {

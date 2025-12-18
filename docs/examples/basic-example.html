@@ -47,13 +47,13 @@
         <!--    <script src="../../src/modules/expression-backend.js"></script>-->
         <!--    <script src="../../src/modules/cursor.js"></script>-->
         <!--    <script src="../../src/modules/ui.js"></script>-->
-        <link rel="stylesheet" href="../css/mjxgui.css" />
-        <script src="../js/mjxgui.js"></script>
-        <title>MJXGUI Demo</title>
+        <link rel="stylesheet" href="../css/guimath.css" />
+        <script src="../js/guimath.js"></script>
+        <title>GuiMath Demo</title>
     </head>
     <body>
         <button
-            id="mjxgui-button"
+            id="guimath-button"
             style="
                 margin: 30px;
                 padding: 10px;
@@ -68,7 +68,7 @@
         </div>
         <script>
             const eqnOutput = document.querySelector('#equation-output');
-            const mjxgui = new MJXGUI('#mjxgui-button', function (
+            const guimath = new GuiMath('#guimath-button', function (
                 latex,
                 instance,
             ) {

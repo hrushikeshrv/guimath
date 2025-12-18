@@ -1,4 +1,4 @@
-._mjxgui_editor_window {
+._guimath_editor_window {
     --background-color: rgb(248, 248, 248);
     --background-dark-1: rgb(220, 220, 220);
     --default-font-color: black;
@@ -6,7 +6,7 @@
     --success-green: rgb(3, 107, 35);
     --error-red: rgb(107, 0, 18);
 }
-._mjxgui_editor_window._mjxgui_dark_theme {
+._guimath_editor_window._guimath_dark_theme {
     --background-color: rgb(42, 42, 42);
     --background-dark-1: rgb(18, 18, 18);
     --default-font-color: white;
@@ -15,7 +15,7 @@
     --error-red: rgb(255, 13, 53);
 }
 
-._mjxgui_editor_window {
+._guimath_editor_window {
     display: none;
     position: fixed;
     top: 50%;
@@ -33,34 +33,34 @@
     width: min(600px, 80%);
 }
 
-._mjxgui_editor_window svg {
+._guimath_editor_window svg {
     stroke: var(--default-font-color);
 }
 
-._mjxgui_editor_window button {
+._guimath_editor_window button {
     background-color: var(--background-color);
     transition: background-color ease 0.2s;
     color: var(--default-font-color);
 }
 
-._mjxgui_editor_window button:hover {
+._guimath_editor_window button:hover {
     background-color: var(--background-dark-1);
 }
 
-._mjxgui_tab_container_container {
+._guimath_tab_container_container {
     display: flex;
     flex-flow: row wrap;
 }
 
-._mjxgui_save_equation svg {
+._guimath_save_equation svg {
     stroke: var(--success-green);
 }
 
-._mjxgui_clear_equation svg {
+._guimath_clear_equation svg {
     stroke: var(--error-red);
 }
 
-.mjxgui_tab_container {
+.guimath_tab_container {
     padding: 5px;
     font-family: monospace;
     font-size: 1.1rem;
@@ -72,21 +72,21 @@
     margin: 0 10px;
 }
 
-.mjxgui_tab_container._mjxgui_active_tab {
+.guimath_tab_container._guimath_active_tab {
     background-color: var(--background-dark-1);
 }
 
-.mjxgui_tab_container:hover {
+.guimath_tab_container:hover {
     background-color: var(--background-dark-1);
 }
 
-.mjxgui_editor_controls {
+.guimath_editor_controls {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
 }
 
-._mjxgui_editor_display {
+._guimath_editor_display {
     padding: 10px;
     margin: 10px;
     border: 1px solid var(--default-font-color);
@@ -94,7 +94,7 @@
     overflow-x: auto;
 }
 
-.mjxgui_tab {
+.guimath_tab {
     padding: 10px;
     margin-top: 10px;
     display: none;
@@ -102,7 +102,7 @@
     flex-flow: row wrap;
 }
 
-.mjxgui_tab .mjxgui-btn {
+.guimath_tab .guimath-btn {
     background-color: var(--background-color);
     transition: background-color ease 0.15s;
     cursor: pointer;
@@ -118,11 +118,11 @@
     font-size: 1.1rem;
 }
 
-.mjxgui-btn:hover {
+.guimath-btn:hover {
     background-color: var(--background-dark-1);
 }
 
-.mjxgui_clear_save_buttons, .mjxgui_button_container {
+.guimath_clear_save_buttons, .guimath_button_container {
     display: flex;
     flex-flow: row wrap;
     font-family: monospace;
@@ -131,7 +131,7 @@
     justify-content: center;
 }
 
-.mjxgui_button_container {
+.guimath_button_container {
     margin: 0 5px;
     background-color: var(--background-color);
     border-radius: 6px;
@@ -140,22 +140,22 @@
     padding: 5px;
 }
 
-.mjxgui_button_container:hover  {
+.guimath_button_container:hover  {
     background-color: var(--background-dark-1);
 }
 
-._mjxgui_dir_btn {
+._guimath_dir_btn {
     margin: 0 5px;
     border: 1px solid transparent;
     border-radius: 3px;
 }
 
-._mjxgui_equation_input {
+._guimath_equation_input {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
 }
 
-._mjxgui_equation_input_preview {
+._guimath_equation_input_preview {
     margin-left: 10px;
 }

@@ -5,7 +5,7 @@
  * @class
  * Thin wrapper around the Component class that collects all the components together in an Expression
  * that can be easily rendered and converted to LaTeX.
-**/
+ **/
 class Expression {
     constructor(nestingDepth = 0) {
         this.components = [];
@@ -18,7 +18,7 @@ class Expression {
         this.components.splice(position, 0, component);
     }
 
-    remove(position = this.components.length-1) {
+    remove(position = this.components.length - 1) {
         // Remove the component at position in this Expression.
         // Defaults to removing the last component in this Expression
         this.components.splice(position, 1);
@@ -36,8 +36,8 @@ class Expression {
 
 /**
  * @class
- * Represents a block. A fundamental unit of the Expression. 
- * 
+ * Represents a block. A fundamental unit of the Expression.
+ *
  * All data is ultimately stored in
  * a Block. A Component or any child class of Component has a fixed number of Blocks in it, and a Block can
  * have a variable number of 'children'. An element in a Block's children array can either be a string
@@ -60,8 +60,7 @@ class Block {
         for (let c of this.children) {
             if (typeof c === 'string') {
                 latex += c;
-            }
-            else {
+            } else {
                 latex += c.toLatex() + ' ';
             }
         }
@@ -74,7 +73,7 @@ class Block {
         this.children.splice(position, 0, component);
     }
 
-    removeChild(position = this.children.length-1) {
+    removeChild(position = this.children.length - 1) {
         // Remove some component from this block.
         // Defaults to removing the last component.
         this.children.splice(position, 1);
@@ -85,7 +84,7 @@ class Block {
  * @class
  * Base class representing a Component of the equation. Inherited by the TextComponent, all *Symbol,
  * and all *Function classes. All child classes of Component override the toLatex method
- * to customize the LaTeX generated. You can define your own child classes to add support for 
+ * to customize the LaTeX generated. You can define your own child classes to add support for
  * LaTeX syntax not yet supported.
  */
 class Component {
@@ -119,19 +118,17 @@ class Component {
     }
 }
 
-
 /**
  * @class
  * A component with one block
  */
- class OneBlockComponent extends Component {
+class OneBlockComponent extends Component {
     constructor(parent) {
         let b1 = new Block();
         super([b1], parent);
         b1.parent = this;
     }
 }
-
 
 /**
  * @class
@@ -146,7 +143,6 @@ class TwoBlockComponent extends Component {
         b2.parent = this;
     }
 }
-
 
 /**
  * @class
@@ -166,7 +162,6 @@ class ThreeBlockComponent extends Component {
     }
 }
 
-
 /**
  * @class
  * A template three block component that contains three blocks and uses the same LaTeX template.
@@ -181,10 +176,11 @@ class TemplateThreeBlockComponent extends ThreeBlockComponent {
     }
 
     toLatex() {
-        return `\\${this.latexData}_{${this.blocks[0].toLatex()}}^{${this.blocks[1].toLatex()}}{${this.blocks[2].toLatex()}}`;
+        return `\\${
+            this.latexData
+        }_{${this.blocks[0].toLatex()}}^{${this.blocks[1].toLatex()}}{${this.blocks[2].toLatex()}}`;
     }
 }
-
 
 /**
  * @class
@@ -200,10 +196,11 @@ class TrigonometricTwoBlockComponent extends TwoBlockComponent {
     }
 
     toLatex() {
-        return `\\${this.latexData}^{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
+        return `\\${
+            this.latexData
+        }^{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
     }
 }
-
 
 /**
  * @class
@@ -222,13 +219,12 @@ class TextComponent extends Component {
     }
 }
 
-
 /**
  * @class
  * A symbol which is just some latex with no arguments to be inserted into the expression.
  */
 // TODO - Add support for the backslash character as a symbol
-class MJXGUISymbol extends Component {
+class GuiMathSymbol extends Component {
     constructor(parent, latexData) {
         super([], parent);
         this.latexData = latexData;
@@ -238,7 +234,6 @@ class MJXGUISymbol extends Component {
         return this.latexData;
     }
 }
-
 
 /**
  * @class
@@ -250,7 +245,6 @@ class FrameBox extends OneBlockComponent {
     }
 }
 
-
 /**
  * @class
  * The limit function
@@ -260,7 +254,6 @@ class Limit extends TwoBlockComponent {
         return `\\lim_{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
     }
 }
-
 
 /**
  * @class
@@ -272,7 +265,6 @@ class Fraction extends TwoBlockComponent {
     }
 }
 
-
 /**
  * @class
  * Subscript
@@ -282,7 +274,6 @@ class Subscript extends TwoBlockComponent {
         return `{${this.blocks[0].toLatex()}}_{${this.blocks[1].toLatex()}}`;
     }
 }
-
 
 /**
  * @class
@@ -295,7 +286,6 @@ class Superscript extends TwoBlockComponent {
     }
 }
 
-
 /**
  * @class
  * Some text with both a subscript as well as a superscript on the left side
@@ -306,7 +296,6 @@ class SubSupRight extends ThreeBlockComponent {
     }
 }
 
-
 /**
  * @class
  * The square root function
@@ -316,7 +305,6 @@ class Sqrt extends OneBlockComponent {
         return `\\sqrt{${this.blocks[0].toLatex()}}`;
     }
 }
-
 
 /**
  * @class
