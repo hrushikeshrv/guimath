@@ -10,9 +10,12 @@ aux_links:
 enable_copy_code_button: true
 
 callouts:
+  important:
+    title: Important
+    color: red
   warning:
     title: Warning
-    color: red
+    color: yellow
   note:
     title: Note
     color: purple

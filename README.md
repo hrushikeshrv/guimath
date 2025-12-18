@@ -1,5 +1,10 @@
-# GuiMath 
+# GUIMath 
 Create mathematical equations on a webpage using a GUI similar to Microsoft Word or Google Docs.
+
+> [!NOTE]
+> This project was previously developed as MJXGUI and distributed as a standalone script. With this release, the library has been renamed and repackaged as GuiMath, starting from a new release cycle at v0.1.0.
+> 
+> GuiMath v0.1.0 is equivalent to MJXGUI v2.1.0
 
 GuiMath is a widget style application meant to give users a graphical interface for creating equations 
 to use on the web. It uses MathJax as a core dependency and as an external renderer to show users a preview 
