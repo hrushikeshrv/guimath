@@ -5,9 +5,9 @@ parent: API
 nav_order: 2
 ---
 
-# MJXGUI Components & Blocks
+# GuiMath Components & Blocks
 {: .no_toc }
-MJXGUI has several Component classes which define how LaTeX is generated.
+GuiMath has several Component classes which define how LaTeX is generated.
 
 1. TOC
 {:toc}
@@ -21,10 +21,10 @@ Internally, this equation is made up of multiple `Component`s. Each character is
 
 Each component is made up of blocks. A block is just a generic container that represents a part of the component. For example, the `TextComponent` has only one block which stores the character it is representing. The `Fraction` class has two blocks - one stores the content of the numerator and the other stores the content of the denominator. Each block can store a single character (as in case of the `TextComponent`'s block) or another component class, allowing for nesting components.
 
-![MJXGUI Structure](../media/mjxgui-structure.svg)
+![GuiMath Structure](../media/guimath-structure.svg)
 
 # Writing Your Own Components
-If you want to add a function to the editor widget that is not present out of the box, you will need to write a component class that will inherit from one of MJXGUI's built-in component classes. You will then have to override the `toLatex()` method of the class to define how the LaTeX should be generated for your component.
+If you want to add a function to the editor widget that is not present out of the box, you will need to write a component class that will inherit from one of GuiMath's built-in component classes. You will then have to override the `toLatex()` method of the class to define how the LaTeX should be generated for your component.
 
 To identify which component class you should inherit from, determine how many blocks your function has. For example, a fraction has two blocks - the numerator and the denominator, and the square root function has just one block. As a guideline, you can usually consider each `{}` in the LaTeX representation of a function as a block - fraction is written as `\frac{}{}`, therefore it has 2 blocks, and square root is written as `\sqrt{}`, and therefore has only 1 block.
 

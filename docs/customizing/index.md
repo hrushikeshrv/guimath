@@ -6,4 +6,4 @@ has_children: true
 ---
 
 # Customizing
-MJXGUI lets you customize both the functionality of the editor widget as well as the UI.
+GuiMath lets you customize both the functionality of the editor widget and the UI.

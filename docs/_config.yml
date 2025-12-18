@@ -1,11 +1,11 @@
-title: MJXGUI
-description: A WYSIWYG equation editor for the web with LaTeX support
+title: GuiMath
+description: Create mathematical equations on webpages using a GUI
 theme: just-the-docs
 
-url: https://hrushikeshrv.github.io/mjxgui
+url: https://hrushikeshrv.github.io/guimath
 
 aux_links:
-  "View on GitHub": https://github.com/hrushikeshrv/mjxgui
+  "View on GitHub": https://github.com/hrushikeshrv/guimath
 
 enable_copy_code_button: true
 
@@ -21,10 +21,10 @@ ga_tracking: G-TGM5F6WJNV
 
 nav_external_links:
   - title: View on GitHub
-    url: https://github.com/hrushikeshrv/mjxgui
+    url: https://github.com/hrushikeshrv/guimath
     opens_in_new_tab: true
   - title: Raise an Issue
-    url: https://github.com/hrushikeshrv/mjxgui/issues
+    url: https://github.com/hrushikeshrv/guimath/issues
     opens_in_new_tab: true
 
 favicon_ico: "/media/favicon.png"

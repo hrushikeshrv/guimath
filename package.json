@@ -1,7 +1,7 @@
 {
-  "name": "mjxgui",
-  "version": "1.0.0",
-  "description": "A WYSIWYG equation editor for the web with LaTeX support",
+  "name": "guimath",
+  "version": "0.1.0",
+  "description": "Create mathematical equations on webpages using a GUI",
   "main": "index.js",
   "directories": {
     "doc": "docs"
@@ -12,18 +12,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hrushikeshrv/mjxgui.git"
+    "url": "https://github.com/hrushikeshrv/guimath.git"
   },
   "keywords": [
     "latex",
-    "mathjax"
+    "mathjax",
+    "equations",
+    "math",
+    "gui"
   ],
   "author": "Hrushikesh Vaidya",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hrushikeshrv/mjxgui/issues"
+    "url": "https://github.com/hrushikeshrv/guimath/issues"
   },
-  "homepage": "https://github.com/hrushikeshrv/mjxgui#readme",
+  "homepage": "https://github.com/hrushikeshrv/guimath",
   "devDependencies": {
     "grunt": "^1.4.1",
     "grunt-contrib-concat": "^1.0.1",
