@@ -53,3 +53,4 @@ guimath.successCallback = function(latex, instance) {
 | `getLatex()`         | Generates LaTeX for the equation being built and returns it as a String                                                       |
 | `registerSymbol()`   | Adds a symbol to the editor that is not present out of the box. See [Customizing]({% link customizing/functionality.md %}).   |
 | `registerFunction()` | Adds a function to the editor that is not present out of the box. See [Customizing]({% link customizing/functionality.md %}). |
+

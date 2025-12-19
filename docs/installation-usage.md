@@ -13,21 +13,46 @@ nav_order: 2
 ## Installation
 GuiMath uses MathJax as a core dependency, so you need to include both MathJax as well as GuiMath into your webpage. GuiMath does not have a built-in renderer, and uses MathJax to render the equations as they are being built.
 
+### CDN
+
 Make sure you include MathJax before including GuiMath.
 
-Then include the GuiMath javascript file and stylesheet. You can get both the script and the stylesheet from GitHub -
-1. [guimath.js](https://raw.githubusercontent.com/hrushikeshrv/guimath/main/src/guimath.min.js)
-2. [guimath.css](https://raw.githubusercontent.com/hrushikeshrv/guimath/main/src/guimath.css)
+Then include the GuiMath javascript file and stylesheet. You can include GuiMath's stylesheet before your site's stylesheet, to allow your CSS to override GuiMath's CSS.
 
-You can include GuiMath's stylesheet before your site's stylesheet, to allow your CSS to override GuiMath's CSS.
+The latest version of GuiMath can be found on [jsDelivr](https://www.jsdelivr.com/package/npm/guimath) or [unpkg](https://unpkg.com/browse/guimath/).
 
-An example config is shown below -
+```html
+<link rel="stylesheet" href="https://unpkg.com/guimath/dist/guimath.css">
+<script src="https://unpkg.com/guimath/dist/guimath.min.js"></script>
+```
+
+OR
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/guimath/dist/guimath.min.css">
+<script src="https://cdn.jsdelivr.net/npm/guimath/dist/guimath.umd.min.js"></script>
+```
+
+An example config is shown below using unpkg -
 
 ```html
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<link rel="stylesheet" href="path/to/guimath/css">
-<script src="path/to/guimath/javascript"></script>
+<link rel="stylesheet" href="https://unpkg.com/guimath/dist/guimath.css">
+<script src="https://unpkg.com/guimath/dist/guimath.min.js"></script>
+```
+
+### npm
+You can also install GuiMath via npm.
+
+```bash
+npm install guimath
+```
+Then import GuiMath and the stylesheet into your JavaScript code.
+
+```javascript
+import GuiMath from "guimath";
+import "guimath/dist/guimath.css";
 ```
 
 ## Usage
