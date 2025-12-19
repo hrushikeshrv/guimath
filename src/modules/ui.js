@@ -121,7 +121,7 @@ const functionComponentMap = {
     frac: ExpressionBackend.Fraction,
 };
 
-export default class GuiMath {
+export default class GUIMath {
     constructor(
         elementSelector,
         successCallback = function (latex, instance) {},
@@ -181,7 +181,7 @@ export default class GuiMath {
         symbols.forEach(symbol => {
             symbol.addEventListener('click', () => {
                 if (symbol.dataset.latexData in symbolLatexMap) {
-                    let _ = new ExpressionBackend.GuiMathSymbol(
+                    let _ = new ExpressionBackend.GUIMathSymbol(
                         this.cursor.block,
                         symbolLatexMap[symbol.dataset.latexData],
                     );
@@ -325,9 +325,9 @@ export default class GuiMath {
     }
 
     /**
-     * Removes all GuiMath click listeners for the current selector,
-     * selects DOM elements again, and rebinds GuiMath click listeners. Meant
-     * to be called if the DOM changes after the GuiMath instance is created.
+     * Removes all GUIMath click listeners for the current selector,
+     * selects DOM elements again, and rebinds GUIMath click listeners. Meant
+     * to be called if the DOM changes after the GUIMath instance is created.
      */
     rebindListeners() {
         this.elements.forEach(el => {
@@ -341,7 +341,7 @@ export default class GuiMath {
 
     /**
      * Adds a function to the UI that is not supported out of the box.
-     @param componentClass A class that inherits from one of GuiMath's many component classes
+     @param componentClass A class that inherits from one of GUIMath's many component classes
      @param buttonContent HTML or text content that will be placed inside the rendered button
      @param title The title to show when a user hovers over the button
      @param typeset true if MathJax should typeset buttonContent
@@ -390,7 +390,7 @@ export default class GuiMath {
         if (typeset) MathJax.typesetPromise([el]).then(() => {});
 
         el.addEventListener('click', () => {
-            let _ = new ExpressionBackend.GuiMathSymbol(
+            let _ = new ExpressionBackend.GUIMathSymbol(
                 this.cursor.block,
                 latexData,
             );
@@ -400,10 +400,10 @@ export default class GuiMath {
     }
 
     /**
-     * Transforms an <input> element into a button that allows users to enter an equation using GuiMath.
+     * Transforms an <input> element into a button that allows users to enter an equation using GUIMath.
      * Stores the resulting LaTeX of the equation as the value of the input.
      * @param selector A CSS selector that identifies the input(s) to be converted
-     * @param options An object of options for configuring the GuiMath widget
+     * @param options An object of options for configuring the GUIMath widget
      */
     static createEquationInput(selector, options = {}) {
         if (options.isPersistent === undefined) options.isPersistent = true;
@@ -429,7 +429,7 @@ export default class GuiMath {
             );
             inpButton.id = `_guimath_insert_equation_button_${i}`;
 
-            const widget = new GuiMath(
+            const widget = new GUIMath(
                 `#_guimath_insert_equation_button_${i}`,
                 function () {},
                 options,
@@ -462,4 +462,4 @@ export default class GuiMath {
     }
 }
 
-GuiMath.ExpressionBackend = ExpressionBackend;
+GUIMath.ExpressionBackend = ExpressionBackend;

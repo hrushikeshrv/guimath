@@ -224,7 +224,7 @@ export class TextComponent extends Component {
  * A symbol which is just some latex with no arguments to be inserted into the expression.
  */
 // TODO - Add support for the backslash character as a symbol
-export class GuiMathSymbol extends Component {
+export class GUIMathSymbol extends Component {
     constructor(parent, latexData) {
         super([], parent);
         this.latexData = latexData;

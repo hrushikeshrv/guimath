@@ -6,4 +6,4 @@ has_children: true
 ---
 
 # Customizing
-GuiMath lets you customize both the functionality of the editor widget and the UI.
+GUIMath lets you customize both the functionality of the editor widget and the UI.

@@ -11,13 +11,13 @@ export default defineConfig({
         {
             file: 'dist/guimath.umd.js',
             format: 'umd',
-            name: 'GuiMath',
+            name: 'GUIMath',
             exports: 'default',
         },
         {
             file: 'dist/guimath.min.js',
             format: 'umd',
-            name: 'GuiMath',
+            name: 'GUIMath',
         },
     ],
     plugins: [

@@ -4,18 +4,18 @@ title: Contributing
 nav_order: 6
 ---
 
-# Contributing to GuiMath
+# Contributing to GUIMath
 {: .no_toc }
 
-Thanks for volunteering your time and effort toward the development of GuiMath! To make the contribution process as smooth as possible, follow the steps below to set up your development environment.
+Thanks for volunteering your time and effort toward the development of GUIMath! To make the contribution process as smooth as possible, follow the steps below to set up your development environment.
 
 1. TOC
 {:toc}
 
 ## Local Installation
-GuiMath is a pretty simple library, and it is not yet on npm, since it is mainly made for web environments and has no dependencies.
+GUIMath is a pretty simple library, and it is not yet on npm, since it is mainly made for web environments and has no dependencies.
 
-To get started, clone the code repository for GuiMath -
+To get started, clone the code repository for GUIMath -
 
 ```bash
 git clone https://github.com/hrushikeshrv/guimath.git
@@ -24,7 +24,7 @@ git clone https://github.com/hrushikeshrv/guimath.git
 Next, create a new issue or claim an existing issue on the repository's [issues page](https://github.com/hrushikeshrv/guimath/issues).
 
 ## Creating A Development Environment
-Before you start working on your patch, it is convenient to create an environment that will allow you to quickly test your changes. For this purpose, you can create a simple webpage that integrates the GuiMath editor and link the relevant files.
+Before you start working on your patch, it is convenient to create an environment that will allow you to quickly test your changes. For this purpose, you can create a simple webpage that integrates the GUIMath editor and link the relevant files.
 
 Create a new directory named `_test/` (since that name has already been included in the `.gitignore`), and inside create an `index.html` file with the following contents -
 
@@ -66,7 +66,7 @@ Create a new directory named `_test/` (since that name has already been included
     <script src="../src/modules/expression-backend.js"></script>
     <script src="../src/modules/cursor.js"></script>
     <script src="../src/modules/ui.js"></script>
-    <title>GuiMath Demo</title>
+    <title>GUIMath Demo</title>
 </head>
 <body>
 <button id="guimath-button" style="margin: 30px; padding: 10px; font-family: monospace; font-size: 2rem;">Add Equation</button>
@@ -86,7 +86,7 @@ Create a new directory named `_test/` (since that name has already been included
 </div>
 <script>
     const eqnOutput = document.querySelector('#equation-output');
-    const guimath = new GuiMath('#guimath-button', '$$', function() {
+    const guimath = new GUIMath('#guimath-button', '$$', function() {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td style="width: 50%; text-align: center;">$$ ${guimath.getLatex()} $$</td>
@@ -101,7 +101,7 @@ Create a new directory named `_test/` (since that name has already been included
 </html>
 ```
 
-This HTML file simply links the source files for GuiMath individually, and gives you a button that you can use to open and test the GuiMath editor. Inside the `_test/` directory, you can create as many new files for testing as you want, and they will not be included in your git commits.
+This HTML file simply links the source files for GUIMath individually, and gives you a button that you can use to open and test the GUIMath editor. Inside the `_test/` directory, you can create as many new files for testing as you want, and they will not be included in your git commits.
 
 ## Starting The Development Server
 Finally, you will need to start a simple HTTP server at the root directory of this project in order for the above HTML file to work correctly.
@@ -113,7 +113,7 @@ If you're using VS Code or any other IDE, you can download the Live Server exten
 Then open the `_test/index.html` file and your development environment should be set up.
 
 ## Working With The Editor's HTML
-If you are working on a patch that requires changing the HTML for the GuiMath editor, you will need to make changes to the `src/modules/editor.html` file. Once you have made your changes, you will need to inject this HTML into the GuiMath source for the new HTML to be used. You can do this by running `Grunt`. Make sure [Grunt is installed](https://gruntjs.com/getting-started) and follow these steps -
+If you are working on a patch that requires changing the HTML for the GUIMath editor, you will need to make changes to the `src/modules/editor.html` file. Once you have made your changes, you will need to inject this HTML into the GUIMath source for the new HTML to be used. You can do this by running `Grunt`. Make sure [Grunt is installed](https://gruntjs.com/getting-started) and follow these steps -
 
 1. Open the `src/modules/ui.js` file.
 2. Find the line where the editor's HTML is injected into the file, which will look something like this -
@@ -131,7 +131,7 @@ If you are working on a patch that requires changing the HTML for the GuiMath ed
 This will minify the `editor.html` file and inject the minified HTML in the right place in the `ui.js` file. You can then test these changes and complete your patch.
 
 ## Working With The Form Input's HTML
-If you are working on a patch that requires changing the HTML for the GuiMath form input, you will need to make changes to the `src/modules/form-input.html` file. Once you have made your changes, you will need to inject this HTML into the GuiMath source for the new HTML to be used. You can do this by running `Grunt`. Make sure [Grunt is installed](https://gruntjs.com/getting-started) and follow these steps -
+If you are working on a patch that requires changing the HTML for the GUIMath form input, you will need to make changes to the `src/modules/form-input.html` file. Once you have made your changes, you will need to inject this HTML into the GUIMath source for the new HTML to be used. You can do this by running `Grunt`. Make sure [Grunt is installed](https://gruntjs.com/getting-started) and follow these steps -
 
 
 1. Open the `src/modules/ui.js` file.
@@ -152,16 +152,16 @@ This will minify the `form-input.html` file and inject the minified HTML in the 
 ## Submitting a Patch
 Once you have finished working on your patch and verified that your issue has been fixed, push your changes and create a pull request!
 
-The GuiMath bundle is created by combining the constituent source files - `cursor.js`, `expression-backend.js`, and `ui.js` into `guimath.js`. This process is automated using Grunt, and a Gruntfile has been configured in the repository root. 
+The GUIMath bundle is created by combining the constituent source files - `cursor.js`, `expression-backend.js`, and `ui.js` into `guimath.js`. This process is automated using Grunt, and a Gruntfile has been configured in the repository root. 
 
 However, you **do not** need to generate and push these files to your patch. Only modify and push changes to the relevant source files.
 
-## Building GuiMath
+## Building GUIMath
 
 {: .note}
-> You do not need to do this step to submit a patch. This is only needed if you want to create your own production build of GuiMath for distribution.
+> You do not need to do this step to submit a patch. This is only needed if you want to create your own production build of GUIMath for distribution.
 
-To create a production build of GuiMath, make sure you have [Grunt installed](https://gruntjs.com/getting-started) and run the following command from the repository root -
+To create a production build of GUIMath, make sure you have [Grunt installed](https://gruntjs.com/getting-started) and run the following command from the repository root -
 
 ```bash
 npm run build

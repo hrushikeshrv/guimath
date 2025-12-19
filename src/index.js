@@ -1,7 +1,7 @@
-import GuiMath from './modules/ui.js';
+import GUIMath from './modules/ui.js';
 import * as ExpressionBackend from './modules/expression-backend.js';
 
 // Attach backend to the constructor
-GuiMath.ExpressionBackend = ExpressionBackend;
+GUIMath.ExpressionBackend = ExpressionBackend;
 
-export default GuiMath;
+export default GUIMath;

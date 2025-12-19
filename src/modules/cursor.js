@@ -52,7 +52,7 @@ export default class Cursor {
             this.expression.add(component, Math.ceil(this.position));
             this.position = Math.ceil(this.position);
             if (
-                component instanceof ExpressionBackend.GuiMathSymbol ||
+                component instanceof ExpressionBackend.GUIMathSymbol ||
                 component instanceof ExpressionBackend.TextComponent
             ) {
                 this.block = null;
@@ -69,7 +69,7 @@ export default class Cursor {
             this.block.addChild(component, Math.ceil(this.child));
             // this.child += 0.5;
             if (
-                component instanceof ExpressionBackend.GuiMathSymbol ||
+                component instanceof ExpressionBackend.GUIMathSymbol ||
                 component instanceof ExpressionBackend.TextComponent
             ) {
                 // If the component we just inserted is a Symbol or Text, don't move into it and increment
@@ -92,7 +92,7 @@ export default class Cursor {
                 this.expression.components[Math.floor(this.position)];
             if (
                 prevComponent instanceof ExpressionBackend.TextComponent ||
-                prevComponent instanceof ExpressionBackend.GuiMathSymbol
+                prevComponent instanceof ExpressionBackend.GUIMathSymbol
             ) {
                 this.position = Math.floor(this.position);
                 this.component = prevComponent;
@@ -140,16 +140,16 @@ export default class Cursor {
         } else if (event.key === 'Enter') {
             document.getElementById('guimath_save_equation').click();
         } else if (event.key === ' ') {
-            let _ = new ExpressionBackend.GuiMathSymbol(this.block, '\\:\\:');
+            let _ = new ExpressionBackend.GUIMathSymbol(this.block, '\\:\\:');
             this.addComponent(_);
         } else if (event.key === '\\') {
-            let _ = new ExpressionBackend.GuiMathSymbol(
+            let _ = new ExpressionBackend.GUIMathSymbol(
                 this.block,
                 '\\backslash',
             );
             this.addComponent(_);
         } else if (['$', '#', '%', '&', '_', '{', '}'].includes(event.key)) {
-            let _ = new ExpressionBackend.GuiMathSymbol(
+            let _ = new ExpressionBackend.GUIMathSymbol(
                 this.block,
                 `\\${event.key}`,
             );
@@ -163,12 +163,12 @@ export default class Cursor {
         if (this.position >= maxPos) return;
         else if (this.block === null) {
             this.position += 0.5;
-            // If the component at this index is a GuiMathSymbol or a TextComponent, skip it and go to the next
+            // If the component at this index is a GUIMathSymbol or a TextComponent, skip it and go to the next
             if (
                 this.expression.components[this.position] instanceof
                     ExpressionBackend.TextComponent ||
                 this.expression.components[this.position] instanceof
-                    ExpressionBackend.GuiMathSymbol
+                    ExpressionBackend.GUIMathSymbol
             ) {
                 // If the component to the right of the cursor is a TextComponent, we skip it and
                 // move one more position to the right and into the space between two components
@@ -217,7 +217,7 @@ export default class Cursor {
                 let nextComponent = this.block.children[Math.ceil(this.child)];
                 if (
                     nextComponent instanceof ExpressionBackend.TextComponent ||
-                    nextComponent instanceof ExpressionBackend.GuiMathSymbol
+                    nextComponent instanceof ExpressionBackend.GUIMathSymbol
                 ) {
                     // If it is a TextComponent or Symbol, skip it and move on
                     this.child++;
@@ -234,12 +234,12 @@ export default class Cursor {
         if (this.position <= -0.5) return;
         else if (this.block === null) {
             this.position -= 0.5;
-            // If the component at this index is a GuiMathSymbol or a TextComponent, we skip this component and go one more step backward
+            // If the component at this index is a GUIMathSymbol or a TextComponent, we skip this component and go one more step backward
             if (
                 this.expression.components[this.position] instanceof
                     ExpressionBackend.TextComponent ||
                 this.expression.components[this.position] instanceof
-                    ExpressionBackend.GuiMathSymbol
+                    ExpressionBackend.GUIMathSymbol
             ) {
                 // If the component to the left of the cursor is a TextComponent, we skip it and
                 // move one more position to the left and into the space between two components
@@ -289,7 +289,7 @@ export default class Cursor {
                 let prevComponent = this.block.children[Math.floor(this.child)];
                 if (
                     prevComponent instanceof ExpressionBackend.TextComponent ||
-                    prevComponent instanceof ExpressionBackend.GuiMathSymbol
+                    prevComponent instanceof ExpressionBackend.GUIMathSymbol
                 ) {
                     // If it is a TextComponent or Symbol, skip it and move on
                     this.child--;
@@ -314,7 +314,7 @@ export default class Cursor {
                 this.expression.components[Math.floor(this.position)];
             if (
                 prevComponent instanceof ExpressionBackend.TextComponent ||
-                prevComponent instanceof ExpressionBackend.GuiMathSymbol
+                prevComponent instanceof ExpressionBackend.GUIMathSymbol
             ) {
                 this.removeComponent();
             } else {
