@@ -1,6 +1,6 @@
 {
   "name": "guimath",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Create mathematical equations on webpages using a GUI",
   "main": "dist/guimath.umd.js",
   "module": "dist/guimath.esm.js",
