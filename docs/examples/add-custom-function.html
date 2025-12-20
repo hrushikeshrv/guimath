@@ -44,11 +44,11 @@
             async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
         ></script>
-        <!--     <script src="../../src/modules/expression-backend.js"></script> -->
-        <!--     <script src="../../src/modules/cursor.js"></script> -->
-        <!--     <script src="../../src/modules/ui.js"></script> -->
-        <link rel="stylesheet" href="../css/guimath.css" />
-        <script src="../js/guimath.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/guimath/dist/guimath.css"
+        />
+        <script src="https://unpkg.com/guimath/dist/guimath.min.js"></script>
         <title>GUIMath Demo - Add A Custom Symbol</title>
 
         <style>
@@ -133,7 +133,8 @@
                 MathJax.typesetPromise([tr]).then(() => {});
             });
 
-            class SinSquaredComponent extends OneBlockComponent {
+            class SinSquaredComponent extends GUIMath.ExpressionBackend
+                .OneBlockComponent {
                 toLatex() {
                     return `\\sin^{2}{${this.blocks[0].toLatex()}}`;
                 }
