@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-TGM5F6WJNV"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-TGM5F6WJNV');
+        </script>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [
+                        ['$', '$'],
+                        ['\\(', '\\)'],
+                    ],
+                    displayMath: [['$$', '$$']],
+                },
+                svg: {
+                    fontCache: 'global',
+                },
+                options: {
+                    menuOptions: {
+                        settings: {
+                            zoom: 'NoZoom',
+                            zscale: '250%',
+                        },
+                    },
+                },
+            };
+        </script>
+        <script
+            id="MathJax-script"
+            async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+        ></script>
+        <style>
+            button {
+                margin: 30px;
+                padding: 10px;
+                font-family: monospace;
+                font-size: 2rem;
+            }
+        </style>
+
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/guimath/dist/guimath.css"
+        />
+        <script src="https://unpkg.com/guimath/dist/guimath.min.js"></script>
+        <title>GUIMath Demo</title>
+    </head>
+    <body>
+        <button id="default-theme">Default Theme</button>
+        <button id="dark-theme">Dark Theme</button>
+        <button id="grey-theme">Grey Theme</button>
+        <button id="dark-blue-theme">Dark Blue Theme</button>
+        <button id="light-blue-theme">Light Blue Theme</button>
+        <button id="dark-pink-theme">Dark Pink Theme</button>
+        <button id="light-pink-theme">Light Pink Theme</button>
+        <div id="equation-output" style="padding: 40px; font-size: 2rem">
+            <h3 style="font-family: monospace">Inserted Equations:</h3>
+        </div>
+        <script>
+            const eqnOutput = document.querySelector('#equation-output');
+            function callback(latex, instance) {
+                MathJax.typesetClear([eqnOutput]);
+                eqnOutput.innerHTML += '$$' + latex + '$$' + '<br>';
+                MathJax.typesetPromise([eqnOutput]).then(() => {});
+            }
+
+            new GUIMath('#default-theme', callback, { theme: 'default' });
+            new GUIMath('#dark-theme', callback, { theme: 'dark' });
+            new GUIMath('#grey-theme', callback, { theme: 'grey' });
+            new GUIMath('#dark-blue-theme', callback, {
+                theme: 'dark-blue',
+            });
+            new GUIMath('#light-blue-theme', callback, {
+                theme: 'light-blue',
+            });
+            new GUIMath('#dark-pink-theme', callback, {
+                theme: 'dark-pink',
+            });
+            new GUIMath('#light-pink-theme', callback, {
+                theme: 'light-pink',
+            });
+        </script>
+    </body>
+</html>

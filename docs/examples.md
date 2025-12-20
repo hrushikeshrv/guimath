@@ -10,3 +10,4 @@ nav_order: 5
 3. [Example 3 - Adding a custom symbol to the editor widget](./examples/add-custom-symbol.html)
 4. [Example 4 - Adding a custom function to the editor widget](./examples/add-custom-function.html)
 5. [Example 5 - Converting an `<input type="text">` into an equation input](./examples/form-equation-input.html)
+6. [Example 6 - Using different themes](./examples/themes.html)

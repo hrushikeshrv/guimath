@@ -31,19 +31,9 @@ module.exports = function (grunt) {
                 dest: 'docs/js/guimath.js',
             },
         },
-        uglify: {
-            options: {
-                banner: '/*! guimath <%= grunt.template.today("yyyy-mm-dd") %> | (C) Hrushikesh Vaidya (@hrushikeshrv) | MIT License */',
-            },
-            build: {
-                src: 'src/index.js',
-                dest: 'src/guimath.min.js',
-            },
-        },
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
     grunt.registerTask('injectHTML', function () {
@@ -60,11 +50,6 @@ module.exports = function (grunt) {
         grunt.file.write(options.src, content);
     });
 
-    grunt.registerTask('default', [
-        'htmlmin',
-        'injectHTML',
-        'concat',
-        'uglify',
-    ]);
+    grunt.registerTask('default', ['htmlmin', 'injectHTML', 'concat']);
     grunt.registerTask('inject-ui', ['htmlmin', 'injectHTML']);
 };
