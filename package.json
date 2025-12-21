@@ -14,9 +14,8 @@
   },
   "scripts": {
     "test": "webpack",
-    "build:src": "grunt",
-    "build:dist": "rollup -c rollup.config.js",
-    "build": "npm run build:src && npm run build:dist"
+    "build": "rollup -c rollup.config.js",
+    "dev": "rollup -c -w"
   },
   "repository": {
     "type": "git",
@@ -36,13 +35,11 @@
   },
   "homepage": "https://github.com/hrushikeshrv/guimath",
   "devDependencies": {
-    "grunt": "^1.4.1",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-htmlmin": "^3.1.0",
-    "grunt-contrib-jshint": "^3.1.1",
-    "grunt-contrib-uglify": "^5.0.1",
+    "html-minifier-terser": "^7.2.0",
     "rollup": "^4.53.5",
     "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-string": "^3.0.0",
+    "vite": "^6.4.1",
     "webpack": "^5.56.1",
     "webpack-cli": "^4.8.0"
   }
