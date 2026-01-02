@@ -1,10 +1,36 @@
+@font-face {
+    font-family: "New Computer Modern";
+    src: url("./fonts/NewCM08-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "New Computer Modern";
+    src: url("./fonts/NewCM08-Italic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "New Computer Modern";
+    src: url("./fonts/NewCM10-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 ._guimath_editor_window {
+    --default-font: "New Computer Modern", Helvetica, sans-serif;
     --background-color: rgb(248, 248, 248);
     --background-dark-1: rgb(220, 220, 220);
     --default-font-color: black;
     --default-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     --success-green: rgb(3, 107, 35);
     --error-red: rgb(107, 0, 18);
+    font-family: var(--default-font);
 }
 ._guimath_editor_window._guimath_dark_theme {
     --background-color: rgb(42, 42, 42);

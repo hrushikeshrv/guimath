@@ -51,7 +51,10 @@ export default defineConfig({
     plugins: [
         minifyHTMLPlugin(),
         copy({
-            targets: [{ src: 'src/guimath.css', dest: 'dist' }],
+            targets: [
+                { src: 'src/guimath.css', dest: 'dist' },
+                { src: 'src/fonts/*', dest: 'dist/fonts' },
+            ],
         }),
         string({
             include: '**/*.html',
