@@ -32,6 +32,17 @@ export class Expression {
         }
         return latex.trim();
     }
+
+    /**
+     * Render the expression to HTML for display in the GUI
+     */
+    toHTML() {
+        let html = '';
+        for (let c of this.components) {
+            html += c.toHTML() + ' ';
+        }
+        return html.trim();
+    }
 }
 
 /**
@@ -67,6 +78,22 @@ export class Block {
         return latex.trim();
     }
 
+    /**
+     * Render the block to HTML for display in the GUI
+     */
+    toHTML() {
+        if (this.children.length === 0) return '';
+        let html = '';
+        for (let c of this.children) {
+            if (typeof c === 'string') {
+                html += c;
+            } else {
+                html += c.toHTML() + ' ';
+            }
+        }
+        return html.trim();
+    }
+
     addChild(component, position = this.children.length) {
         // Setter method to add some component to this block at position. Component can be any child class of Component.
         // Defaults to adding the component at the end.
@@ -99,6 +126,15 @@ export class Component {
 
     toLatex() {
         return '';
+    }
+
+    toHTML() {
+        let html = '<div class="_guimath_component">';
+        for (let block of this.blocks) {
+            html += `<div class="_guimath_block">${block.toHTML()}</div>`;
+        }
+        html += '</div>';
+        return html;
     }
 
     addBlock(block, position) {
@@ -225,13 +261,18 @@ export class TextComponent extends Component {
  */
 // TODO - Add support for the backslash character as a symbol
 export class GUIMathSymbol extends Component {
-    constructor(parent, latexData) {
+    constructor(parent, latexData, htmlData) {
         super([], parent);
         this.latexData = latexData;
+        this.htmlData = htmlData;
     }
 
     toLatex() {
         return this.latexData;
+    }
+
+    toHTML() {
+        return `<span class="_guimath_symbol_html">${this.htmlData}</span>`;
     }
 }
 

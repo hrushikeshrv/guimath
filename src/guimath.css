@@ -26,7 +26,9 @@
     --default-font: "New Computer Modern", Helvetica, sans-serif;
     --background-color: rgb(248, 248, 248);
     --background-dark-1: rgb(220, 220, 220);
+    --background-dark-2: rgb(199, 199, 199);
     --default-font-color: black;
+    --muted-font-color: rgb(80, 80, 80);
     --default-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     --success-green: rgb(3, 107, 35);
     --error-red: rgb(107, 0, 18);
@@ -152,12 +154,17 @@
     justify-content: space-between;
 }
 
-._guimath_editor_display {
-    padding: 10px;
+#_guimath_equation_display {
+    padding: 20px 10px;
     margin: 10px;
     border: 1px solid var(--default-font-color);
     border-radius: 10px;
     overflow-x: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .guimath_tab {
@@ -224,4 +231,14 @@
 
 ._guimath_equation_input_preview {
     margin-left: 10px;
+}
+
+._guimath_component {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--muted-font-color);
+    border-radius: 2px;
+    padding: 2px;
 }

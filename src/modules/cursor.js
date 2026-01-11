@@ -140,18 +140,24 @@ export default class Cursor {
         } else if (event.key === 'Enter') {
             document.getElementById('guimath_save_equation').click();
         } else if (event.key === ' ') {
-            let _ = new ExpressionBackend.GUIMathSymbol(this.block, '\\:\\:');
+            let _ = new ExpressionBackend.GUIMathSymbol(
+                this.block,
+                '\\:\\:',
+                ' ',
+            );
             this.addComponent(_);
         } else if (event.key === '\\') {
             let _ = new ExpressionBackend.GUIMathSymbol(
                 this.block,
                 '\\backslash',
+                ' ',
             );
             this.addComponent(_);
         } else if (['$', '#', '%', '&', '_', '{', '}'].includes(event.key)) {
             let _ = new ExpressionBackend.GUIMathSymbol(
                 this.block,
                 `\\${event.key}`,
+                event.key,
             );
             this.addComponent(_);
         }
@@ -348,41 +354,11 @@ export default class Cursor {
         return latex;
     }
 
-    toDisplayLatex() {
-        // Generate LaTeX to show in the display by adding a caret character to the expression.
-        // This is not the real LaTeX of the expression but the LaTeX resulting after we add
-        // a caret as a | character in the expression
-        let caret = new ExpressionBackend.TextComponent(this.block);
-        caret.blocks[0].addChild('|');
-
-        let frame = new ExpressionBackend.FrameBox(this.block);
-
-        if (this.block === null) {
-            // If we are not in any block, we just add the caret, generate latex
-            // and reset the components
-            this.expression.add(caret, Math.ceil(this.position));
-        } else {
-            // We add the current component inside the frame, add the caret in the
-            // right position, generate latex and reset the components
-            let i = this.component.blocks.indexOf(this.block);
-            this.component.removeBlock(i);
-            this.component.addBlock(frame, i);
-            frame.blocks[0] = this.block;
-            this.block.addChild(caret, Math.ceil(this.child));
-        }
-
-        let latex = this.toLatex();
-
-        if (this.block === null) {
-            this.expression.remove(Math.ceil(this.position));
-        } else {
-            let i = this.component.blocks.indexOf(frame);
-            this.component.removeBlock(i);
-            this.component.addBlock(this.block, i);
-            this.block.removeChild(Math.ceil(this.child));
-        }
-
-        return latex;
+    toHTML() {
+        // Generate HTML from the expression built till now
+        let html = this.expression.toHTML();
+        this.html = html;
+        return html;
     }
 
     updateDisplay() {
@@ -392,8 +368,6 @@ export default class Cursor {
         ) {
             this.display = document.querySelector(this.display);
         }
-        MathJax.typesetClear([this.display]);
-        this.display.innerHTML = '$$' + this.toDisplayLatex() + '$$';
-        MathJax.typesetPromise([this.display]).then(() => {});
+        this.display.innerHTML = this.toHTML();
     }
 }
