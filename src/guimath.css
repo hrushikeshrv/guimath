@@ -22,6 +22,20 @@
     font-display: swap;
 }
 
+._guimath_flexbox_row {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+._guimath_flexbox_column {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
 ._guimath_editor_window {
     --default-font: "New Computer Modern", Helvetica, sans-serif;
     --background-color: rgb(248, 248, 248);
@@ -233,12 +247,56 @@
     margin-left: 10px;
 }
 
-._guimath_component {
+._guimath_component, ._guimath_block {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--muted-font-color);
+}
+
+._guimath_block {
+    min-height: 10px;
+    min-width: 10px;
+    line-height: 0.8;
+    font-size: 1.2rem;
+    font-style: italic;
+    position: relative;
+}
+
+._guimath_block::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    bottom: -1px;
+    left: -2px;
+    right: -2px;
+    border: 2px solid transparent;
     border-radius: 2px;
-    padding: 2px;
+    transition: border-color ease 0.2s;
+}
+
+._guimath_block:hover::before {
+    border-color: var(--muted-font-color);
+}
+
+._guimath_small_block ._guimath_block {
+    font-size: 0.8em;
+}
+
+._guimath_small_block {
+    z-index: 2;
+}
+
+._guimath_large_block {
+    padding-top: 3px;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding-bottom: 3px;
+    font-size: 2.5em;
+    font-style: normal;
+    z-index: 1;
+}
+
+._guimath_small_block ._guimath_small_block {
+    font-size: 2em;
 }

@@ -36,7 +36,7 @@ export class Expression {
     /**
      * Render the expression to HTML for display in the GUI
      */
-    toHTML() {
+    toHTML(cursorComponent = null, cursorBlock = null, cursorPosition = null) {
         let html = '';
         for (let c of this.components) {
             html += c.toHTML() + ' ';
@@ -206,15 +206,31 @@ export class ThreeBlockComponent extends Component {
  * differs significantly from component to component.
  */
 export class TemplateThreeBlockComponent extends ThreeBlockComponent {
-    constructor(parent, latexData) {
+    constructor(parent, latexData, htmlData) {
         super(parent);
         this.latexData = latexData;
+        this.htmlData = htmlData;
     }
 
     toLatex() {
         return `\\${
             this.latexData
         }_{${this.blocks[0].toLatex()}}^{${this.blocks[1].toLatex()}}{${this.blocks[2].toLatex()}}`;
+    }
+
+    toHTML() {
+        return `
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class="_guimath_flexbox_column">
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML()}</div>
+                <div class='_guimath_block _guimath_large_block'>${
+                    this.htmlData
+                }</div>
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML()}</div>
+            </div>
+            <div class='_guimath_block'>${this.blocks[2].toHTML()}</div>
+        </div>
+        `;
     }
 }
 

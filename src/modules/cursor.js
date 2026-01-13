@@ -15,10 +15,18 @@ export default class Cursor {
         this.expression = expression;
         this.block = null;
         this.component = null;
+        /// The index of the cursor in the current block's children, -0.5 means before the first child
         this.child = -0.5;
+        /// The index of the cursor in the expression's components, -0.5 means before the first component
         this.position = -0.5;
         this.latex = '';
         this.display = display;
+        if (
+            this.display instanceof String ||
+            typeof this.display === 'string'
+        ) {
+            this.display = document.querySelector(this.display);
+        }
     }
 
     addText(text) {
@@ -362,12 +370,6 @@ export default class Cursor {
     }
 
     updateDisplay() {
-        if (
-            this.display instanceof String ||
-            typeof this.display === 'string'
-        ) {
-            this.display = document.querySelector(this.display);
-        }
         this.display.innerHTML = this.toHTML();
     }
 }

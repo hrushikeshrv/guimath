@@ -165,7 +165,7 @@ export default class GUIMath {
         document.addEventListener('keydown', evt => {
             if (this.editorWindow.dataset.visible === 'false') return;
             this.cursor.keyPress(evt);
-            this.eqnDisplay.innerHTML = this.cursor.toHTML();
+            this.cursor.updateDisplay();
         });
 
         const symbols = this.editorWindow.querySelectorAll(
@@ -196,6 +196,7 @@ export default class GUIMath {
                         _ = new ExpressionBackend.TemplateThreeBlockComponent(
                             this.cursor.block,
                             func.dataset.latexData,
+                            func.innerHTML,
                         );
                     } else if (func.dataset.templateType === 'trigonometric') {
                         _ =
@@ -253,19 +254,6 @@ export default class GUIMath {
             '.guimath_tab_container',
         );
         const guimathTabs = editorDiv.querySelectorAll('.guimath_tab');
-
-        const leftArrowButton = editorDiv.querySelector('.leftArrowButton');
-        const rightArrowButton = editorDiv.querySelector('.rightArrowButton');
-
-        leftArrowButton.addEventListener('click', () => {
-            this.cursor.seekLeft();
-            this.cursor.updateDisplay();
-        });
-
-        rightArrowButton.addEventListener('click', () => {
-            this.cursor.seekRight();
-            this.cursor.updateDisplay();
-        });
 
         guimathTabButtons.forEach(btn => {
             btn.addEventListener('click', function () {
