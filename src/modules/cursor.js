@@ -364,7 +364,7 @@ export default class Cursor {
 
     toHTML() {
         // Generate HTML from the expression built till now
-        let html = this.expression.toHTML();
+        let html = this.expression.toHTML(this.block, this.child);
         this.html = html;
         return html;
     }

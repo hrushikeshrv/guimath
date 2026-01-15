@@ -36,10 +36,10 @@ export class Expression {
     /**
      * Render the expression to HTML for display in the GUI
      */
-    toHTML(cursorComponent = null, cursorBlock = null, cursorPosition = null) {
+    toHTML(cursorBlock = null, cursorPosition = null) {
         let html = '';
         for (let c of this.components) {
-            html += c.toHTML() + ' ';
+            html += c.toHTML(cursorBlock, cursorPosition) + ' ';
         }
         return html.trim();
     }
@@ -81,15 +81,29 @@ export class Block {
     /**
      * Render the block to HTML for display in the GUI
      */
-    toHTML() {
-        if (this.children.length === 0) return '';
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        if (this.children.length === 0) {
+            if (this === cursorBlock)
+                return '<span class="_guimath_cursor"></span>';
+            return '';
+        }
         let html = '';
-        for (let c of this.children) {
+        for (let i = 0; i < this.children.length; i++) {
+            let c = this.children[i];
+            if (Math.ceil(cursorPosition) === i && this === cursorBlock) {
+                html += '<span class="_guimath_cursor"></span>';
+            }
             if (typeof c === 'string') {
                 html += c;
             } else {
-                html += c.toHTML() + ' ';
+                html += c.toHTML(cursorBlock, cursorPosition) + ' ';
             }
+        }
+        if (
+            Math.ceil(cursorPosition) === this.children.length &&
+            this === cursorBlock
+        ) {
+            html += '<span class="_guimath_cursor"></span>';
         }
         return html.trim();
     }
@@ -128,10 +142,13 @@ export class Component {
         return '';
     }
 
-    toHTML() {
+    toHTML(cursorBlock = null, cursorPosition = null) {
         let html = '<div class="_guimath_component">';
         for (let block of this.blocks) {
-            html += `<div class="_guimath_block">${block.toHTML()}</div>`;
+            html += `<div class="_guimath_block">${block.toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>`;
         }
         html += '</div>';
         return html;
@@ -218,17 +235,26 @@ export class TemplateThreeBlockComponent extends ThreeBlockComponent {
         }_{${this.blocks[0].toLatex()}}^{${this.blocks[1].toLatex()}}{${this.blocks[2].toLatex()}}`;
     }
 
-    toHTML() {
+    toHTML(cursorBlock = null, cursorPosition = null) {
         return `
         <div class="_guimath_component _guimath_flexbox_row">
             <div class="_guimath_flexbox_column">
-                <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML()}</div>
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
                 <div class='_guimath_block _guimath_large_block'>${
                     this.htmlData
                 }</div>
-                <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML()}</div>
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
             </div>
-            <div class='_guimath_block'>${this.blocks[2].toHTML()}</div>
+            <div class='_guimath_block'>${this.blocks[2].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
         </div>
         `;
     }
@@ -251,6 +277,22 @@ export class TrigonometricTwoBlockComponent extends TwoBlockComponent {
         return `\\${
             this.latexData
         }^{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class='_guimath_block'>${this.latexData}</div>
+            <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div class='_guimath_block'>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
     }
 }
 
@@ -287,7 +329,7 @@ export class GUIMathSymbol extends Component {
         return this.latexData;
     }
 
-    toHTML() {
+    toHTML(cursorBlock = null, cursorPosition = null) {
         return `<span class="_guimath_symbol_html">${this.htmlData}</span>`;
     }
 }

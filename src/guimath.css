@@ -247,6 +247,21 @@
     margin-left: 10px;
 }
 
+@keyframes _guimath_blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+._guimath_cursor {
+    width: 2px;
+    height: 1.2em;
+    background-color: var(--default-font-color);
+    animation: _guimath_blink 1s steps(1) infinite;
+}
+
 ._guimath_component, ._guimath_block {
     display: flex;
     flex-flow: row nowrap;
@@ -275,9 +290,9 @@
     transition: border-color ease 0.2s;
 }
 
-._guimath_block:hover::before {
-    border-color: var(--muted-font-color);
-}
+/*._guimath_block:hover::before {*/
+/*    border-color: var(--muted-font-color);*/
+/*}*/
 
 ._guimath_small_block ._guimath_block {
     font-size: 0.8em;
