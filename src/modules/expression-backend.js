@@ -2,6 +2,16 @@
 // Exposes its API for the cursor module to use
 
 /**
+ * Helper function to determine if a string is a number
+ * @param str
+ * @returns {boolean}
+ */
+function isNumber(str) {
+    if (typeof str != 'string') return false;
+    return !isNaN(str) && !isNaN(parseFloat(str)) && isFinite(Number(str));
+}
+
+/**
  * @class
  * Thin wrapper around the Component class that collects all the components together in an Expression
  * that can be easily rendered and converted to LaTeX.
@@ -145,10 +155,11 @@ export class Component {
     toHTML(cursorBlock = null, cursorPosition = null) {
         let html = '<div class="_guimath_component">';
         for (let block of this.blocks) {
-            html += `<div class="_guimath_block">${block.toHTML(
-                cursorBlock,
-                cursorPosition,
-            )}</div>`;
+            if (block === cursorBlock) {
+                html += '<div class="_guimath_active_block _guimath_block">';
+            } else html += '<div class="_guimath_block">';
+            html += block.toHTML(cursorBlock, cursorPosition);
+            html += '</div>';
         }
         html += '</div>';
         return html;
@@ -236,6 +247,33 @@ export class TemplateThreeBlockComponent extends ThreeBlockComponent {
     }
 
     toHTML(cursorBlock = null, cursorPosition = null) {
+        if (
+            this.parent !== null &&
+            this.parent.parent !== null &&
+            this.parent.parent instanceof Component
+        ) {
+            return `
+                <div class="_guimath_component _guimath_flexbox_row">
+                    <div class='_guimath_block _guimath_large_block' style="margin-right: 0;">${
+                        this.htmlData
+                    }</div>
+                    <div class='_guimath_flexbox_column'>
+                        <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
+                            cursorBlock,
+                            cursorPosition,
+                        )}</div>
+                        <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                            cursorBlock,
+                            cursorPosition,
+                        )}</div>
+                    </div>
+                    <div class='_guimath_block'>${this.blocks[2].toHTML(
+                        cursorBlock,
+                        cursorPosition,
+                    )}</div>
+                </div>
+            `;
+        }
         return `
         <div class="_guimath_component _guimath_flexbox_row">
             <div class="_guimath_flexbox_column">
@@ -282,8 +320,10 @@ export class TrigonometricTwoBlockComponent extends TwoBlockComponent {
     toHTML(cursorBlock = null, cursorPosition = null) {
         return `
         <div class="_guimath_component _guimath_flexbox_row">
-            <div class='_guimath_block'>${this.latexData}</div>
-            <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+            <div class='_guimath_block' style="font-style: normal;">${
+                this.latexData
+            }</div>
+            <div class='_guimath_block _guimath_small_block' style="top: -0.5em">${this.blocks[0].toHTML(
                 cursorBlock,
                 cursorPosition,
             )}</div>
@@ -310,6 +350,13 @@ export class TextComponent extends Component {
 
     toLatex() {
         return this.blocks[0].toLatex();
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        const content = this.blocks[0].toHTML(cursorBlock, cursorPosition);
+        return `<span class="_guimath_text ${
+            isNumber(content) ? '_guimath_straight_text' : ''
+        }">${content}</span>`;
     }
 }
 

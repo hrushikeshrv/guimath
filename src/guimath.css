@@ -269,6 +269,10 @@
     justify-content: center;
 }
 
+._guimath_straight_text {
+    font-style: normal;
+}
+
 ._guimath_block {
     min-height: 10px;
     min-width: 10px;
@@ -276,6 +280,7 @@
     font-size: 1.2rem;
     font-style: italic;
     position: relative;
+    white-space: pre;
 }
 
 ._guimath_block::before {
@@ -290,9 +295,14 @@
     transition: border-color ease 0.2s;
 }
 
-/*._guimath_block:hover::before {*/
-/*    border-color: var(--muted-font-color);*/
-/*}*/
+._guimath_text ._guimath_block::before {
+    content: none;
+}
+
+._guimath_block:hover::before,
+._guimath_active_block {
+    border-color: var(--muted-font-color);
+}
 
 ._guimath_small_block ._guimath_block {
     font-size: 0.8em;
@@ -310,8 +320,4 @@
     font-size: 2.5em;
     font-style: normal;
     z-index: 1;
-}
-
-._guimath_small_block ._guimath_small_block {
-    font-size: 2em;
 }
