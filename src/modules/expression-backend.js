@@ -419,6 +419,24 @@ export class Limit extends TwoBlockComponent {
     toLatex() {
         return `\\lim_{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
     }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class='_guimath_flexbox_column' style='margin-right: 0.35em;'>
+                <div class='_guimath_block' style="font-style: normal;">lim</div>
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+            </div>
+            <div class='_guimath_block'>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
+    }
 }
 
 /**
@@ -429,6 +447,21 @@ export class Fraction extends TwoBlockComponent {
     toLatex() {
         return `\\frac{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
     }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class="_guimath_component _guimath_flexbox_column">
+            <div class='_guimath_block' style='border-bottom: 2px solid var(--default-font-color); padding-bottom: 0.35em;'>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div class='_guimath_block' style='padding-top: 0.35em;'>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
+    }
 }
 
 /**
@@ -438,6 +471,21 @@ export class Fraction extends TwoBlockComponent {
 export class Subscript extends TwoBlockComponent {
     toLatex() {
         return `{${this.blocks[0].toLatex()}}_{${this.blocks[1].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class='_guimath_component'>
+            <div class='_guimath_block'>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div class='_guimath_block _guimath_small_block' style="top: 0.5em;">${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
     }
 }
 
@@ -450,6 +498,21 @@ export class Superscript extends TwoBlockComponent {
     toLatex() {
         return `{${this.blocks[0].toLatex()}}^{${this.blocks[1].toLatex()}}`;
     }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class='_guimath_component'>
+            <div class='_guimath_block'>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div class='_guimath_block _guimath_small_block' style="bottom: 0.5em;">${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
+    }
 }
 
 /**
@@ -459,6 +522,27 @@ export class Superscript extends TwoBlockComponent {
 export class SubSupRight extends ThreeBlockComponent {
     toLatex() {
         return `{${this.blocks[0].toLatex()}}_{${this.blocks[1].toLatex()}}^{${this.blocks[2].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class='_guimath_component'>
+            <div class='_guimath_block'>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+           <div class='_guimath_flexbox_column'>
+               <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
+                   cursorBlock,
+                   cursorPosition,
+               )}</div>
+               <div class='_guimath_block _guimath_small_block'>${this.blocks[2].toHTML(
+                   cursorBlock,
+                   cursorPosition,
+               )}</div>
+           </div>
+        </div>
+        `;
     }
 }
 

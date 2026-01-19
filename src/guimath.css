@@ -24,14 +24,14 @@
 
 ._guimath_flexbox_row {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row nowrap !important;
     align-items: center;
     justify-content: center;
 }
 
 ._guimath_flexbox_column {
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: column nowrap !important;
     align-items: center;
     justify-content: center;
 }
