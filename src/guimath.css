@@ -269,15 +269,21 @@
     justify-content: center;
 }
 
+._guimath_text {
+    font-style: italic;
+    font-size: 1.2em;
+}
+
 ._guimath_straight_text {
-    font-style: normal;
+    font-style: normal !important;
+    font-size: 1.2em;
 }
 
 ._guimath_block {
     min-height: 10px;
     min-width: 10px;
     line-height: 0.8;
-    font-size: 1.2rem;
+    font-size: 1em;
     font-style: italic;
     position: relative;
     white-space: pre;
@@ -300,11 +306,13 @@
 }
 
 ._guimath_block:hover::before,
-._guimath_active_block {
+._guimath_active_block::before {
     border-color: var(--muted-font-color);
 }
 
-._guimath_small_block ._guimath_block {
+._guimath_small_block ._guimath_block,
+._guimath_small_block ._guimath_text,
+._guimath_small_block ._guimath_straight_text {
     font-size: 0.8em;
 }
 

@@ -158,6 +158,7 @@ export default class GUIMath {
 
         this.constructUI();
         this.cursor = new Cursor(this.expression, this.eqnDisplay);
+        this.eqnDisplay.innerHTML = this.cursor.toHTML();
         this.elements.forEach(el => {
             el.addEventListener('click', this.showUI);
         });
@@ -245,7 +246,6 @@ export default class GUIMath {
 
         this.editorWindow = editorDiv;
         this.eqnDisplay = editorDiv.querySelector('#_guimath_equation_display');
-        this.eqnDisplay.innerHTML = '';
 
         this.pseudoMobileKeyboard = editorDiv.querySelector(
             '.guimath-pseudo-mobile-keyboard',

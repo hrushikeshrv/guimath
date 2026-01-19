@@ -51,7 +51,23 @@ export class Expression {
         for (let c of this.components) {
             html += c.toHTML(cursorBlock, cursorPosition) + ' ';
         }
-        return html.trim();
+        return this._postprocessHTML(html.trim());
+    }
+
+    /**
+     * Postprocess the HTML generated to add any additional features
+     * @param html
+     * @private
+     */
+    _postprocessHTML(html) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const activeBlock = doc.querySelector('._guimath_active_block_marker');
+        if (!activeBlock) return doc.body.innerHTML;
+
+        activeBlock.parentElement.classList.add('_guimath_active_block');
+        activeBlock.remove();
+        return doc.body.innerHTML;
     }
 }
 
@@ -98,6 +114,10 @@ export class Block {
             return '';
         }
         let html = '';
+        if (this === cursorBlock) {
+            // This span is removed in postprocessing
+            html += "<span class='_guimath_active_block_marker'></span>";
+        }
         for (let i = 0; i < this.children.length; i++) {
             let c = this.children[i];
             if (Math.ceil(cursorPosition) === i && this === cursorBlock) {

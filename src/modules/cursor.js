@@ -365,6 +365,14 @@ export default class Cursor {
     toHTML() {
         // Generate HTML from the expression built till now
         let html = this.expression.toHTML(this.block, this.child);
+        if (this.block === null && this.position === -0.5) {
+            html = '<span class="_guimath_cursor"></span>' + html;
+        } else if (
+            this.block === null &&
+            this.position === this.expression.components.length - 0.5
+        ) {
+            html = html + '<span class="_guimath_cursor"></span>';
+        }
         this.html = html;
         return html;
     }
