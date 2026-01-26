@@ -455,7 +455,7 @@ export class Fraction extends TwoBlockComponent {
                 cursorBlock,
                 cursorPosition,
             )}</div>
-            <div class='_guimath_block' style='padding-top: 0.35em;'>${this.blocks[1].toHTML(
+            <div class='_guimath_block' style='padding-top: 0.05em;'>${this.blocks[1].toHTML(
                 cursorBlock,
                 cursorPosition,
             )}</div>
@@ -554,6 +554,21 @@ export class Sqrt extends OneBlockComponent {
     toLatex() {
         return `\\sqrt{${this.blocks[0].toLatex()}}`;
     }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <math class="_guimath_component _guimath_flexbox_row">
+            <msqrt>
+                <mtext>
+                <div class='_guimath_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                </mtext>
+            </msqrt> 
+        </math>
+        `;
+    }
 }
 
 /**
@@ -563,5 +578,24 @@ export class Sqrt extends OneBlockComponent {
 export class NthRoot extends TwoBlockComponent {
     toLatex() {
         return `\\sqrt[${this.blocks[0].toLatex()}]{${this.blocks[1].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <math class="_guimath_component _guimath_flexbox_row">
+            <mroot>
+                <mtext>
+                <div class='_guimath_block'>${this.blocks[1].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                </mtext>
+                <mn class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</mn>
+            </mroot> 
+        </math>
+        `;
     }
 }

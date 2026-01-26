@@ -146,19 +146,21 @@ export default class Cursor {
         } else if (event.key === 'Backspace') {
             this.backspace();
         } else if (event.key === 'Enter') {
-            document.getElementById('guimath_save_equation').click();
+            document
+                .getElementsByClassName('_guimath_save_equation')[0]
+                .click();
         } else if (event.key === ' ') {
             let _ = new ExpressionBackend.GUIMathSymbol(
                 this.block,
                 '\\:\\:',
-                ' ',
+                '',
             );
             this.addComponent(_);
         } else if (event.key === '\\') {
             let _ = new ExpressionBackend.GUIMathSymbol(
                 this.block,
                 '\\backslash',
-                ' ',
+                '\\',
             );
             this.addComponent(_);
         } else if (['$', '#', '%', '&', '_', '{', '}'].includes(event.key)) {

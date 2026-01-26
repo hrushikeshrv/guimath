@@ -142,11 +142,13 @@ export default class GUIMath {
             // Show the editor window
             this.editorWindow.style.display = 'block';
             this.editorWindow.dataset.visible = 'true';
+            this.editorWindow.dataset.focused = 'true';
         };
         this.hideUI = () => {
             // Hide the editor window
             this.editorWindow.removeAttribute('style');
             this.editorWindow.dataset.visible = 'false';
+            this.editorWindow.dataset.focused = 'false';
         };
 
         if (
@@ -160,11 +162,29 @@ export default class GUIMath {
         this.cursor = new Cursor(this.expression, this.eqnDisplay);
         this.eqnDisplay.innerHTML = this.cursor.toHTML();
         this.elements.forEach(el => {
-            el.addEventListener('click', this.showUI);
+            el.addEventListener('click', evt => {
+                this.showUI();
+                evt.stopPropagation();
+            });
         });
 
+        document.addEventListener('click', evt => {
+            if (
+                this.editorWindow.dataset.visible === 'true' &&
+                this.editorWindow.dataset.focused === 'true'
+            )
+                this.editorWindow.dataset.focused = 'false';
+        });
+        this.editorWindow.addEventListener('click', evt => {
+            this.editorWindow.dataset.focused = 'true';
+            evt.stopPropagation();
+        });
         document.addEventListener('keydown', evt => {
-            if (this.editorWindow.dataset.visible === 'false') return;
+            if (
+                this.editorWindow.dataset.visible === 'false' ||
+                this.editorWindow.dataset.focused !== 'true'
+            )
+                return;
             this.cursor.keyPress(evt);
             this.cursor.updateDisplay();
         });
@@ -229,6 +249,7 @@ export default class GUIMath {
             editorDiv.classList.add(this.options['class']);
         }
         editorDiv.dataset.visible = 'false';
+        editorDiv.dataset.focused = 'false';
         editorDiv.innerHTML = editorHTML;
         if (this.options.theme?.toLowerCase().trim() === 'dark') {
             editorDiv.classList.add('_guimath_dark_theme');
@@ -277,7 +298,7 @@ export default class GUIMath {
         });
 
         const closeEditor = editorDiv.querySelector(
-            '.guimath_close_button_svg',
+            '._guimath_close_button_svg',
         );
         closeEditor.addEventListener('click', this.hideUI);
 
