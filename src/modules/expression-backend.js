@@ -2,6 +2,16 @@
 // Exposes its API for the cursor module to use
 
 /**
+ * Helper function to determine if a string is a number
+ * @param str
+ * @returns {boolean}
+ */
+function isNumber(str) {
+    if (typeof str != 'string') return false;
+    return !isNaN(str) && !isNaN(parseFloat(str)) && isFinite(Number(str));
+}
+
+/**
  * @class
  * Thin wrapper around the Component class that collects all the components together in an Expression
  * that can be easily rendered and converted to LaTeX.
@@ -31,6 +41,33 @@ export class Expression {
             latex += c.toLatex() + ' ';
         }
         return latex.trim();
+    }
+
+    /**
+     * Render the expression to HTML for display in the GUI
+     */
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        let html = '';
+        for (let c of this.components) {
+            html += c.toHTML(cursorBlock, cursorPosition) + ' ';
+        }
+        return this._postprocessHTML(html.trim());
+    }
+
+    /**
+     * Postprocess the HTML generated to add any additional features
+     * @param html
+     * @private
+     */
+    _postprocessHTML(html) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const activeBlock = doc.querySelector('._guimath_active_block_marker');
+        if (!activeBlock) return doc.body.innerHTML;
+
+        activeBlock.parentElement.classList.add('_guimath_active_block');
+        activeBlock.remove();
+        return doc.body.innerHTML;
     }
 }
 
@@ -67,6 +104,40 @@ export class Block {
         return latex.trim();
     }
 
+    /**
+     * Render the block to HTML for display in the GUI
+     */
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        if (this.children.length === 0) {
+            if (this === cursorBlock)
+                return '<span class="_guimath_cursor"></span>';
+            return '';
+        }
+        let html = '';
+        if (this === cursorBlock) {
+            // This span is removed in postprocessing
+            html += "<span class='_guimath_active_block_marker'></span>";
+        }
+        for (let i = 0; i < this.children.length; i++) {
+            let c = this.children[i];
+            if (Math.ceil(cursorPosition) === i && this === cursorBlock) {
+                html += '<span class="_guimath_cursor"></span>';
+            }
+            if (typeof c === 'string') {
+                html += c;
+            } else {
+                html += c.toHTML(cursorBlock, cursorPosition) + ' ';
+            }
+        }
+        if (
+            Math.ceil(cursorPosition) === this.children.length &&
+            this === cursorBlock
+        ) {
+            html += '<span class="_guimath_cursor"></span>';
+        }
+        return html.trim();
+    }
+
     addChild(component, position = this.children.length) {
         // Setter method to add some component to this block at position. Component can be any child class of Component.
         // Defaults to adding the component at the end.
@@ -99,6 +170,19 @@ export class Component {
 
     toLatex() {
         return '';
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        let html = '<div class="_guimath_component">';
+        for (let block of this.blocks) {
+            if (block === cursorBlock) {
+                html += '<div class="_guimath_active_block _guimath_block">';
+            } else html += '<div class="_guimath_block">';
+            html += block.toHTML(cursorBlock, cursorPosition);
+            html += '</div>';
+        }
+        html += '</div>';
+        return html;
     }
 
     addBlock(block, position) {
@@ -170,15 +254,67 @@ export class ThreeBlockComponent extends Component {
  * differs significantly from component to component.
  */
 export class TemplateThreeBlockComponent extends ThreeBlockComponent {
-    constructor(parent, latexData) {
+    constructor(parent, latexData, htmlData) {
         super(parent);
         this.latexData = latexData;
+        this.htmlData = htmlData;
     }
 
     toLatex() {
         return `\\${
             this.latexData
         }_{${this.blocks[0].toLatex()}}^{${this.blocks[1].toLatex()}}{${this.blocks[2].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        if (
+            this.parent !== null &&
+            this.parent.parent !== null &&
+            this.parent.parent instanceof Component
+        ) {
+            return `
+                <div class="_guimath_component _guimath_flexbox_row">
+                    <div class='_guimath_block _guimath_large_block' style="margin-right: 0;">${
+                        this.htmlData
+                    }</div>
+                    <div class='_guimath_flexbox_column'>
+                        <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
+                            cursorBlock,
+                            cursorPosition,
+                        )}</div>
+                        <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                            cursorBlock,
+                            cursorPosition,
+                        )}</div>
+                    </div>
+                    <div class='_guimath_block'>${this.blocks[2].toHTML(
+                        cursorBlock,
+                        cursorPosition,
+                    )}</div>
+                </div>
+            `;
+        }
+        return `
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class="_guimath_flexbox_column">
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                <div class='_guimath_block _guimath_large_block'>${
+                    this.htmlData
+                }</div>
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+            </div>
+            <div class='_guimath_block'>${this.blocks[2].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
     }
 }
 
@@ -200,6 +336,24 @@ export class TrigonometricTwoBlockComponent extends TwoBlockComponent {
             this.latexData
         }^{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
     }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class='_guimath_block' style="font-style: normal;">${
+                this.latexData
+            }</div>
+            <div class='_guimath_block _guimath_small_block' style="top: -0.5em">${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div class='_guimath_block'>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
+    }
 }
 
 /**
@@ -217,6 +371,13 @@ export class TextComponent extends Component {
     toLatex() {
         return this.blocks[0].toLatex();
     }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        const content = this.blocks[0].toHTML(cursorBlock, cursorPosition);
+        return `<span class="_guimath_text ${
+            isNumber(content) ? '_guimath_straight_text' : ''
+        }">${content}</span>`;
+    }
 }
 
 /**
@@ -225,13 +386,18 @@ export class TextComponent extends Component {
  */
 // TODO - Add support for the backslash character as a symbol
 export class GUIMathSymbol extends Component {
-    constructor(parent, latexData) {
+    constructor(parent, latexData, htmlData) {
         super([], parent);
         this.latexData = latexData;
+        this.htmlData = htmlData;
     }
 
     toLatex() {
         return this.latexData;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `<span class="_guimath_symbol_html">${this.htmlData}</span>`;
     }
 }
 
@@ -253,6 +419,24 @@ export class Limit extends TwoBlockComponent {
     toLatex() {
         return `\\lim_{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
     }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class='_guimath_flexbox_column' style='margin-right: 0.35em;'>
+                <div class='_guimath_block' style="font-style: normal;">lim</div>
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+            </div>
+            <div class='_guimath_block'>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
+    }
 }
 
 /**
@@ -263,6 +447,21 @@ export class Fraction extends TwoBlockComponent {
     toLatex() {
         return `\\frac{${this.blocks[0].toLatex()}}{${this.blocks[1].toLatex()}}`;
     }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class="_guimath_component _guimath_flexbox_column">
+            <div class='_guimath_block' style='border-bottom: 2px solid var(--default-font-color); padding-bottom: 0.35em;'>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div class='_guimath_block' style='padding-top: 0.05em;'>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
+    }
 }
 
 /**
@@ -272,6 +471,21 @@ export class Fraction extends TwoBlockComponent {
 export class Subscript extends TwoBlockComponent {
     toLatex() {
         return `{${this.blocks[0].toLatex()}}_{${this.blocks[1].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class='_guimath_component'>
+            <div class='_guimath_block'>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div class='_guimath_block _guimath_small_block' style="top: 0.5em;">${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
     }
 }
 
@@ -284,6 +498,21 @@ export class Superscript extends TwoBlockComponent {
     toLatex() {
         return `{${this.blocks[0].toLatex()}}^{${this.blocks[1].toLatex()}}`;
     }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class='_guimath_component'>
+            <div class='_guimath_block'>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div class='_guimath_block _guimath_small_block' style="bottom: 0.5em;">${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
+    }
 }
 
 /**
@@ -293,6 +522,27 @@ export class Superscript extends TwoBlockComponent {
 export class SubSupRight extends ThreeBlockComponent {
     toLatex() {
         return `{${this.blocks[0].toLatex()}}_{${this.blocks[1].toLatex()}}^{${this.blocks[2].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class='_guimath_component'>
+            <div class='_guimath_block'>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+           <div class='_guimath_flexbox_column'>
+               <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
+                   cursorBlock,
+                   cursorPosition,
+               )}</div>
+               <div class='_guimath_block _guimath_small_block'>${this.blocks[2].toHTML(
+                   cursorBlock,
+                   cursorPosition,
+               )}</div>
+           </div>
+        </div>
+        `;
     }
 }
 
@@ -304,6 +554,21 @@ export class Sqrt extends OneBlockComponent {
     toLatex() {
         return `\\sqrt{${this.blocks[0].toLatex()}}`;
     }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <math class="_guimath_component _guimath_flexbox_row">
+            <msqrt>
+                <mtext>
+                <div class='_guimath_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                </mtext>
+            </msqrt> 
+        </math>
+        `;
+    }
 }
 
 /**
@@ -313,5 +578,24 @@ export class Sqrt extends OneBlockComponent {
 export class NthRoot extends TwoBlockComponent {
     toLatex() {
         return `\\sqrt[${this.blocks[0].toLatex()}]{${this.blocks[1].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <math class="_guimath_component _guimath_flexbox_row">
+            <mroot>
+                <mtext>
+                <div class='_guimath_block'>${this.blocks[1].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                </mtext>
+                <mn class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</mn>
+            </mroot> 
+        </math>
+        `;
     }
 }

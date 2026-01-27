@@ -20,7 +20,7 @@ Each element of the GUIMath editor widget has a class attached to it to allow yo
 GUIMath defines the following classes -
 
 - The root element containing the entire widget has a class of `_guimath_editor_window`.
-- There is a row of controls on top of the widget, which has the close button, the clear equation button, and the save button. This row has the class `guimath_editor_controls`.
+- There is a row of controls on top of the widget, which has the close button, the clear equation button, and the save button. This row has the class `_guimath_editor_controls`.
 - The row that contains the tab navigation ("Letters", "Symbols", "Functions") has the class `_guimath_tab_container_container`, and each tab button has the class `guimath_tab_container`.
   - The active tab is given a class of `_guimath_active_tab`.
 - The elements contain the actual greek letters, symbols, or functions are given the class `guimath_tab`.

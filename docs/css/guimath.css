@@ -80,7 +80,7 @@
     background-color: var(--background-dark-1);
 }
 
-.guimath_editor_controls {
+._guimath_editor_controls {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -122,7 +122,7 @@
     background-color: var(--background-dark-1);
 }
 
-.guimath_clear_save_buttons, .guimath_button_container {
+._guimath_clear_save_buttons, ._guimath_button_container {
     display: flex;
     flex-flow: row wrap;
     font-family: monospace;
@@ -131,7 +131,7 @@
     justify-content: center;
 }
 
-.guimath_button_container {
+._guimath_button_container {
     margin: 0 5px;
     background-color: var(--background-color);
     border-radius: 6px;
@@ -140,7 +140,7 @@
     padding: 5px;
 }
 
-.guimath_button_container:hover  {
+._guimath_button_container:hover  {
     background-color: var(--background-dark-1);
 }
 

@@ -132,7 +132,6 @@ export default class GUIMath {
         this.selector = elementSelector;
         this.elements = document.querySelectorAll(elementSelector);
         this.options = options;
-        this.mathDelimiter = this.options.mathDelimiter || '$$';
         this.isPersistent = options.isPersistent || false;
         this.successCallback = successCallback;
         this.eqnHistory = [];
@@ -143,11 +142,13 @@ export default class GUIMath {
             // Show the editor window
             this.editorWindow.style.display = 'block';
             this.editorWindow.dataset.visible = 'true';
+            this.editorWindow.dataset.focused = 'true';
         };
         this.hideUI = () => {
             // Hide the editor window
             this.editorWindow.removeAttribute('style');
             this.editorWindow.dataset.visible = 'false';
+            this.editorWindow.dataset.focused = 'false';
         };
 
         if (
@@ -159,19 +160,33 @@ export default class GUIMath {
 
         this.constructUI();
         this.cursor = new Cursor(this.expression, this.eqnDisplay);
+        this.eqnDisplay.innerHTML = this.cursor.toHTML();
         this.elements.forEach(el => {
-            el.addEventListener('click', this.showUI);
+            el.addEventListener('click', evt => {
+                this.showUI();
+                evt.stopPropagation();
+            });
         });
 
+        document.addEventListener('click', evt => {
+            if (
+                this.editorWindow.dataset.visible === 'true' &&
+                this.editorWindow.dataset.focused === 'true'
+            )
+                this.editorWindow.dataset.focused = 'false';
+        });
+        this.editorWindow.addEventListener('click', evt => {
+            this.editorWindow.dataset.focused = 'true';
+            evt.stopPropagation();
+        });
         document.addEventListener('keydown', evt => {
-            if (this.editorWindow.dataset.visible === 'false') return;
-            MathJax.typesetClear([this.eqnDisplay]);
+            if (
+                this.editorWindow.dataset.visible === 'false' ||
+                this.editorWindow.dataset.focused !== 'true'
+            )
+                return;
             this.cursor.keyPress(evt);
-            this.eqnDisplay.innerHTML =
-                this.mathDelimiter +
-                this.cursor.toDisplayLatex() +
-                this.mathDelimiter;
-            MathJax.typesetPromise([this.eqnDisplay]).then(() => {});
+            this.cursor.updateDisplay();
         });
 
         const symbols = this.editorWindow.querySelectorAll(
@@ -186,6 +201,7 @@ export default class GUIMath {
                     let _ = new ExpressionBackend.GUIMathSymbol(
                         this.cursor.block,
                         symbolLatexMap[symbol.dataset.latexData],
+                        symbol.innerHTML,
                     );
                     this.cursor.addComponent(_);
                     this.cursor.updateDisplay();
@@ -201,6 +217,7 @@ export default class GUIMath {
                         _ = new ExpressionBackend.TemplateThreeBlockComponent(
                             this.cursor.block,
                             func.dataset.latexData,
+                            func.innerHTML,
                         );
                     } else if (func.dataset.templateType === 'trigonometric') {
                         _ =
@@ -232,6 +249,7 @@ export default class GUIMath {
             editorDiv.classList.add(this.options['class']);
         }
         editorDiv.dataset.visible = 'false';
+        editorDiv.dataset.focused = 'false';
         editorDiv.innerHTML = editorHTML;
         if (this.options.theme?.toLowerCase().trim() === 'dark') {
             editorDiv.classList.add('_guimath_dark_theme');
@@ -248,8 +266,7 @@ export default class GUIMath {
         }
 
         this.editorWindow = editorDiv;
-        this.eqnDisplay = editorDiv.querySelector('._guimath_editor_display');
-        this.eqnDisplay.innerHTML = `${this.mathDelimiter} | ${this.mathDelimiter}`;
+        this.eqnDisplay = editorDiv.querySelector('#_guimath_equation_display');
 
         this.pseudoMobileKeyboard = editorDiv.querySelector(
             '.guimath-pseudo-mobile-keyboard',
@@ -258,19 +275,6 @@ export default class GUIMath {
             '.guimath_tab_container',
         );
         const guimathTabs = editorDiv.querySelectorAll('.guimath_tab');
-
-        const leftArrowButton = editorDiv.querySelector('.leftArrowButton');
-        const rightArrowButton = editorDiv.querySelector('.rightArrowButton');
-
-        leftArrowButton.addEventListener('click', () => {
-            this.cursor.seekLeft();
-            this.cursor.updateDisplay();
-        });
-
-        rightArrowButton.addEventListener('click', () => {
-            this.cursor.seekRight();
-            this.cursor.updateDisplay();
-        });
 
         guimathTabButtons.forEach(btn => {
             btn.addEventListener('click', function () {
@@ -294,7 +298,7 @@ export default class GUIMath {
         });
 
         const closeEditor = editorDiv.querySelector(
-            '.guimath_close_button_svg',
+            '._guimath_close_button_svg',
         );
         closeEditor.addEventListener('click', this.hideUI);
 
@@ -361,15 +365,8 @@ export default class GUIMath {
      @param componentClass A class that inherits from one of GUIMath's many component classes
      @param buttonContent HTML or text content that will be placed inside the rendered button
      @param title The title to show when a user hovers over the button
-     @param typeset true if MathJax should typeset buttonContent
-      (requires MathJax to be completely loaded when this function is called)
      */
-    registerFunction(
-        componentClass,
-        buttonContent,
-        title = '',
-        typeset = false,
-    ) {
+    registerFunction(componentClass, buttonContent, title = '') {
         const el = document.createElement('span');
         el.classList.add('guimath-btn', 'guimath-function');
         el.title = title;
@@ -379,7 +376,6 @@ export default class GUIMath {
         this.editorWindow
             .querySelector('._guimath_functions_tab')
             .appendChild(el);
-        if (typeset) MathJax.typesetPromise([el]).then(() => {});
 
         el.addEventListener('click', () => {
             this.cursor.addComponent(new componentClass());
@@ -390,26 +386,24 @@ export default class GUIMath {
     /**
      * Adds a symbol to the UI that is not supported out of the box.
      @param latexData LaTeX code for the symbol
-     @param buttonContent HTML or text content that will be placed inside the rendered button
+     @param htmlData HTML or text content that will be placed inside the rendered button
      @param title The title to show when a user hovers over the button
-     @param typeset true if MathJax should typeset buttonContent
-      (requires MathJax to be completely loaded when this function is called)
      */
-    registerSymbol(latexData, buttonContent, title = '', typeset = false) {
+    registerSymbol(latexData, htmlData, title = '') {
         const el = document.createElement('span');
         el.classList.add('guimath-btn', 'guimath-symbol');
         el.title = title;
         el.dataset.latexData = latexData;
-        el.innerHTML = buttonContent;
+        el.innerHTML = htmlData;
         this.editorWindow
             .querySelector('._guimath_symbols_tab')
             .appendChild(el);
-        if (typeset) MathJax.typesetPromise([el]).then(() => {});
 
         el.addEventListener('click', () => {
             let _ = new ExpressionBackend.GUIMathSymbol(
                 this.cursor.block,
                 latexData,
+                htmlData,
             );
             this.cursor.addComponent(_);
             this.cursor.updateDisplay();
@@ -454,14 +448,11 @@ export default class GUIMath {
                 if (latex.length > 0) {
                     // Set input value and show equation preview
                     inp.value = latex;
-                    MathJax.typesetClear([eqnDisplay]);
                     eqnDisplay.innerHTML = `$ ${latex} $`;
-                    MathJax.typesetPromise([eqnDisplay]).then(() => {});
 
                     inpButton.textContent = 'Edit';
                 } else {
                     inp.value = '';
-                    MathJax.typesetClear([eqnDisplay]);
                     eqnDisplay.innerHTML = '';
                     inpButton.textContent = 'Add Equation';
                 }

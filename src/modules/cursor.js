@@ -15,10 +15,18 @@ export default class Cursor {
         this.expression = expression;
         this.block = null;
         this.component = null;
+        /// The index of the cursor in the current block's children, -0.5 means before the first child
         this.child = -0.5;
+        /// The index of the cursor in the expression's components, -0.5 means before the first component
         this.position = -0.5;
         this.latex = '';
         this.display = display;
+        if (
+            this.display instanceof String ||
+            typeof this.display === 'string'
+        ) {
+            this.display = document.querySelector(this.display);
+        }
     }
 
     addText(text) {
@@ -138,20 +146,28 @@ export default class Cursor {
         } else if (event.key === 'Backspace') {
             this.backspace();
         } else if (event.key === 'Enter') {
-            document.getElementById('guimath_save_equation').click();
+            document
+                .getElementsByClassName('_guimath_save_equation')[0]
+                .click();
         } else if (event.key === ' ') {
-            let _ = new ExpressionBackend.GUIMathSymbol(this.block, '\\:\\:');
+            let _ = new ExpressionBackend.GUIMathSymbol(
+                this.block,
+                '\\:\\:',
+                '',
+            );
             this.addComponent(_);
         } else if (event.key === '\\') {
             let _ = new ExpressionBackend.GUIMathSymbol(
                 this.block,
                 '\\backslash',
+                '\\',
             );
             this.addComponent(_);
         } else if (['$', '#', '%', '&', '_', '{', '}'].includes(event.key)) {
             let _ = new ExpressionBackend.GUIMathSymbol(
                 this.block,
                 `\\${event.key}`,
+                event.key,
             );
             this.addComponent(_);
         }
@@ -348,52 +364,22 @@ export default class Cursor {
         return latex;
     }
 
-    toDisplayLatex() {
-        // Generate LaTeX to show in the display by adding a caret character to the expression.
-        // This is not the real LaTeX of the expression but the LaTeX resulting after we add
-        // a caret as a | character in the expression
-        let caret = new ExpressionBackend.TextComponent(this.block);
-        caret.blocks[0].addChild('|');
-
-        let frame = new ExpressionBackend.FrameBox(this.block);
-
-        if (this.block === null) {
-            // If we are not in any block, we just add the caret, generate latex
-            // and reset the components
-            this.expression.add(caret, Math.ceil(this.position));
-        } else {
-            // We add the current component inside the frame, add the caret in the
-            // right position, generate latex and reset the components
-            let i = this.component.blocks.indexOf(this.block);
-            this.component.removeBlock(i);
-            this.component.addBlock(frame, i);
-            frame.blocks[0] = this.block;
-            this.block.addChild(caret, Math.ceil(this.child));
+    toHTML() {
+        // Generate HTML from the expression built till now
+        let html = this.expression.toHTML(this.block, this.child);
+        if (this.block === null && this.position === -0.5) {
+            html = '<span class="_guimath_cursor"></span>' + html;
+        } else if (
+            this.block === null &&
+            this.position === this.expression.components.length - 0.5
+        ) {
+            html = html + '<span class="_guimath_cursor"></span>';
         }
-
-        let latex = this.toLatex();
-
-        if (this.block === null) {
-            this.expression.remove(Math.ceil(this.position));
-        } else {
-            let i = this.component.blocks.indexOf(frame);
-            this.component.removeBlock(i);
-            this.component.addBlock(this.block, i);
-            this.block.removeChild(Math.ceil(this.child));
-        }
-
-        return latex;
+        this.html = html;
+        return html;
     }
 
     updateDisplay() {
-        if (
-            this.display instanceof String ||
-            typeof this.display === 'string'
-        ) {
-            this.display = document.querySelector(this.display);
-        }
-        MathJax.typesetClear([this.display]);
-        this.display.innerHTML = '$$' + this.toDisplayLatex() + '$$';
-        MathJax.typesetPromise([this.display]).then(() => {});
+        this.display.innerHTML = this.toHTML();
     }
 }
