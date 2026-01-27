@@ -55,6 +55,7 @@
 ._guimath_editor_window._guimath_dark_theme {
     --background-color: rgb(42, 42, 42);
     --background-dark-1: rgb(18, 18, 18);
+    --background-dark-2: rgb(0, 0, 0);
     --default-font-color: white;
     --default-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     --success-green: rgb(55, 255, 115);
@@ -63,6 +64,7 @@
 ._guimath_editor_window._guimath_grey_theme {
     --background-color: rgb(215, 214, 214);
     --background-dark-1: rgb(185, 185, 185);
+    --background-dark-2: rgb(133, 133, 133);
     --default-font-color: black;
     --default-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     --success-green: rgb(3, 107, 35);
@@ -71,6 +73,7 @@
 ._guimath_editor_window._guimath_dark_blue_theme {
     --background-color: rgb(38, 50, 56);
     --background-dark-1: rgb(26, 35, 39);
+    --background-dark-2: rgb(19, 24, 26);
     --default-font-color: white;
     --default-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     --success-green: rgb(55, 255, 115);
@@ -79,6 +82,7 @@
 ._guimath_editor_window._guimath_light_blue_theme {
     --background-color: rgb(242, 250, 255);
     --background-dark-1: rgb(195, 209, 215);
+    --background-dark-2: rgb(131, 142, 147);
     --default-font-color: black;
     --default-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     --success-green: rgb(3, 107, 35);
@@ -87,6 +91,7 @@
 ._guimath_editor_window._guimath_dark_pink_theme {
     --background-color: rgb(35, 0, 30);
     --background-dark-1: rgb(34, 18, 30);
+    --background-dark-2: rgb(19, 6, 17);
     --default-font-color: white;
     --default-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     --success-green: rgb(55, 255, 115);
@@ -95,6 +100,7 @@
 ._guimath_editor_window._guimath_light_pink_theme {
     --background-color: rgb(245, 235, 238);
     --background-dark-1: rgb(213, 195, 199);
+    --background-dark-2: rgb(134, 120, 123);
     --default-font-color: black;
     --default-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     --success-green: rgb(3, 107, 35);
