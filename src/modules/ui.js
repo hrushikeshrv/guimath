@@ -280,7 +280,7 @@ export default class GUIMath {
             btn.addEventListener('click', function () {
                 guimathTabs.forEach(tab => {
                     if (tab.dataset.tab === btn.dataset.tab) {
-                        tab.style.display = 'flex';
+                        tab.style.display = 'grid';
                     } else {
                         tab.removeAttribute('style');
                     }
