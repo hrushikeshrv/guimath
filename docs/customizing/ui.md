@@ -28,9 +28,9 @@ GUIMath defines the following classes -
   - The element containing the symbols is also given the class `_guimath_symbols_tab`.
   - The element containing the functions is also given the class `_guimath_functions_tab`.
 - Each button in each of the three tabs is given the class `guimath-btn`.
-  - Each button in the Letters tab is given the class `guimath-greek-letter`.
-  - Each button in the Symbols tab is given the class `guimath-operator`.
-  - Each button in the Functions tab is given the class `guimath-function`.
+  - Each button in the Letters tab is given the class `_guimath_greek_letter`.
+  - Each button in the Symbols tab is given the class `_guimath_operator`.
+  - Each button in the Functions tab is given the class `_guimath_function`.
 - The navigation buttons below the three tabs are both given the class `_guimath_dir_button`.
   - The left arrow button is given the class `leftArrowButton`.
   - The right arrow button is given the class `rightArrowButton`.

@@ -153,7 +153,7 @@
     stroke: var(--error-red);
 }
 
-.guimath_tab_container {
+._guimath_tab_container {
     padding: 5px;
     font-family: monospace;
     font-size: 1.1rem;
@@ -165,11 +165,11 @@
     margin: 0 10px;
 }
 
-.guimath_tab_container._guimath_active_tab {
+._guimath_tab_container._guimath_active_tab {
     background-color: var(--background-dark-1);
 }
 
-.guimath_tab_container:hover {
+._guimath_tab_container:hover {
     background-color: var(--background-dark-1);
 }
 
@@ -192,7 +192,7 @@
     justify-content: center;
 }
 
-.guimath_tab {
+._guimath_tab {
     padding: 10px;
     margin-top: 10px;
     display: none;
@@ -200,7 +200,7 @@
     flex-flow: row wrap;
 }
 
-.guimath_tab .guimath-btn {
+._guimath_tab ._guimath_btn {
     background-color: var(--background-color);
     transition: background-color ease 0.15s;
     cursor: pointer;
@@ -216,7 +216,7 @@
     font-size: 1.1rem;
 }
 
-.guimath-btn:hover {
+._guimath_btn:hover {
     background-color: var(--background-dark-1);
 }
 

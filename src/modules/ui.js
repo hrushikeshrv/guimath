@@ -190,10 +190,10 @@ export default class GUIMath {
         });
 
         const symbols = this.editorWindow.querySelectorAll(
-            '.guimath-operator, .guimath-greek-letter',
+            '._guimath_operator, ._guimath_greek_letter',
         );
         const functions =
-            this.editorWindow.querySelectorAll('.guimath-function');
+            this.editorWindow.querySelectorAll('._guimath_function');
 
         symbols.forEach(symbol => {
             symbol.addEventListener('click', () => {
@@ -272,9 +272,9 @@ export default class GUIMath {
             '.guimath-pseudo-mobile-keyboard',
         );
         const guimathTabButtons = editorDiv.querySelectorAll(
-            '.guimath_tab_container',
+            '._guimath_tab_container',
         );
-        const guimathTabs = editorDiv.querySelectorAll('.guimath_tab');
+        const guimathTabs = editorDiv.querySelectorAll('._guimath_tab');
 
         guimathTabButtons.forEach(btn => {
             btn.addEventListener('click', function () {
@@ -368,7 +368,7 @@ export default class GUIMath {
      */
     registerFunction(componentClass, buttonContent, title = '') {
         const el = document.createElement('span');
-        el.classList.add('guimath-btn', 'guimath-function');
+        el.classList.add('guimath-btn', '_guimath_function');
         el.title = title;
         el.dataset.templateType = 'user-defined';
         el.dataset.functionId = 'user-defined';
