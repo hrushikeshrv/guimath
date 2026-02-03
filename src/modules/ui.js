@@ -4,115 +4,6 @@ import Cursor from './cursor.js';
 import editorHTML from '../html/editor.min.html';
 import formHTML from '../html/form-input.min.html';
 
-const symbolLatexMap = {
-    // Lowercase greek letters
-    alpha: '\\alpha',
-    beta: '\\beta',
-    gamma: '\\gamma',
-    delta: '\\delta',
-    epsilon: '\\epsilon',
-    zeta: '\\zeta',
-    eta: '\\eta',
-    theta: '\\theta',
-    iota: '\\iota',
-    kappa: '\\kappa',
-    lambda: '\\lambda',
-    mu: '\\mu',
-    nu: '\\nu',
-    xi: '\\xi',
-    omicron: '\\omicron',
-    pi: '\\pi',
-    rho: '\\rho',
-    sigma: '\\sigma',
-    tau: '\\tau',
-    upsilon: '\\upsilon',
-    phi: '\\phi',
-    chi: '\\chi',
-    psi: '\\psi',
-    omega: '\\omega',
-
-    // Uppercase greek letters
-    Alpha: 'A',
-    Beta: 'B',
-    Gamma: '\\Gamma',
-    Delta: '\\Delta',
-    Epsilon: 'E',
-    Zeta: 'Z',
-    Eta: 'H',
-    Theta: '\\Theta',
-    Iota: 'I',
-    Kappa: 'K',
-    Lambda: '\\Lambda',
-    Mu: 'M',
-    Nu: 'N',
-    Xi: '\\Xi',
-    Omicron: 'O',
-    Pi: '\\Pi',
-    Rho: 'P',
-    Sigma: '\\Sigma',
-    Tau: 'T',
-    Upsilon: '\\Upsilon',
-    Phi: '\\Phi',
-    Chi: 'X',
-    Psi: '\\Psi',
-    Omega: '\\Omega',
-
-    // Operators and symbols
-    times: '\\times',
-    div: '\\div',
-    centerdot: '\\cdot',
-    plusmn: '\\pm',
-    mnplus: '\\mp',
-    starf: '\\star',
-    bigcup: '\\bigcup',
-    bigcap: '\\bigcap',
-    cup: '\\cup',
-    cap: '\\cap',
-    lt: '\\lt',
-    gt: '\\gt',
-    leq: '\\leq',
-    GreaterEqual: '\\geq',
-    equals: '=',
-    approx: '\\approx',
-    NotEqual: '\\ne',
-    sub: '\\subset',
-    sup: '\\supset',
-    sube: '\\subseteq',
-    supe: '\\supseteq',
-    nsub: '\\not\\subset',
-    nsup: '\\not\\supset',
-    nsube: '\\not\\subseteq',
-    nsupe: '\\not\\supseteq',
-    propto: '\\propto',
-    parallel: '\\parallel',
-    npar: '\\nparallel',
-    asympeq: '\\asymp',
-    isin: '\\in',
-    notin: '\\notin',
-    exist: '\\exists',
-    nexist: '\\nexists',
-    perp: '\\perp',
-    angle: '\\angle',
-    angmsd: '\\measuredangle',
-    Leftarrow: '\\Leftarrow',
-    Rightarrow: '\\Rightarrow',
-    Leftrightarrow: '\\Leftrightarrow',
-    rightarrow: '\\to',
-    leftarrow: '\\gets',
-    leftrightarrow: '\\leftrightarrow',
-    longrightarrow: '\\longrightarrow',
-    longleftarrow: '\\longleftarrow',
-    longleftrightarrow: '\\longleftrightarrow',
-    uparrow: '\\uparrow',
-    downarrow: '\\downarrow',
-    updownarrow: '\\updownarrow',
-    PartialD: '\\partial',
-    hbar: '\\hbar',
-    real: '\\Re',
-    nabla: '\\nabla',
-    infin: '\\infty',
-};
-
 const functionComponentMap = {
     lim: ExpressionBackend.Limit,
     sqrt: ExpressionBackend.Sqrt,
@@ -190,22 +81,20 @@ export default class GUIMath {
         });
 
         const symbols = this.editorWindow.querySelectorAll(
-            '._guimath_operator, ._guimath_greek_letter',
+            '._guimath_operator, ._guimath_greek_letter, ._guimath_double_struck_letter, ._guimath_fraktur_letter',
         );
         const functions =
             this.editorWindow.querySelectorAll('._guimath_function');
 
         symbols.forEach(symbol => {
             symbol.addEventListener('click', () => {
-                if (symbol.dataset.latexData in symbolLatexMap) {
-                    let _ = new ExpressionBackend.GUIMathSymbol(
-                        this.cursor.block,
-                        symbolLatexMap[symbol.dataset.latexData],
-                        symbol.innerHTML,
-                    );
-                    this.cursor.addComponent(_);
-                    this.cursor.updateDisplay();
-                }
+                let _ = new ExpressionBackend.GUIMathSymbol(
+                    this.cursor.block,
+                    symbol.dataset.latexData,
+                    symbol.innerHTML,
+                );
+                this.cursor.addComponent(_);
+                this.cursor.updateDisplay();
             });
         });
 
@@ -280,7 +169,7 @@ export default class GUIMath {
             btn.addEventListener('click', function () {
                 guimathTabs.forEach(tab => {
                     if (tab.dataset.tab === btn.dataset.tab) {
-                        tab.style.display = 'grid';
+                        tab.style.display = 'flex';
                     } else {
                         tab.removeAttribute('style');
                     }

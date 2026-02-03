@@ -145,6 +145,7 @@
     flex-flow: row wrap;
     font-family: var(--default-font);
     margin-top: 10px;
+    padding: 0 4px;
 }
 
 ._guimath_save_equation svg {
@@ -156,19 +157,19 @@
 }
 
 ._guimath_tab_container {
-    padding: 5px;
+    padding: 7px 7px 10px 7px;
     font-size: 1.2rem;
     min-width: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 1em;
-    border-radius: 6px;
     background-color: var(--background-color);
-    transition: background-color ease 0.25s;
+    transition: background-color ease 0.15s;
     cursor: pointer;
     user-select: none;
-    margin: 0 10px;
+    margin: 0 6px;
+    border-radius: 6px 6px 0 0;
 }
 
 ._guimath_tab_container._guimath_active_tab {
@@ -198,10 +199,16 @@
     justify-content: center;
 }
 
+._guimath_grid {
+    display: grid;
+    width: 100%;
+}
+
 ._guimath_tab {
     padding: 0 10px 10px;
     display: none;
-    grid-template-columns: repeat(15, 1fr);
+    flex-flow: row nowrap;
+    overflow-x: auto;
 }
 
 ._guimath_tab ._guimath_btn {
