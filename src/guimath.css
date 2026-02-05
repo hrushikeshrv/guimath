@@ -209,6 +209,8 @@
     display: none;
     flex-flow: row nowrap;
     overflow-x: auto;
+    min-height: 7em;
+    align-items: start;
 }
 
 ._guimath_tab ._guimath_btn {
