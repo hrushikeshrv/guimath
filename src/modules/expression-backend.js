@@ -441,6 +441,73 @@ export class Limit extends TwoBlockComponent {
 
 /**
  * @class
+ * The Logarithm function
+ */
+export class Logarithm extends TwoBlockComponent {
+    toLatex() {
+        return `\\log_{${this.blocks[0].toLatex()}}{\\left(${this.blocks[1].toLatex()}\\right)}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class='_guimath_block' style="font-style: normal;">log</div>
+            <div class='_guimath_block _guimath_small_block' style="bottom: -0.5em">${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div class='_guimath_block'><span class='_guimath_straight_text'>(</span>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}<span class='_guimath_straight_text'>)</span></div>
+        </div>
+        `;
+    }
+}
+
+export class NaturalLogarithm extends OneBlockComponent {
+    toLatex() {
+        return `\\ln\\left(${this.blocks[0].toLatex()}\\right)`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class='_guimath_flexbox_column' style='margin-right: 0.35em;'>
+                <div class='_guimath_block' style="font-style: normal;">ln</div>
+            </div>
+            <div class='_guimath_block'><span class='_guimath_straight_text'>(</span>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}<span class="_guimath_straight_text">)</span></div> 
+        </div>
+        `;
+    }
+}
+
+export class Exponent extends OneBlockComponent {
+    toLatex() {
+        return `\\exp\\left(${this.blocks[0].toLatex()}\\right)`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class='_guimath_flexbox_column' style='margin-right: 0.35em;'>
+                <div class='_guimath_block' style="font-style: normal;">exp</div>
+            </div>
+            <div class='_guimath_block'><span class='_guimath_straight_text'>(</span>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}<span class="_guimath_straight_text">)</span></div>
+        </div>
+        `;
+    }
+}
+
+/**
+ * @class
  * A fraction
  */
 export class Fraction extends TwoBlockComponent {

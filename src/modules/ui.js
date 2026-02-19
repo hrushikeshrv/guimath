@@ -6,6 +6,9 @@ import formHTML from '../html/form-input.min.html';
 
 const functionComponentMap = {
     lim: ExpressionBackend.Limit,
+    log: ExpressionBackend.Logarithm,
+    ln: ExpressionBackend.NaturalLogarithm,
+    exp: ExpressionBackend.Exponent,
     sqrt: ExpressionBackend.Sqrt,
     nsqrt: ExpressionBackend.NthRoot,
     sub: ExpressionBackend.Subscript,
