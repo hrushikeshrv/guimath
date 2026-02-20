@@ -84,7 +84,7 @@ export default class GUIMath {
         });
 
         const symbols = this.editorWindow.querySelectorAll(
-            '._guimath_operator, ._guimath_greek_letter, ._guimath_double_struck_letter, ._guimath_fraktur_letter',
+            '._guimath_operator, ._guimath_greek_letter, ._guimath_double_struck_letter, ._guimath_fraktur_letter, ._guimath_arrow',
         );
         const functions =
             this.editorWindow.querySelectorAll('._guimath_function');
