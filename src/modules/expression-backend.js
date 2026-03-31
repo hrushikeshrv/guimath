@@ -230,9 +230,7 @@ export class TwoBlockComponent extends Component {
 
 /**
  * @class
- * A component with three blocks. We could further subclass ThreeBlockComponent to define a class that
- * takes in some LaTeX data, since that is mostly the only thing that varies between functions, and that would
- * make this file much DRYer
+ * A component with three blocks
  */
 export class ThreeBlockComponent extends Component {
     constructor(parent) {
@@ -243,6 +241,78 @@ export class ThreeBlockComponent extends Component {
         b1.parent = this;
         b2.parent = this;
         b3.parent = this;
+    }
+}
+
+/**
+ * @class
+ * A template component representing an overscript/underscript/accent with one block, using the same LaTeX template.
+ * Only the resulting LaTeX changes, but the HTML template remains the same for every component.
+ */
+export class ScriptOneBlockComponent extends OneBlockComponent {
+    constructor(parent, latexData, scriptType) {
+        super(parent);
+        this.latexData = latexData;
+        // Should be either `"overscript"` or `"underscript"`
+        this.scriptType = scriptType;
+        if (
+            this.scriptType !== 'overscript' &&
+            this.scriptType !== 'underscript'
+        ) {
+            this.scriptType = 'overscript';
+        }
+    }
+
+    toLatex() {
+        return `\\${this.latexData}{${this.blocks[0].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        const scriptMap = {
+            overbrace:
+                '<span style="transform: rotate(90deg); display: block;">{</span>',
+            vec: '→',
+            overleftarrow: '←',
+            overleftrightarrow: '↔',
+            overleftharpoon: '↼',
+            overrightharpoon: '⇀',
+            widetilde: '~',
+            dot: '&bull;',
+            ddot: '&uml;',
+            dddot: '&hellip;',
+            breve: '&breve;',
+            widehat: '&#770;',
+            acute: '&acute;',
+            grave: '&grave;',
+            overline: '&macr;',
+
+            underbrace:
+                '<span style="transform: rotate(90deg); display: block;">}</span>',
+            underline: '&macr;',
+        };
+
+        return `
+            <div class='_guimath_component _guimath_flexbox_column'>
+                ${
+                    this.scriptType === 'overscript'
+                        ? `<span class='_guimath_accent_block'>${
+                              scriptMap[this.latexData]
+                          }</span>`
+                        : ''
+                }
+                <div class='_guimath_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                ${
+                    this.scriptType === 'underscript'
+                        ? `<span class='_guimath_accent_block'>${
+                              scriptMap[this.latexData]
+                          }</span>`
+                        : ''
+                }
+            </div>
+        `;
     }
 }
 
@@ -267,6 +337,7 @@ export class TemplateThreeBlockComponent extends ThreeBlockComponent {
     }
 
     toHTML(cursorBlock = null, cursorPosition = null) {
+        // If this is not a top-level component, render it in "inline" mode
         if (
             this.parent !== null &&
             this.parent.parent !== null &&
@@ -584,7 +655,7 @@ export class Superscript extends TwoBlockComponent {
 
 /**
  * @class
- * Some text with both a subscript as well as a superscript on the left side
+ * Some text with both a subscript and a superscript on the right side
  */
 export class SubSupRight extends ThreeBlockComponent {
     toLatex() {
@@ -608,6 +679,37 @@ export class SubSupRight extends ThreeBlockComponent {
                    cursorPosition,
                )}</div>
            </div>
+        </div>
+        `;
+    }
+}
+
+/**
+ * @class
+ * Some text with both a subscript and superscript on the left side
+ */
+export class SubSupLeft extends ThreeBlockComponent {
+    toLatex() {
+        return `\\sideset{^{${this.blocks[1].toLatex()}}_{${this.blocks[0].toLatex()}}}{}{${this.blocks[2].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class='_guimath_component'>
+            <div class='_guimath_flexbox_column'>
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+            </div>
+            <div class='_guimath_block'>${this.blocks[2].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
         </div>
         `;
     }

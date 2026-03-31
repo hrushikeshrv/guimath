@@ -363,3 +363,8 @@
     font-style: normal;
     z-index: 1;
 }
+
+._guimath_accent_block {
+    padding: 0;
+    line-height: 0.5;
+}

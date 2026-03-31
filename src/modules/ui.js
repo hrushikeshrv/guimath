@@ -14,6 +14,7 @@ const functionComponentMap = {
     sub: ExpressionBackend.Subscript,
     sup: ExpressionBackend.Superscript,
     subsup: ExpressionBackend.SubSupRight,
+    subsupleft: ExpressionBackend.SubSupLeft,
     frac: ExpressionBackend.Fraction,
 };
 
@@ -89,6 +90,8 @@ export default class GUIMath {
         const functions =
             this.editorWindow.querySelectorAll('._guimath_function');
 
+        const accents = this.editorWindow.querySelectorAll('._guimath_accent');
+
         symbols.forEach(symbol => {
             symbol.addEventListener('click', () => {
                 let _ = new ExpressionBackend.GUIMathSymbol(
@@ -123,6 +126,18 @@ export default class GUIMath {
                         this.cursor.block,
                     );
                 }
+                this.cursor.addComponent(_);
+                this.cursor.updateDisplay();
+            });
+        });
+
+        accents.forEach(accent => {
+            accent.addEventListener('click', () => {
+                let _ = new ExpressionBackend.ScriptOneBlockComponent(
+                    this.cursor.block,
+                    accent.dataset.latexData,
+                    accent.dataset.templateType,
+                );
                 this.cursor.addComponent(_);
                 this.cursor.updateDisplay();
             });
