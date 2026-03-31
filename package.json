@@ -15,7 +15,7 @@
   "scripts": {
     "test": "webpack",
     "build": "rollup -c rollup.config.js",
-    "dev": "rollup -c -w"
+    "dev": "chokidar \"./src/**/*.{html,css,js}\" -i \"./src/html/*.min.html\" -c \"npm run build\""
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/hrushikeshrv/guimath",
   "devDependencies": {
+    "chokidar-cli": "^3.0.0",
     "html-minifier-terser": "^7.2.0",
     "rollup": "^4.53.5",
     "rollup-plugin-copy": "^3.5.0",
