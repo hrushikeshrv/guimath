@@ -89,8 +89,12 @@ export default class GUIMath {
         );
         const functions =
             this.editorWindow.querySelectorAll('._guimath_function');
-
         const accents = this.editorWindow.querySelectorAll('._guimath_accent');
+        const templateArrows = this.editorWindow.querySelectorAll(
+            '._guimath_template_arrow',
+        );
+        const brackets =
+            this.editorWindow.querySelectorAll('._guimath_bracket');
 
         symbols.forEach(symbol => {
             symbol.addEventListener('click', () => {
@@ -137,6 +141,28 @@ export default class GUIMath {
                     this.cursor.block,
                     accent.dataset.latexData,
                     accent.dataset.templateType,
+                );
+                this.cursor.addComponent(_);
+                this.cursor.updateDisplay();
+            });
+        });
+
+        templateArrows.forEach(templateArrow => {
+            templateArrow.addEventListener('click', () => {
+                let _ = new ExpressionBackend.ArrowTwoBlockComponent(
+                    this.cursor.block,
+                    templateArrow.dataset.arrowType,
+                );
+                this.cursor.addComponent(_);
+                this.cursor.updateDisplay();
+            });
+        });
+
+        brackets.forEach(bracket => {
+            bracket.addEventListener('click', () => {
+                let _ = new ExpressionBackend.BracketOneBlockComponent(
+                    this.cursor.block,
+                    bracket.dataset.bracketType,
                 );
                 this.cursor.addComponent(_);
                 this.cursor.updateDisplay();

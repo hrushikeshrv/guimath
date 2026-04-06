@@ -316,6 +316,57 @@ export class ScriptOneBlockComponent extends OneBlockComponent {
     }
 }
 
+export class BracketOneBlockComponent extends OneBlockComponent {
+    constructor(parent, bracketType) {
+        super(parent);
+        this.bracketType = bracketType;
+        const validBracketTypes = new Set([
+            'parenthesis',
+            'square',
+            'curly',
+            'bar',
+            'angle',
+        ]);
+        if (!validBracketTypes.has(this.bracketType))
+            this.bracketType = 'parenthesis';
+    }
+
+    toLatex() {
+        const bracketMap = {
+            parenthesis: ['(', ')'],
+            square: ['[', ']'],
+            curly: ['{', '}'],
+            bar: ['|', '|'],
+            angle: ['<', '>'],
+        };
+        return `\\left${this.bracketType === 'curly' ? '\\' : ''}${
+            bracketMap[this.bracketType][0]
+        } ${this.blocks[0].toLatex()} \\right${
+            this.bracketType === 'curly' ? '\\' : ''
+        }${bracketMap[this.bracketType][1]}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        const bracketMap = {
+            parenthesis: ['(', ')'],
+            square: ['[', ']'],
+            curly: ['{', '}'],
+            bar: ['|', '|'],
+            angle: ['<', '>'],
+        };
+        return `
+            <div class='_guimath_component _guimath_flexbox_row'>
+                <div>${bracketMap[this.bracketType][0]}</div>
+                <div class='_guimath_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                <div>${bracketMap[this.bracketType][1]}</div>
+            </div>
+        `;
+    }
+}
+
 /**
  * @class
  * A template three block component that contains three blocks and uses the same LaTeX template.
@@ -392,9 +443,7 @@ export class TemplateThreeBlockComponent extends ThreeBlockComponent {
 /**
  * @class
  * A template two block component for trigonometric functions, which all use the same LaTeX template.
- * Every trigonometric component will, by default, have an empty block as a superscript. MathJax removes the
- * empty block while rendering, so users will be able to raise the function to any power without us having to
- * define a separate template component to support exponents for trigonometric components.
+ * Every trigonometric component will, by default, have an empty block as a superscript.
  */
 export class TrigonometricTwoBlockComponent extends TwoBlockComponent {
     constructor(parent, latexData) {
@@ -419,6 +468,67 @@ export class TrigonometricTwoBlockComponent extends TwoBlockComponent {
                 cursorPosition,
             )}</div>
             <div class='_guimath_block'>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
+    }
+}
+
+/**
+ * @class
+ * A template two block component for different arrows with one block
+ * above the arrow and one block below the arrow.
+ */
+export class ArrowTwoBlockComponent extends TwoBlockComponent {
+    constructor(parent, arrowType) {
+        super(parent);
+        this.arrowType = arrowType;
+        const validArrowTypes = [
+            'left',
+            'right',
+            'Left',
+            'Right',
+            'leftright',
+            'Leftright',
+        ];
+        if (validArrowTypes.indexOf(this.arrowType) === -1) {
+            this.arrowType = 'right';
+        }
+    }
+
+    toLatex() {
+        const arrowMap = {
+            right: 'xrightarrow',
+            left: 'xleftarrow',
+            Right: 'xRightarrow',
+            Left: 'xLeftarrow',
+            leftright: 'xleftrightarrow',
+            Leftright: 'xLeftrightarrow',
+        };
+        return `\\${
+            arrowMap[this.arrowType]
+        }[${this.blocks[0].toLatex()}]{${this.blocks[1].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        const arrowMap = {
+            right: '&xrarr;',
+            left: '&xlarr;',
+            Right: '&xrArr;',
+            Left: '&xlArr;',
+            leftright: '&xharr;',
+            Leftright: '&xhArr;',
+        };
+        return `
+        <div class='_guimath_component _guimath_flexbox_column'>
+            <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div style='line-height: 0.5;'>${arrowMap[this.arrowType]}</div>
+            <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
                 cursorBlock,
                 cursorPosition,
             )}</div>
