@@ -24,11 +24,24 @@ Each component is made up of blocks. A block is just a generic container that re
 ![GUIMath Structure](../media/guimath-structure.svg)
 
 # Writing Your Own Components
-If you want to add a function to the editor widget that is not present out of the box, you will need to write a component class that will inherit from one of GUIMath's built-in component classes. You will then have to override the `toLatex()` method of the class to define how the LaTeX should be generated for your component.
+If you want to add a function to the editor widget that is not present out of the box, you will need to write a component class that will inherit from one of GUIMath's built-in component classes. You will then have to define how the component is rendered into HTML and LaTeX by defining the `toHTML()` and `toLatex()` methods. 
 
 To identify which component class you should inherit from, determine how many blocks your function has. For example, a fraction has two blocks - the numerator and the denominator, and the square root function has just one block. As a guideline, you can usually consider each `{}` in the LaTeX representation of a function as a block - fraction is written as `\frac{}{}`, therefore it has 2 blocks, and square root is written as `\sqrt{}`, and therefore has only 1 block.
 
-Once you determine which component class to inherit from, you will need to override the `toLatex()` method. This is where you will be able to define how the LaTeX is generated for your function. Inside the `toLatex()` method, you can access the `blocks` attribute of the instance, and call `toLatex()` for each block to construct the final LaTeX expression step-by-step. There is an example implementation under each heading below to demonstrate.
+Once you determine which component class to inherit from, you will need to override the `toHTML()` and `toLatex()` methods. 
+
+## Defining `toHTML(cursorBlock, cursorPosition)`
+This is where you will be able to define how the HTML is generated for your function. See the inheritance examples below to get a quick idea of how to implement this method. `toHTML()` takes two arguments:
+
+1. `cursorBlock` - The `Block` instance that the cursor is currently in
+2. `cursorPosition` - The position of the cursor within the block it is in (`Number`)
+
+You will likely not need to use these arguments yourself. They are used during rendering to provide feedback for hover and click events, and to highlight which `Block` the cursor is currently in. All this is handled by the `GUIMath` and `Block` class for you. However, it is important that you pass these same arguments as they are to any recursive calls to `toHTML()` you make in your definition to preserve this functionality.
+
+You should return a string containing what the HTML representation of the component should look like in the editor window.
+
+## Defining `toLatex()`
+This is where you will be able to define how the LaTeX is generated for your function. Inside the `toLatex()` method, you can access the `blocks` attribute of the instance, and call `toLatex()` for each block to construct the final LaTeX expression step-by-step. There is an example implementation under each heading below to demonstrate.
 
 ## One Block Component
 Inherit from this class if your function has one block. Examples of functions which have one block include $ \sqrt{\boxed{}} $, $ \sin{\boxed{}} $, $ \sin^{2}{\boxed{}} $, etc.
