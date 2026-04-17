@@ -47,13 +47,20 @@ export default defineConfig({
             format: 'umd',
             name: 'GUIMath',
         },
+        {
+            file: 'docs/js/guimath.min.js',
+            format: 'umd',
+            name: 'GUIMath',
+        },
     ],
     plugins: [
         minifyHTMLPlugin(),
         copy({
             targets: [
                 { src: 'src/guimath.css', dest: 'dist' },
+                { src: 'src/guimath.css', dest: 'docs/css' },
                 { src: 'src/fonts/*', dest: 'dist/fonts' },
+                { src: 'src/fonts/*', dest: 'docs/css/fonts' },
             ],
         }),
         string({

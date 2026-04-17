@@ -316,6 +316,10 @@ export class ScriptOneBlockComponent extends OneBlockComponent {
     }
 }
 
+/**
+ * @class
+ * A template representing a bracket.
+ */
 export class BracketOneBlockComponent extends OneBlockComponent {
     constructor(parent, bracketType) {
         super(parent);

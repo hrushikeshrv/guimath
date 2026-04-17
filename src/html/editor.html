@@ -26,16 +26,16 @@
     </div>
 </div>
 <div class="_guimath_tab_container_container">
-    <div class="_guimath_tab_container" data-tab="1" title="Greek Letters">&theta;</div>
-    <div class='_guimath_tab_container' data-tab="2" title="Double Struck & Fraktur">&Aopf;</div>
-    <div class="_guimath_tab_container" data-tab="3" title="Arithmetic Operators">&plusmn;</div>
-    <div class="_guimath_tab_container" data-tab="4" title="Relational Operators">&sub;</div>
-    <div class="_guimath_tab_container" data-tab="5" title="Functions">&Sigma;</div>
-    <div class="_guimath_tab_container" data-tab="6" title="Arrows">&rightarrow;</div>
-    <div class="_guimath_tab_container" data-tab="7" title="Scripts & Brackets"><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=100 text-anchor=middle transform="translate(30 -25)" x=70 y=75>→</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></div>
+    <div class="_guimath_tab_container" data-tab="1" data-tab-name="greek-letters" title="Greek Letters">&theta;</div>
+    <div class='_guimath_tab_container' data-tab="2" data-tab-name="double-struck-fraktur" title="Double Struck & Fraktur">&Aopf;</div>
+    <div class="_guimath_tab_container" data-tab="3" data-tab-name="arithmetic-operators" title="Arithmetic Operators">&plusmn;</div>
+    <div class="_guimath_tab_container" data-tab="4" data-tab-name="relational-operators" title="Relational Operators">&sub;</div>
+    <div class="_guimath_tab_container" data-tab="5" data-tab-name="functions" title="Functions">&Sigma;</div>
+    <div class="_guimath_tab_container" data-tab="6" data-tab-name="arrows" title="Arrows">&rightarrow;</div>
+    <div class="_guimath_tab_container" data-tab="7" data-tab-name="scripts-brackets" title="Scripts & Brackets"><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=100 text-anchor=middle transform="translate(30 -25)" x=70 y=75>→</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></div>
 </div>
 <hr style='margin: 0 10px 10px 10px;'>
-<div class='_guimath_tab _guimath_letters_tab' style="display: flex;" data-tab="1">
+<div class='_guimath_tab _guimath_letters_tab' data-tab-name="greek-letters" style="display: flex;" data-tab="1">
     <div class='_guimath_grid' style='grid-template-columns: repeat(8, minmax(2em, 1fr));'>
         <span class='_guimath_btn _guimath_greek_letter' title="Alpha" data-latex-data="A">&Alpha;</span>
         <span class='_guimath_btn _guimath_greek_letter' title="Beta" data-latex-data="B">&Beta;</span>
@@ -90,7 +90,7 @@
         <span class='_guimath_btn _guimath_greek_letter' title="omega" data-latex-data="\omega">&omega;</span>
     </div>
 </div>
-<div class='_guimath_tab _guimath_math_characters_tab' data-tab="2">
+<div class='_guimath_tab _guimath_math_characters_tab' data-tab-name="double-struck-fraktur" data-tab="2">
     <div class='_guimath_grid' style='grid-template-columns: repeat(9, minmax(2em, 1fr));'>
         <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck A" data-latex-data="\mathbb{A}">&Aopf;</span>
         <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck B" data-latex-data="\mathbb{B}">&Bopf;</span>
@@ -149,7 +149,7 @@
         <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur Z" data-latex-data="\mathfrak{Z}">&Zfr;</span>
     </div>
 </div>
-<div class='_guimath_tab _guimath_arithmetic_operators_tab' data-tab="3">
+<div class='_guimath_tab _guimath_arithmetic_operators_tab' data-tab-name="arithmetic-operators" data-tab="3">
     <div class='_guimath_grid' style='grid-template-columns: repeat(6, minmax(2em, 1fr));'>
         <span class='_guimath_btn _guimath_operator' title="Plus" data-latex-data="+">&plus;</span>
         <span class='_guimath_btn _guimath_operator' title="Minus" data-latex-data="-">&minus;</span>
@@ -191,7 +191,7 @@
         <span class='_guimath_btn _guimath_operator' title="Hence" data-latex-data="\because">&because;</span>
     </div>
 </div>
-<div class='_guimath_tab _guimath_relational_operators_tab' data-tab="4">
+<div class='_guimath_tab _guimath_relational_operators_tab' data-tab-name="relational-operators" data-tab="4">
     <div class='_guimath_grid' style='grid-template-columns: repeat(8, minmax(2em, 1fr));'>
         <span class='_guimath_btn _guimath_operator' title="Equals" data-latex-data="=">&equals;</span>
         <span class='_guimath_btn _guimath_operator' title="Identical to" data-latex-data="\equiv">&equiv;</span>
@@ -244,7 +244,7 @@
         <span class='_guimath_btn _guimath_operator' title="Infinity symbol" data-latex-data="\infty">&infin;</span>
     </div>
 </div>
-<div class='_guimath_tab _guimath_functions_tab' data-tab="5">
+<div class='_guimath_tab _guimath_functions_tab' data-tab-name="functions" data-tab="5">
     <div class='_guimath_grid' style='grid-template-columns: repeat(15, minmax(2em, 1fr));'>
         <span class='_guimath_btn _guimath_function' title="Fraction" data-template-type="null" data-function-id="frac"><svg viewBox="0 0 567 567"><defs><style>.cls-1{fill:none;fill-rule:evenodd;stroke-width:12.875px}</style></defs><path id="Rectangle_1_copy" d="M193.8 225.579h169.985V55.59H193.8v169.989z" class="cls-1" data-name="Rectangle 1 copy"/><path id="Line_1" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="10.125" d="M124 284v-1h295v1H124z" data-name="Line 1"/><path id="Rectangle_1_copy_2" d="M364.2 528.579H194.215V358.59H364.2v169.989z" class="cls-1" data-name="Rectangle 1 copy 2"/></svg></span>
         <span class='_guimath_btn _guimath_function' title="Square root" data-template-type="null" data-function-id="sqrt"><svg viewBox="0 0 567 567"><defs><style>.cls-1,.cls-2{fill-rule:evenodd}  .cls-1{stroke-width:4.667px}  .cls-2{stroke-width:7.417px}</style></defs><path id="Line_1" d="M3.707 306.883l-1.73-2.643 41.9-27.427 1.73 2.642z" class="cls-1" data-name="Line 1"/><path id="Line_2" d="M47.233 275.65l1.831-1.045 80.1 140.4-1.831 1.044z" class="cls-1" data-name="Line 2"/><path id="Line_3" d="M129.569 410.274l-3.113-1.374 111.707-252.923 3.113 1.375z" class="cls-2" data-name="Line 3"/><path id="Line_4" d="M241.471 154.67v-1.746h322.563v1.746H241.471z" class="cls-2" data-name="Line 4"/><path fill="none" fill-rule="evenodd" stroke-width="10.125" d="M288.978 190.824H495.53v206.552H288.978V190.824z"/></svg></span>
@@ -278,7 +278,7 @@
         <span class='_guimath_btn _guimath_function' title="Inverse tangent" data-template-type="trigonometric" data-latex-data="arctan"><svg width="45" height="20" viewBox="0 0 2000 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" text-anchor="middle" transform="matrix(1.5 0 0 1.5 973.5 496)"><tspan x="0">arctan</tspan></text></svg></span>
     </div>
 </div>
-<div class='_guimath_tab _guimath_arrows_tab' data-tab="6">
+<div class='_guimath_tab _guimath_arrows_tab' data-tab-name="arrows" data-tab="6">
     <div class='_guimath_grid' style='grid-template-columns: repeat(15, minmax(2em, 1fr));'>
         <span class='_guimath_btn _guimath_arrow' title="Left arrow" data-latex-data="\leftarrow">&leftarrow;</span>
         <span class='_guimath_btn _guimath_arrow' title="Right arrow" data-latex-data="\rightarrow">&rightarrow;</span>
@@ -324,7 +324,7 @@
         <span class='_guimath_btn _guimath_template_arrow' title='Left right double arrow with over and under script' data-arrow-type='Leftright'><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="30" width="60" height="60" fill="none" stroke="black" stroke-width="6"/><line x1="50" y1="104" x2="170" y2="104" stroke="black" stroke-width="6"/><line x1="50" y1="116" x2="170" y2="116" stroke="black" stroke-width="6"/><polygon points="20,110 55,90 55,130" fill="black"/><polygon points="200,110 165,90 165,130" fill="black"/><rect x="80" y="130" width="60" height="60" fill="none" stroke="black" stroke-width="6"/></svg></span>
     </div>
 </div>
-<div class='_guimath_tab _guimath_scripts_tab' data-tab="7">
+<div class='_guimath_tab _guimath_scripts_tab' data-tab-name="scripts-brackets" data-tab="7">
     <div class='_guimath_grid' style='grid-template-columns: repeat(15, minmax(2em, 1fr));'>
         <span class='_guimath_btn _guimath_function' title="Subscript" data-template-type="null" data-function-id="sub"><svg viewBox="0 0 567 567"><defs><style>.cls-1{fill:none;stroke-width:12.875px;fill-rule:evenodd}</style></defs><path d="M27.09 82.836h285.083v285.083H27.09V82.836z" class="cls-1"/><path id="Rectangle_1_copy" d="M362.8 295.421h169.985V465.41H362.8V295.421z" class="cls-1" data-name="Rectangle 1 copy"/></svg></span>
         <span class='_guimath_btn _guimath_function' title="Superscript" data-template-type="null" data-function-id="sup"><svg viewBox="0 0 567 567"><defs><style>.cls-1{fill:none;stroke-width:12.875px;fill-rule:evenodd}</style></defs><path d="M27.09 468.164h285.083V183.081H27.09v285.083z" class="cls-1"/><path id="Rectangle_1_copy" d="M362.8 255.579h169.985V85.59H362.8v169.989z" class="cls-1" data-name="Rectangle 1 copy"/></svg></span>

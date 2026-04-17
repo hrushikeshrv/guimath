@@ -18,6 +18,16 @@ const functionComponentMap = {
     frac: ExpressionBackend.Fraction,
 };
 
+const validEditorTabNames = [
+    'greek-letters',
+    'double-struck-fraktur',
+    'arithmetic-operators',
+    'relational-operators',
+    'functions',
+    'arrows',
+    'scripts-brackets',
+];
+
 export default class GUIMath {
     constructor(
         elementSelector,
@@ -298,17 +308,33 @@ export default class GUIMath {
      @param componentClass A class that inherits from one of GUIMath's many component classes
      @param buttonContent HTML or text content that will be placed inside the rendered button
      @param title The title to show when a user hovers over the button
+     @param tabName The name of the tab where this symbol should be placed. Should be one of
+        `["greek-letters", "double-struck-fraktur", "arithmetic-operators", "relational-operators", "functions", "arrows", "scripts-brackets"]`
      */
-    registerFunction(componentClass, buttonContent, title = '') {
+    registerFunction(componentClass, buttonContent, title, tabName) {
+        if (!validEditorTabNames.includes(tabName)) {
+            // Do nothing if tab name is invalid
+            console.error(
+                'GUIMath.registerFunction received invalid tab name. Tab name should be one of ["greek-letters", "double-struck-fraktur", "arithmetic-operators", "relational-operators", "functions", "arrows", "scripts-brackets"]',
+            );
+            return;
+        }
+
         const el = document.createElement('span');
-        el.classList.add('guimath-btn', '_guimath_function');
+        el.classList.add('_guimath_btn', '_guimath_function');
         el.title = title;
         el.dataset.templateType = 'user-defined';
         el.dataset.functionId = 'user-defined';
         el.innerHTML = buttonContent;
-        this.editorWindow
-            .querySelector('._guimath_functions_tab')
-            .appendChild(el);
+        let tab = this.editorWindow.querySelector(
+            `._guimath_tab[data-tab-name="${tabName}"]`,
+        );
+        if (tab.querySelectorAll('._guimath_grid')) {
+            // Select the last _guimath_grid element inside `tab`
+            let _ = tab.querySelectorAll('._guimath_grid');
+            tab = _[_.length - 1];
+        }
+        tab.appendChild(el);
 
         el.addEventListener('click', () => {
             this.cursor.addComponent(new componentClass());
@@ -319,18 +345,34 @@ export default class GUIMath {
     /**
      * Adds a symbol to the UI that is not supported out of the box.
      @param latexData LaTeX code for the symbol
-     @param htmlData HTML or text content that will be placed inside the rendered button
+     @param htmlData HTML or text content representing the symbol
      @param title The title to show when a user hovers over the button
+     @param tabName The name of the tab where this symbol should be placed. Should be one of
+        `["greek-letters", "double-struck-fraktur", "arithmetic-operators", "relational-operators", "functions", "arrows", "scripts-brackets"]`
      */
-    registerSymbol(latexData, htmlData, title = '') {
+    registerSymbol(latexData, htmlData, title, tabName) {
+        if (!validEditorTabNames.includes(tabName)) {
+            // Do nothing if tab name is invalid
+            console.error(
+                'GUIMath.registerSymbol received invalid tab name. Tab name should be one of ["greek-letters", "double-struck-fraktur", "arithmetic-operators", "relational-operators", "functions", "arrows", "scripts-brackets"]',
+            );
+            return;
+        }
+
         const el = document.createElement('span');
-        el.classList.add('guimath-btn', 'guimath-symbol');
+        el.classList.add('_guimath_btn', 'guimath-symbol');
         el.title = title;
         el.dataset.latexData = latexData;
         el.innerHTML = htmlData;
-        this.editorWindow
-            .querySelector('._guimath_symbols_tab')
-            .appendChild(el);
+        let tab = this.editorWindow.querySelector(
+            `._guimath_tab[data-tab-name="${tabName}"]`,
+        );
+        if (tab.querySelectorAll('._guimath_grid')) {
+            // Select the last _guimath_grid element inside `tab`
+            let _ = tab.querySelectorAll('._guimath_grid');
+            tab = _[_.length - 1];
+        }
+        tab.appendChild(el);
 
         el.addEventListener('click', () => {
             let _ = new ExpressionBackend.GUIMathSymbol(
