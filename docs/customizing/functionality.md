@@ -88,6 +88,16 @@ class SinSquaredComponent extends OneBlockComponent {
     toLatex() {
         return `\\sin^{2}{${this.blocks[0].toLatex()}}`;
     }
+    
+    toHTML(cursorBlock, cursorPosition) {
+        return `
+            <div class="_guimath_component _guimath_flexbox_row">
+                <div class='_guimath_block' style="font-style: normal;">sin</div>
+                <div class='_guimath_block _guimath_small_block' style="top: -0.5em">2</div>
+                <div class='_guimath_block'>${this.blocks[0].toHTML(cursorBlock, cursorPosition)}</div>
+            </div>
+        `;
+    }
 }
 
 // Create a GUIMath instance
@@ -104,8 +114,8 @@ guimath.registerFunction(
             <mn>2</mn>
         </msup>
     </math>`,
-    title = 'Sine squared',
-    typeset = false
+    title = "Sine squared",
+    tabName = "functions"
 );
 ```
 You can see this example [here](../examples/add-custom-function.html).
