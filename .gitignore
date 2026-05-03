@@ -3,3 +3,5 @@ node_modules
 _test/
 dist
 .vscode
+_site/
+.jekyll_cache/

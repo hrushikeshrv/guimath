@@ -230,9 +230,7 @@ export class TwoBlockComponent extends Component {
 
 /**
  * @class
- * A component with three blocks. We could further subclass ThreeBlockComponent to define a class that
- * takes in some LaTeX data, since that is mostly the only thing that varies between functions, and that would
- * make this file much DRYer
+ * A component with three blocks
  */
 export class ThreeBlockComponent extends Component {
     constructor(parent) {
@@ -243,6 +241,133 @@ export class ThreeBlockComponent extends Component {
         b1.parent = this;
         b2.parent = this;
         b3.parent = this;
+    }
+}
+
+/**
+ * @class
+ * A template component representing an overscript/underscript/accent with one block, using the same LaTeX template.
+ * Only the resulting LaTeX changes, but the HTML template remains the same for every component.
+ */
+export class ScriptOneBlockComponent extends OneBlockComponent {
+    constructor(parent, latexData, scriptType) {
+        super(parent);
+        this.latexData = latexData;
+        // Should be either `"overscript"` or `"underscript"`
+        this.scriptType = scriptType;
+        if (
+            this.scriptType !== 'overscript' &&
+            this.scriptType !== 'underscript'
+        ) {
+            this.scriptType = 'overscript';
+        }
+    }
+
+    toLatex() {
+        return `\\${this.latexData}{${this.blocks[0].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        const scriptMap = {
+            overbrace:
+                '<span style="transform: rotate(90deg); display: block;">{</span>',
+            vec: '→',
+            overleftarrow: '←',
+            overleftrightarrow: '↔',
+            overleftharpoon: '↼',
+            overrightharpoon: '⇀',
+            widetilde: '~',
+            dot: '&bull;',
+            ddot: '&uml;',
+            dddot: '&hellip;',
+            breve: '&breve;',
+            widehat: '&#770;',
+            acute: '&acute;',
+            grave: '&grave;',
+            overline: '&macr;',
+
+            underbrace:
+                '<span style="transform: rotate(90deg); display: block;">}</span>',
+            underline: '&macr;',
+        };
+
+        return `
+            <div class='_guimath_component _guimath_flexbox_column'>
+                ${
+                    this.scriptType === 'overscript'
+                        ? `<span class='_guimath_accent_block'>${
+                              scriptMap[this.latexData]
+                          }</span>`
+                        : ''
+                }
+                <div class='_guimath_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                ${
+                    this.scriptType === 'underscript'
+                        ? `<span class='_guimath_accent_block'>${
+                              scriptMap[this.latexData]
+                          }</span>`
+                        : ''
+                }
+            </div>
+        `;
+    }
+}
+
+/**
+ * @class
+ * A template representing a bracket.
+ */
+export class BracketOneBlockComponent extends OneBlockComponent {
+    constructor(parent, bracketType) {
+        super(parent);
+        this.bracketType = bracketType;
+        const validBracketTypes = new Set([
+            'parenthesis',
+            'square',
+            'curly',
+            'bar',
+            'angle',
+        ]);
+        if (!validBracketTypes.has(this.bracketType))
+            this.bracketType = 'parenthesis';
+    }
+
+    toLatex() {
+        const bracketMap = {
+            parenthesis: ['(', ')'],
+            square: ['[', ']'],
+            curly: ['{', '}'],
+            bar: ['|', '|'],
+            angle: ['<', '>'],
+        };
+        return `\\left${this.bracketType === 'curly' ? '\\' : ''}${
+            bracketMap[this.bracketType][0]
+        } ${this.blocks[0].toLatex()} \\right${
+            this.bracketType === 'curly' ? '\\' : ''
+        }${bracketMap[this.bracketType][1]}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        const bracketMap = {
+            parenthesis: ['(', ')'],
+            square: ['[', ']'],
+            curly: ['{', '}'],
+            bar: ['|', '|'],
+            angle: ['<', '>'],
+        };
+        return `
+            <div class='_guimath_component _guimath_flexbox_row'>
+                <div>${bracketMap[this.bracketType][0]}</div>
+                <div class='_guimath_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                <div>${bracketMap[this.bracketType][1]}</div>
+            </div>
+        `;
     }
 }
 
@@ -267,6 +392,7 @@ export class TemplateThreeBlockComponent extends ThreeBlockComponent {
     }
 
     toHTML(cursorBlock = null, cursorPosition = null) {
+        // If this is not a top-level component, render it in "inline" mode
         if (
             this.parent !== null &&
             this.parent.parent !== null &&
@@ -321,9 +447,7 @@ export class TemplateThreeBlockComponent extends ThreeBlockComponent {
 /**
  * @class
  * A template two block component for trigonometric functions, which all use the same LaTeX template.
- * Every trigonometric component will, by default, have an empty block as a superscript. MathJax removes the
- * empty block while rendering, so users will be able to raise the function to any power without us having to
- * define a separate template component to support exponents for trigonometric components.
+ * Every trigonometric component will, by default, have an empty block as a superscript.
  */
 export class TrigonometricTwoBlockComponent extends TwoBlockComponent {
     constructor(parent, latexData) {
@@ -348,6 +472,67 @@ export class TrigonometricTwoBlockComponent extends TwoBlockComponent {
                 cursorPosition,
             )}</div>
             <div class='_guimath_block'>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div>
+        `;
+    }
+}
+
+/**
+ * @class
+ * A template two block component for different arrows with one block
+ * above the arrow and one block below the arrow.
+ */
+export class ArrowTwoBlockComponent extends TwoBlockComponent {
+    constructor(parent, arrowType) {
+        super(parent);
+        this.arrowType = arrowType;
+        const validArrowTypes = [
+            'left',
+            'right',
+            'Left',
+            'Right',
+            'leftright',
+            'Leftright',
+        ];
+        if (validArrowTypes.indexOf(this.arrowType) === -1) {
+            this.arrowType = 'right';
+        }
+    }
+
+    toLatex() {
+        const arrowMap = {
+            right: 'xrightarrow',
+            left: 'xleftarrow',
+            Right: 'xRightarrow',
+            Left: 'xLeftarrow',
+            leftright: 'xleftrightarrow',
+            Leftright: 'xLeftrightarrow',
+        };
+        return `\\${
+            arrowMap[this.arrowType]
+        }[${this.blocks[0].toLatex()}]{${this.blocks[1].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        const arrowMap = {
+            right: '&xrarr;',
+            left: '&xlarr;',
+            Right: '&xrArr;',
+            Left: '&xlArr;',
+            leftright: '&xharr;',
+            Leftright: '&xhArr;',
+        };
+        return `
+        <div class='_guimath_component _guimath_flexbox_column'>
+            <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div style='line-height: 0.5;'>${arrowMap[this.arrowType]}</div>
+            <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
                 cursorBlock,
                 cursorPosition,
             )}</div>
@@ -441,6 +626,73 @@ export class Limit extends TwoBlockComponent {
 
 /**
  * @class
+ * The Logarithm function
+ */
+export class Logarithm extends TwoBlockComponent {
+    toLatex() {
+        return `\\log_{${this.blocks[0].toLatex()}}{\\left(${this.blocks[1].toLatex()}\\right)}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class='_guimath_block' style="font-style: normal;">log</div>
+            <div class='_guimath_block _guimath_small_block' style="bottom: -0.5em">${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+            <div class='_guimath_block'><span class='_guimath_straight_text'>(</span>${this.blocks[1].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}<span class='_guimath_straight_text'>)</span></div>
+        </div>
+        `;
+    }
+}
+
+export class NaturalLogarithm extends OneBlockComponent {
+    toLatex() {
+        return `\\ln\\left(${this.blocks[0].toLatex()}\\right)`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class='_guimath_flexbox_column' style='margin-right: 0.35em;'>
+                <div class='_guimath_block' style="font-style: normal;">ln</div>
+            </div>
+            <div class='_guimath_block'><span class='_guimath_straight_text'>(</span>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}<span class="_guimath_straight_text">)</span></div> 
+        </div>
+        `;
+    }
+}
+
+export class Exponent extends OneBlockComponent {
+    toLatex() {
+        return `\\exp\\left(${this.blocks[0].toLatex()}\\right)`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class="_guimath_component _guimath_flexbox_row">
+            <div class='_guimath_flexbox_column' style='margin-right: 0.35em;'>
+                <div class='_guimath_block' style="font-style: normal;">exp</div>
+            </div>
+            <div class='_guimath_block'><span class='_guimath_straight_text'>(</span>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}<span class="_guimath_straight_text">)</span></div>
+        </div>
+        `;
+    }
+}
+
+/**
+ * @class
  * A fraction
  */
 export class Fraction extends TwoBlockComponent {
@@ -517,7 +769,7 @@ export class Superscript extends TwoBlockComponent {
 
 /**
  * @class
- * Some text with both a subscript as well as a superscript on the left side
+ * Some text with both a subscript and a superscript on the right side
  */
 export class SubSupRight extends ThreeBlockComponent {
     toLatex() {
@@ -541,6 +793,37 @@ export class SubSupRight extends ThreeBlockComponent {
                    cursorPosition,
                )}</div>
            </div>
+        </div>
+        `;
+    }
+}
+
+/**
+ * @class
+ * Some text with both a subscript and superscript on the left side
+ */
+export class SubSupLeft extends ThreeBlockComponent {
+    toLatex() {
+        return `\\sideset{^{${this.blocks[1].toLatex()}}_{${this.blocks[0].toLatex()}}}{}{${this.blocks[2].toLatex()}}`;
+    }
+
+    toHTML(cursorBlock = null, cursorPosition = null) {
+        return `
+        <div class='_guimath_component'>
+            <div class='_guimath_flexbox_column'>
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+                <div class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
+                    cursorBlock,
+                    cursorPosition,
+                )}</div>
+            </div>
+            <div class='_guimath_block'>${this.blocks[2].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
         </div>
         `;
     }

@@ -26,143 +26,334 @@
     </div>
 </div>
 <div class="_guimath_tab_container_container">
-    <div class="guimath_tab_container" data-tab="1">&alpha; Letters</div>
-    <div class="guimath_tab_container" data-tab="2">&plusmn; Symbols</div>
-    <div class="guimath_tab_container" data-tab="3">&Sigma; Functions</div>
+    <div class="_guimath_tab_container" data-tab="1" data-tab-name="greek-letters" title="Greek Letters">&theta;</div>
+    <div class='_guimath_tab_container' data-tab="2" data-tab-name="double-struck-fraktur" title="Double Struck & Fraktur">&Aopf;</div>
+    <div class="_guimath_tab_container" data-tab="3" data-tab-name="arithmetic-operators" title="Arithmetic Operators">&plusmn;</div>
+    <div class="_guimath_tab_container" data-tab="4" data-tab-name="relational-operators" title="Relational Operators">&sub;</div>
+    <div class="_guimath_tab_container" data-tab="5" data-tab-name="functions" title="Functions">&Sigma;</div>
+    <div class="_guimath_tab_container" data-tab="6" data-tab-name="arrows" title="Arrows">&rightarrow;</div>
+    <div class="_guimath_tab_container" data-tab="7" data-tab-name="scripts-brackets" title="Scripts & Brackets"><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=100 text-anchor=middle transform="translate(30 -25)" x=70 y=75>→</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></div>
 </div>
-<div class="guimath_tab _guimath_letters_tab" style="display: flex;" data-tab="1">
-    <span class="guimath-btn guimath-greek-letter" title="Alpha" data-latex-data="Alpha">&Alpha;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Beta" data-latex-data="Beta">&Beta;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Gamma" data-latex-data="Gamma">&Gamma;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Delta" data-latex-data="Delta">&Delta;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Epsilon" data-latex-data="Epsilon">&Epsilon;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Zeta" data-latex-data="Zeta">&Zeta;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Eta" data-latex-data="Eta">&Eta;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Theta" data-latex-data="Theta">&Theta;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Iota" data-latex-data="Iota">&Iota;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Kappa" data-latex-data="Kappa">&Kappa;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Lambda" data-latex-data="Lambda">&Lambda;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Mu" data-latex-data="Mu">&Mu;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Nu" data-latex-data="Nu">&Nu;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Xi" data-latex-data="Xi">&Xi;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Omicron" data-latex-data="Omicron">&Omicron;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Pi" data-latex-data="Pi">&Pi;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Rho" data-latex-data="Rho">&Rho;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Sigma" data-latex-data="Sigma">&Sigma;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Tau" data-latex-data="Tau">&Tau;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Upsilon" data-latex-data="Upsilon">&Upsilon;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Phi" data-latex-data="Phi">&Phi;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Chi" data-latex-data="Chi">&Chi;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Psi" data-latex-data="Psi">&Psi;</span>
-    <span class="guimath-btn guimath-greek-letter" title="Omega" data-latex-data="Omega">&Omega;</span>
+<hr style='margin: 0 10px 10px 10px;'>
+<div class='_guimath_tab _guimath_letters_tab' data-tab-name="greek-letters" style="display: flex;" data-tab="1">
+    <div class='_guimath_grid' style='grid-template-columns: repeat(8, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_greek_letter' title="Alpha" data-latex-data="A">&Alpha;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Beta" data-latex-data="B">&Beta;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Gamma" data-latex-data="\Gamma">&Gamma;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Delta" data-latex-data="\Delta">&Delta;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Epsilon" data-latex-data="E">&Epsilon;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Zeta" data-latex-data="Z">&Zeta;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Eta" data-latex-data="H">&Eta;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Theta" data-latex-data="\Theta">&Theta;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Iota" data-latex-data="I">&Iota;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Kappa" data-latex-data="K">&Kappa;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Lambda" data-latex-data="\Lambda">&Lambda;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Mu" data-latex-data="M">&Mu;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Nu" data-latex-data="N">&Nu;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Xi" data-latex-data="\Xi">&Xi;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Omicron" data-latex-data="O">&Omicron;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Pi" data-latex-data="\Pi">&Pi;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Rho" data-latex-data="P">&Rho;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Sigma" data-latex-data="\Sigma">&Sigma;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Tau" data-latex-data="T">&Tau;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Upsilon" data-latex-data="\Upsilon">&Upsilon;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Phi" data-latex-data="\Phi">&Phi;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Chi" data-latex-data="X">&Chi;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Psi" data-latex-data="\Psi">&Psi;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="Omega" data-latex-data="\Omega">&Omega;</span>
+    </div>
 
-    <span class="guimath-btn guimath-greek-letter" title="alpha" data-latex-data="alpha">&alpha;</span>
-    <span class="guimath-btn guimath-greek-letter" title="beta" data-latex-data="beta">&beta;</span>
-    <span class="guimath-btn guimath-greek-letter" title="gamma" data-latex-data="gamma">&gamma;</span>
-    <span class="guimath-btn guimath-greek-letter" title="delta" data-latex-data="delta">&delta;</span>
-    <span class="guimath-btn guimath-greek-letter" title="epsilon" data-latex-data="epsilon">&epsilon;</span>
-    <span class="guimath-btn guimath-greek-letter" title="zeta" data-latex-data="zeta">&zeta;</span>
-    <span class="guimath-btn guimath-greek-letter" title="eta" data-latex-data="eta">&eta;</span>
-    <span class="guimath-btn guimath-greek-letter" title="theta" data-latex-data="theta">&theta;</span>
-    <span class="guimath-btn guimath-greek-letter" title="iota" data-latex-data="iota">&iota;</span>
-    <span class="guimath-btn guimath-greek-letter" title="kappa" data-latex-data="kappa">&kappa;</span>
-    <span class="guimath-btn guimath-greek-letter" title="lambda" data-latex-data="lambda">&lambda;</span>
-    <span class="guimath-btn guimath-greek-letter" title="mu" data-latex-data="mu">&mu;</span>
-    <span class="guimath-btn guimath-greek-letter" title="nu" data-latex-data="nu">&nu;</span>
-    <span class="guimath-btn guimath-greek-letter" title="xi" data-latex-data="xi">&xi;</span>
-    <span class="guimath-btn guimath-greek-letter" title="omicron" data-latex-data="omicron">&omicron;</span>
-    <span class="guimath-btn guimath-greek-letter" title="pi" data-latex-data="pi">&pi;</span>
-    <span class="guimath-btn guimath-greek-letter" title="rho" data-latex-data="rho">&rho;</span>
-    <span class="guimath-btn guimath-greek-letter" title="sigma" data-latex-data="sigma">&sigma;</span>
-    <span class="guimath-btn guimath-greek-letter" title="tau" data-latex-data="tau">&tau;</span>
-    <span class="guimath-btn guimath-greek-letter" title="upsilon" data-latex-data="upsilon">&upsilon;</span>
-    <span class="guimath-btn guimath-greek-letter" title="phi" data-latex-data="phi">&phi;</span>
-    <span class="guimath-btn guimath-greek-letter" title="chi" data-latex-data="chi">&chi;</span>
-    <span class="guimath-btn guimath-greek-letter" title="psi" data-latex-data="psi">&psi;</span>
-    <span class="guimath-btn guimath-greek-letter" title="omega" data-latex-data="omega">&omega;</span>
+    <div class='_guimath_grid' style='grid-template-columns: repeat(8, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_greek_letter' title="alpha" data-latex-data="\alpha">&alpha;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="beta" data-latex-data="\beta">&beta;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="gamma" data-latex-data="\gamma">&gamma;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="delta" data-latex-data="\delta">&delta;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="epsilon" data-latex-data="\epsilon">&epsilon;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="zeta" data-latex-data="\zeta">&zeta;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="eta" data-latex-data="\eta">&eta;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="theta" data-latex-data="\theta">&theta;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="iota" data-latex-data="\iota">&iota;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="kappa" data-latex-data="\kappa">&kappa;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="lambda" data-latex-data="\lambda">&lambda;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="mu" data-latex-data="\mu">&mu;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="nu" data-latex-data="\nu">&nu;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="xi" data-latex-data="\xi">&xi;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="omicron" data-latex-data="\omicron">&omicron;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="pi" data-latex-data="\pi">&pi;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="rho" data-latex-data="\rho">&rho;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="sigma" data-latex-data="\sigma">&sigma;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="tau" data-latex-data="\tau">&tau;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="upsilon" data-latex-data="\upsilon">&upsilon;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="phi" data-latex-data="\phi">&phi;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="chi" data-latex-data="\chi">&chi;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="psi" data-latex-data="\psi">&psi;</span>
+        <span class='_guimath_btn _guimath_greek_letter' title="omega" data-latex-data="\omega">&omega;</span>
+    </div>
 </div>
-<div class="guimath_tab _guimath_symbols_tab" data-tab="2">
-    <span class="guimath-btn guimath-operator" title="Times" data-latex-data="times">&times;</span>
-    <span class="guimath-btn guimath-operator" title="Divide" data-latex-data="div">&div;</span>
-    <span class="guimath-btn guimath-operator" title="Center dot" data-latex-data="centerdot">&centerdot;</span>
-    <span class="guimath-btn guimath-operator" title="Plus-minus" data-latex-data="plusmn">&plusmn;</span>
-    <span class="guimath-btn guimath-operator" title="Less than" data-latex-data="lt">&lt;</span>
-    <span class="guimath-btn guimath-operator" title="Greater than" data-latex-data="gt">&gt;</span>
-    <span class="guimath-btn guimath-operator" title="Less than or equal to" data-latex-data="leq">&leq;</span>
-    <span class="guimath-btn guimath-operator" title="Greater than or equal to" data-latex-data="GreaterEqual">&GreaterEqual;</span>
-    <span class="guimath-btn guimath-operator" title="Equals" data-latex-data="equals">&equals;</span>
-    <span class="guimath-btn guimath-operator" title="Approximate" data-latex-data="approx">&approx;</span>
-    <span class="guimath-btn guimath-operator" title="Not equal" data-latex-data="NotEqual">&NotEqual;</span>
-    <span class="guimath-btn guimath-operator" title="Minus-plus" data-latex-data="mnplus">&mnplus;</span>
-    <span class="guimath-btn guimath-operator" title="Star" data-latex-data="starf">&starf;</span>
-    <span class="guimath-btn guimath-operator" title="Big cup" data-latex-data="bigcup">&bigcup;</span>
-    <span class="guimath-btn guimath-operator" title="Big cap" data-latex-data="bigcap">&bigcap;</span>
-    <span class="guimath-btn guimath-operator" title="Cup" data-latex-data="cup">&cup;</span>
-    <span class="guimath-btn guimath-operator" title="Cap" data-latex-data="cap">&cap;</span>
-    <span class="guimath-btn guimath-operator" title="Subset of" data-latex-data="sub">&sub;</span>
-    <span class="guimath-btn guimath-operator" title="Superset of" data-latex-data="sup">&sup;</span>
-    <span class="guimath-btn guimath-operator" title="Subset of or equal to" data-latex-data="sube">&sube;</span>
-    <span class="guimath-btn guimath-operator" title="Superset of or equal to" data-latex-data="supe">&supe;</span>
-    <span class="guimath-btn guimath-operator" title="Not a subset of" data-latex-data="nsub">&nsub;</span>
-    <span class="guimath-btn guimath-operator" title="Not a superset of" data-latex-data="nsup">&nsup;</span>
-    <span class="guimath-btn guimath-operator" title="Not a subset of or equal to" data-latex-data="nsube">&nsube;</span>
-    <span class="guimath-btn guimath-operator" title="Not a superset of or equal to" data-latex-data="nsupe">&nsupe;</span>
-    <span class="guimath-btn guimath-operator" title="Proportional to" data-latex-data="propto">&propto;</span>
-    <span class="guimath-btn guimath-operator" title="Parallel to" data-latex-data="parallel">&parallel;</span>
-    <span class="guimath-btn guimath-operator" title="Not parallel to" data-latex-data="npar">&npar;</span>
-    <span class="guimath-btn guimath-operator" title="Approximately equal to" data-latex-data="asympeq">&asympeq;</span>
-    <span class="guimath-btn guimath-operator" title="Element of" data-latex-data="isin">&isin;</span>
-    <span class="guimath-btn guimath-operator" title="Not an element of" data-latex-data="notin">&notin;</span>
-    <span class="guimath-btn guimath-operator" title="There exists" data-latex-data="exist">&exist;</span>
-    <span class="guimath-btn guimath-operator" title="There does not exists" data-latex-data="nexist">&nexist;</span>
-    <span class="guimath-btn guimath-operator" title="Perpendicular to" data-latex-data="perp">&perp;</span>
-    <span class="guimath-btn guimath-operator" title="Implies (left)" data-latex-data="Leftarrow">&Leftarrow;</span>
-    <span class="guimath-btn guimath-operator" title="Implies (right)" data-latex-data="Rightarrow">&Rightarrow;</span>
-    <span class="guimath-btn guimath-operator" title="If and only if (iff)" data-latex-data="Leftrightarrow">&Leftrightarrow;</span>
-    <span class="guimath-btn guimath-operator" title="Angle" data-latex-data="angle">&angle;</span>
-    <span class="guimath-btn guimath-operator" title="Measured angle" data-latex-data="angmsd">&angmsd;</span>
-    <span class="guimath-btn guimath-operator" title="Right arrow" data-latex-data="rightarrow">&rightarrow;</span>
-    <span class="guimath-btn guimath-operator" title="Left arrow" data-latex-data="leftarrow">&leftarrow;</span>
-    <span class="guimath-btn guimath-operator" title="Left right arrow" data-latex-data="leftrightarrow">&leftrightarrow;</span>
-    <span class="guimath-btn guimath-operator" title="Long right arrow" data-latex-data="longrightarrow">&longrightarrow;</span>
-    <span class="guimath-btn guimath-operator" title="Long left arrow" data-latex-data="longleftarrow">&longleftarrow;</span>
-    <span class="guimath-btn guimath-operator" title="Long left right arrow" data-latex-data="longleftrightarrow">&longleftrightarrow;</span>
-    <span class="guimath-btn guimath-operator" title="Up arrow" data-latex-data="uparrow">&uparrow;</span>
-    <span class="guimath-btn guimath-operator" title="Down arrow" data-latex-data="downarrow">&downarrow;</span>
-    <span class="guimath-btn guimath-operator" title="Up down arrow" data-latex-data="updownarrow">&updownarrow;</span>
-    <span class="guimath-btn guimath-operator" title="Partial derivative" data-latex-data="PartialD">&PartialD;</span>
-    <span class="guimath-btn guimath-operator" title="Reduced plank constant (h-bar)" data-latex-data="hbar">&hbar;</span>
-    <span class="guimath-btn guimath-operator" title="Real part symbol" data-latex-data="real">&real;</span>
-    <span class="guimath-btn guimath-operator" title="Nabla, del operator" data-latex-data="nabla">&nabla;</span>
-    <span class="guimath-btn guimath-operator" title="Infinity symbol" data-latex-data="infin">&infin;</span>
+<div class='_guimath_tab _guimath_math_characters_tab' data-tab-name="double-struck-fraktur" data-tab="2">
+    <div class='_guimath_grid' style='grid-template-columns: repeat(9, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck A" data-latex-data="\mathbb{A}">&Aopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck B" data-latex-data="\mathbb{B}">&Bopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck C" data-latex-data="\mathbb{C}">&Copf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck D" data-latex-data="\mathbb{D}">&Dopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck E" data-latex-data="\mathbb{E}">&Eopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck F" data-latex-data="\mathbb{F}">&Fopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck G" data-latex-data="\mathbb{G}">&Gopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck H" data-latex-data="\mathbb{H}">&Hopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck I" data-latex-data="\mathbb{I}">&Iopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck J" data-latex-data="\mathbb{J}">&Jopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck K" data-latex-data="\mathbb{K}">&Kopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck L" data-latex-data="\mathbb{L}">&Lopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck M" data-latex-data="\mathbb{M}">&Mopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck N" data-latex-data="\mathbb{N}">&Nopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck O" data-latex-data="\mathbb{O}">&Oopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck P" data-latex-data="\mathbb{P}">&Popf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck Q" data-latex-data="\mathbb{Q}">&Qopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck R" data-latex-data="\mathbb{R}">&Ropf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck S" data-latex-data="\mathbb{S}">&Sopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck T" data-latex-data="\mathbb{T}">&Topf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck U" data-latex-data="\mathbb{U}">&Uopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck V" data-latex-data="\mathbb{V}">&Vopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck W" data-latex-data="\mathbb{W}">&Wopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck X" data-latex-data="\mathbb{X}">&Xopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck Y" data-latex-data="\mathbb{Y}">&Yopf;</span>
+        <span class='_guimath_btn _guimath_double_struck_letter' title="Double Struck Z" data-latex-data="\mathbb{Z}">&Zopf;</span>
+    </div>
+
+    <div class='_guimath_grid' style='grid-template-columns: repeat(9, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur A" data-latex-data="\mathfrak{A}">&Afr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur B" data-latex-data="\mathfrak{B}">&Bfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur C" data-latex-data="\mathfrak{C}">&Cfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur D" data-latex-data="\mathfrak{D}">&Dfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur E" data-latex-data="\mathfrak{E}">&Efr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur F" data-latex-data="\mathfrak{F}">&Ffr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur G" data-latex-data="\mathfrak{G}">&Gfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur H" data-latex-data="\mathfrak{H}">&Hfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur I" data-latex-data="\mathfrak{I}">&Ifr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur J" data-latex-data="\mathfrak{J}">&Jfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur K" data-latex-data="\mathfrak{K}">&Kfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur L" data-latex-data="\mathfrak{L}">&Lfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur M" data-latex-data="\mathfrak{M}">&Mfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur N" data-latex-data="\mathfrak{N}">&Nfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur O" data-latex-data="\mathfrak{O}">&Ofr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur P" data-latex-data="\mathfrak{P}">&Pfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur Q" data-latex-data="\mathfrak{Q}">&Qfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur R" data-latex-data="\mathfrak{R}">&Rfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur S" data-latex-data="\mathfrak{S}">&Sfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur T" data-latex-data="\mathfrak{T}">&Tfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur U" data-latex-data="\mathfrak{U}">&Ufr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur V" data-latex-data="\mathfrak{V}">&Vfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur W" data-latex-data="\mathfrak{W}">&Wfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur X" data-latex-data="\mathfrak{X}">&Xfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur Y" data-latex-data="\mathfrak{Y}">&Yfr;</span>
+        <span class='_guimath_btn _guimath_fraktur_letter' title="Fraktur Z" data-latex-data="\mathfrak{Z}">&Zfr;</span>
+    </div>
 </div>
-<div class="guimath_tab _guimath_functions_tab" data-tab="3">
-    <span class="guimath-btn guimath-function" title="Summation" data-template-type="three" data-latex-data="sum">&Sigma;</span>
-    <span class="guimath-btn guimath-function" title="Integral" data-template-type="three" data-latex-data="int">&int;</span>
-    <span class="guimath-btn guimath-function" title="Double integral" data-template-type="three" data-latex-data="iint">&#8748</span>
-    <span class="guimath-btn guimath-function" title="Triple integral" data-template-type="three" data-latex-data="iiint">&iiint;</span>
-    <span class="guimath-btn guimath-function" title="Contour integral" data-template-type="three" data-latex-data="oint">&oint;</span>
-    <span class="guimath-btn guimath-function" title="Product" data-template-type="three" data-latex-data="prod">&Pi;</span>
-    <span class="guimath-btn guimath-function" title="Co product" data-template-type="three" data-latex-data="coprod">&coprod;</span>
-    <span class="guimath-btn guimath-function" title="Big cup (union)" data-template-type="three" data-latex-data="bigcup">&bigcup;</span>
-    <span class="guimath-btn guimath-function" title="Big cap (intersection)" data-template-type="three" data-latex-data="bigcap">&bigcap;</span>
-    <span class="guimath-btn guimath-function" title="Big vee (logical OR)" data-template-type="three" data-latex-data="bigvee">&bigvee;</span>
-    <span class="guimath-btn guimath-function" title="Big wedge (logical AND)" data-template-type="three" data-latex-data="bigwedge">&bigwedge;</span>
-    <span class="guimath-btn guimath-function" title="Limit" data-template-type="null" data-function-id="lim"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" font-weight="500" text-anchor="middle" transform="matrix(.75 0 0 .75 279.5 326.267)"><tspan x="0">lim</tspan></text></svg></span>
-    <span class="guimath-btn guimath-function" title="Square root" data-template-type="null" data-function-id="sqrt"><svg viewBox="0 0 567 567"><defs><style>.cls-1,.cls-2{fill-rule:evenodd}.cls-1{stroke-width:4.667px}.cls-2{stroke-width:7.417px}</style></defs><path id="Line_1" d="M3.707 306.883l-1.73-2.643 41.9-27.427 1.73 2.642z" class="cls-1" data-name="Line 1"/><path id="Line_2" d="M47.233 275.65l1.831-1.045 80.1 140.4-1.831 1.044z" class="cls-1" data-name="Line 2"/><path id="Line_3" d="M129.569 410.274l-3.113-1.374 111.707-252.923 3.113 1.375z" class="cls-2" data-name="Line 3"/><path id="Line_4" d="M241.471 154.67v-1.746h322.563v1.746H241.471z" class="cls-2" data-name="Line 4"/><path fill="none" fill-rule="evenodd" stroke-width="10.125" d="M288.978 190.824H495.53v206.552H288.978V190.824z"/></svg></span>
-    <span class="guimath-btn guimath-function" title="Nth root" data-template-type="null" data-function-id="nsqrt"><svg viewBox="0 0 567 567"><defs><style>.cls-1,.cls-2,.cls-3{fill-rule:evenodd}.cls-1{stroke-width:4.667px}.cls-2{stroke-width:7.417px}.cls-3{fill:none;stroke-width:10.125px}</style></defs><path id="Line_1" d="M3.707 306.883l-1.73-2.643 41.9-27.427 1.73 2.642z" class="cls-1" data-name="Line 1"/><path id="Line_2" d="M47.233 275.65l1.831-1.045 80.1 140.4-1.831 1.044z" class="cls-1" data-name="Line 2"/><path id="Line_3" d="M129.569 410.274l-3.113-1.374 111.707-252.923 3.113 1.375z" class="cls-2" data-name="Line 3"/><path id="Line_4" d="M241.471 154.67v-1.746h322.563v1.746H241.471z" class="cls-2" data-name="Line 4"/><path d="M288.978 190.824H495.53v206.552H288.978V190.824z" class="cls-3"/><path id="Rectangle_1_copy" d="M69.42 178.744h90.512v90.512H69.42v-90.512z" class="cls-3" data-name="Rectangle 1 copy"/></svg></span>
-    <span class="guimath-btn guimath-function" title="Subscript" data-template-type="null" data-function-id="sub"><svg viewBox="0 0 567 567"><defs><style>.cls-1{fill:none;stroke-width:12.875px;fill-rule:evenodd}</style></defs><path d="M27.09 82.836h285.083v285.083H27.09V82.836z" class="cls-1"/><path id="Rectangle_1_copy" d="M362.8 295.421h169.985V465.41H362.8V295.421z" class="cls-1" data-name="Rectangle 1 copy"/></svg></span>
-    <span class="guimath-btn guimath-function" title="Superscript" data-template-type="null" data-function-id="sup"><svg viewBox="0 0 567 567"><defs><style>.cls-1{fill:none;stroke-width:12.875px;fill-rule:evenodd}</style></defs><path d="M27.09 468.164h285.083V183.081H27.09v285.083z" class="cls-1"/><path id="Rectangle_1_copy" d="M362.8 255.579h169.985V85.59H362.8v169.989z" class="cls-1" data-name="Rectangle 1 copy"/></svg></span>
-    <span class="guimath-btn guimath-function" title="Subscript and Superscript" data-template-type="null" data-function-id="subsup"><svg viewBox="0 0 567 567"><defs><style>.cls-1{fill:none;stroke-width:12.875px;fill-rule:evenodd}</style></defs><path d="M34.7 413.554h267.862V145.693H34.7v267.861z" class="cls-1"/><path id="Rectangle_1_copy" d="M362.8 243.579h169.985V73.59H362.8v169.989z" class="cls-1" data-name="Rectangle 1 copy"/><path id="Rectangle_1_copy_2" d="M533.2 487.579H363.215V317.59H533.2v169.989z" class="cls-1" data-name="Rectangle 1 copy 2"/></svg></span>
-    <span class="guimath-btn guimath-function" title="Fraction" data-template-type="null" data-function-id="frac"><svg viewBox="0 0 567 567"><defs><style>.cls-1{fill:none;fill-rule:evenodd;stroke-width:12.875px}</style></defs><path id="Rectangle_1_copy" d="M193.8 225.579h169.985V55.59H193.8v169.989z" class="cls-1" data-name="Rectangle 1 copy"/><path id="Line_1" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="10.125" d="M124 284v-1h295v1H124z" data-name="Line 1"/><path id="Rectangle_1_copy_2" d="M364.2 528.579H194.215V358.59H364.2v169.989z" class="cls-1" data-name="Rectangle 1 copy 2"/></svg></span>
-    <span class="guimath-btn guimath-function" title="Sine" data-template-type="trigonometric" data-latex-data="sin"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">sin</tspan></text></svg></span>
-    <span class="guimath-btn guimath-function" title="Cosine" data-template-type="trigonometric" data-latex-data="cos"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">cos</tspan></text></svg></span>
-    <span class="guimath-btn guimath-function" title="Tangent" data-template-type="trigonometric" data-latex-data="tan"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">tan</tspan></text></svg></span>
-    <span class="guimath-btn guimath-function" title="Cosecant" data-template-type="trigonometric" data-latex-data="csc"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">csc</tspan></text></svg></span>
-    <span class="guimath-btn guimath-function" title="Secant" data-template-type="trigonometric" data-latex-data="sec"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">sec</tspan></text></svg></span>
-    <span class="guimath-btn guimath-function" title="Cotangent" data-template-type="trigonometric" data-latex-data="cot"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">cot</tspan></text></svg></span>
-    <span class="guimath-btn guimath-function" title="Inverse sine" data-template-type="trigonometric" data-latex-data="arcsin"><svg width="45" height="20" viewBox="0 0 2000 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" text-anchor="middle" transform="matrix(1.5 0 0 1.5 973.5 496)"><tspan x="0">arcsin</tspan></text></svg></span>
-    <span class="guimath-btn guimath-function" title="Inverse cosine" data-template-type="trigonometric" data-latex-data="arccos"><svg width="45" height="20" viewBox="0 0 2000 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" text-anchor="middle" transform="matrix(1.5 0 0 1.5 973.5 496)"><tspan x="0">arccos</tspan></text></svg></span>
-    <span class="guimath-btn guimath-function" title="Inverse tangent" data-template-type="trigonometric" data-latex-data="arctan"><svg width="45" height="20" viewBox="0 0 2000 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" text-anchor="middle" transform="matrix(1.5 0 0 1.5 973.5 496)"><tspan x="0">arctan</tspan></text></svg></span>
+<div class='_guimath_tab _guimath_arithmetic_operators_tab' data-tab-name="arithmetic-operators" data-tab="3">
+    <div class='_guimath_grid' style='grid-template-columns: repeat(6, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_operator' title="Plus" data-latex-data="+">&plus;</span>
+        <span class='_guimath_btn _guimath_operator' title="Minus" data-latex-data="-">&minus;</span>
+        <span class='_guimath_btn _guimath_operator' title="Plus-minus" data-latex-data="\pm">&plusmn;</span>
+        <span class='_guimath_btn _guimath_operator' title="Minus-plus" data-latex-data="\mp">&mnplus;</span>
+        <span class='_guimath_btn _guimath_operator' title="Times" data-latex-data="\times">&times;</span>
+        <span class='_guimath_btn _guimath_operator' title="Divide" data-latex-data="\div">&div;</span>
+        <span class='_guimath_btn _guimath_operator' title="Circled Plus" data-latex-data="\oplus">&oplus;</span>
+        <span class='_guimath_btn _guimath_operator' title="Circled Minus" data-latex-data="\ominus">&ominus;</span>
+        <span class='_guimath_btn _guimath_operator' title="Circled Multiplication" data-latex-data="\otimes">&otimes;</span>
+        <span class='_guimath_btn _guimath_operator' title="Circled Division" data-latex-data="\oslash">&osol;</span>
+        <span class='_guimath_btn _guimath_operator' title="Center Dot" data-latex-data="\cdot">&centerdot;</span>
+        <span class='_guimath_btn _guimath_operator' title="Circled Dot" data-latex-data="\odot">&odot;</span>
+        <span class='_guimath_btn _guimath_operator' title="Asterisk" data-latex-data="\mbox{*}">&ast;</span>
+        <span class='_guimath_btn _guimath_operator' title="Forward Slash" data-latex-data="/">/</span>
+        <span class='_guimath_btn _guimath_operator' title="Percent" data-latex-data="\%">&percnt;</span>
+        <span class='_guimath_btn _guimath_operator' title="Diamond" data-latex-data="\diamond">&diamond;</span>
+        <span class='_guimath_btn _guimath_operator' title="Nabla, del operator" data-latex-data="\nabla">&nabla;</span>
+        <span class='_guimath_btn _guimath_operator' title="Star" data-latex-data="\star">&starf;</span>
+    </div>
+
+    <div class='_guimath_grid' style='grid-template-columns: repeat(6, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_operator' title="Union" data-latex-data="\cup">&cup;</span>
+        <span class='_guimath_btn _guimath_operator' title="Intersection" data-latex-data="\cap">&cap;</span>
+        <span class='_guimath_btn _guimath_operator' title="Negation" data-latex-data="\neg">&not;</span>
+        <span class='_guimath_btn _guimath_operator' title="Logical AND" data-latex-data="\land">&and;</span>
+        <span class='_guimath_btn _guimath_operator' title="Logical OR" data-latex-data="\lor">&or;</span>
+        <span class='_guimath_btn _guimath_operator' title="For All" data-latex-data="\forall">&forall;</span>
+        <span class='_guimath_btn _guimath_operator' title="There Exists" data-latex-data="\exists">&exist;</span>
+        <span class='_guimath_btn _guimath_operator' title="There Does Not Exist" data-latex-data="\nexists">&nexist;</span>
+        <span class='_guimath_btn _guimath_operator' title="Angle" data-latex-data="\angle">&angle;</span>
+        <span class='_guimath_btn _guimath_operator' title="Measured Angle" data-latex-data="\measuredangle">&measuredangle;</span>
+        <span class='_guimath_btn _guimath_operator' title="Spherical Angle" data-latex-data="\sphericalangle">&angsph;</span>
+        <span class='_guimath_btn _guimath_operator' title="Perpendicular" data-latex-data="\perp">&perp;</span>
+        <span class='_guimath_btn _guimath_operator' title="Parallel" data-latex-data="\parallel">&parallel;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not Parallel" data-latex-data="\nparallel">&NotDoubleVerticalBar;</span>
+        <span class='_guimath_btn _guimath_operator' title="Degree" data-latex-data="^{\circ}">&deg;</span>
+        <span class='_guimath_btn _guimath_operator' title="Therefore" data-latex-data="\therefore">&therefore;</span>
+        <span class='_guimath_btn _guimath_operator' title="Hence" data-latex-data="\because">&because;</span>
+    </div>
+</div>
+<div class='_guimath_tab _guimath_relational_operators_tab' data-tab-name="relational-operators" data-tab="4">
+    <div class='_guimath_grid' style='grid-template-columns: repeat(8, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_operator' title="Equals" data-latex-data="=">&equals;</span>
+        <span class='_guimath_btn _guimath_operator' title="Identical to" data-latex-data="\equiv">&equiv;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not equal" data-latex-data="\ne">&NotEqual;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not identical to" data-latex-data="\not\equiv">&nequiv;</span>
+        <span class='_guimath_btn _guimath_operator' title="Similar to" data-latex-data="\sim">&sim;</span>
+        <span class='_guimath_btn _guimath_operator' title="Almost equal to" data-latex-data="\approx">&approx;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not similar to" data-latex-data="\not\sim">&nsim;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not almost equal to" data-latex-data="\not\approx">&napprox;</span>
+        <span class='_guimath_btn _guimath_operator' title="Asymptotically equal to" data-latex-data="\simeq">&simeq;</span>
+        <span class='_guimath_btn _guimath_operator' title="Approximately equal to" data-latex-data="\cong">&cong;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not asymptotically equal to" data-latex-data="\not\simeq">&nsimeq;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not approximately equal to" data-latex-data="\not\cong">&ncong;</span>
+        <span class='_guimath_btn _guimath_operator' title="Greater than" data-latex-data="\gt">&gt;</span>
+        <span class='_guimath_btn _guimath_operator' title="Less than" data-latex-data="\lt">&lt;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not greater than" data-latex-data="\not\gt">&ngt;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not less than" data-latex-data="\not\lt">&nlt;</span>
+        <span class='_guimath_btn _guimath_operator' title="Greater than or equal to" data-latex-data="\geq">&GreaterEqual;</span>
+        <span class='_guimath_btn _guimath_operator' title="Less than or equal to" data-latex-data="\leq">&leq;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not greater than or equal to" data-latex-data="\not\geq">&ngeq;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not less than or equal to" data-latex-data="\not\leq">&nleq;</span>
+        <span class='_guimath_btn _guimath_operator' title="Much greater than" data-latex-data="\gg">&gg;</span>
+        <span class='_guimath_btn _guimath_operator' title="Much less than" data-latex-data="\ll">&ll;</span>
+        <span class='_guimath_btn _guimath_operator' title="Approximately equal to" data-latex-data="\asymp">&asympeq;</span>
+        <span class='_guimath_btn _guimath_operator' title="Proportional to" data-latex-data="\propto">&propto;</span>
+    </div>
+    <div class='_guimath_grid' style='grid-template-columns: repeat(8, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_operator' title="Element of" data-latex-data="\in">&isin;</span>
+        <span class='_guimath_btn _guimath_operator' title="Contains as a member" data-latex-data="\ni">&ni;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not an element of" data-latex-data="\notin">&notin;</span>
+        <span class='_guimath_btn _guimath_operator' title="Does not contain as a member" data-latex-data="\not\ni">&notni;</span>
+        <span class='_guimath_btn _guimath_operator' title="Subset of" data-latex-data="\subset">&sub;</span>
+        <span class='_guimath_btn _guimath_operator' title="Superset of" data-latex-data="\supset">&sup;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not a subset of" data-latex-data="\not\subset">&nsub;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not a superset of" data-latex-data="\not\supset">&nsup;</span>
+        <span class='_guimath_btn _guimath_operator' title="Subset of or equal to" data-latex-data="\subseteq">&sube;</span>
+        <span class='_guimath_btn _guimath_operator' title="Superset of or equal to" data-latex-data="\supseteq">&supe;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not a subset of or equal to" data-latex-data="\not\subseteq">&nsube;</span>
+        <span class='_guimath_btn _guimath_operator' title="Not a superset of or equal to" data-latex-data="\not\supseteq">&nsupe;</span>
+        <span class='_guimath_btn _guimath_operator' title="Precedes" data-latex-data="\prec">&prec;</span>
+        <span class='_guimath_btn _guimath_operator' title="Succeeds" data-latex-data="\succ">&succ;</span>
+        <span class='_guimath_btn _guimath_operator' title="Square subset of" data-latex-data="\sqsubset">&sqsubset;</span>
+        <span class='_guimath_btn _guimath_operator' title="Square superset of" data-latex-data="\sqsupset">&sqsupset;</span>
+        <span class='_guimath_btn _guimath_operator' title="Square subset or equal" data-latex-data="\sqsubseteq">&sqsubseteq;</span>
+        <span class='_guimath_btn _guimath_operator' title="Square superset or equal" data-latex-data="\sqsupseteq">&sqsupseteq;</span>
+        <span class='_guimath_btn _guimath_operator' title="Proves" data-latex-data="\vdash">&vdash;</span>
+        <span class='_guimath_btn _guimath_operator' title="Does not yield" data-latex-data="\dashv">&dashv;</span>
+        <span class='_guimath_btn _guimath_operator' title="Cup" data-latex-data="\cup">&cup;</span>
+        <span class='_guimath_btn _guimath_operator' title="Cap" data-latex-data="\cap">&cap;</span>
+        <span class='_guimath_btn _guimath_operator' title="Infinity symbol" data-latex-data="\infty">&infin;</span>
+    </div>
+</div>
+<div class='_guimath_tab _guimath_functions_tab' data-tab-name="functions" data-tab="5">
+    <div class='_guimath_grid' style='grid-template-columns: repeat(15, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_function' title="Fraction" data-template-type="null" data-function-id="frac"><svg viewBox="0 0 567 567"><defs><style>.cls-1{fill:none;fill-rule:evenodd;stroke-width:12.875px}</style></defs><path id="Rectangle_1_copy" d="M193.8 225.579h169.985V55.59H193.8v169.989z" class="cls-1" data-name="Rectangle 1 copy"/><path id="Line_1" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="10.125" d="M124 284v-1h295v1H124z" data-name="Line 1"/><path id="Rectangle_1_copy_2" d="M364.2 528.579H194.215V358.59H364.2v169.989z" class="cls-1" data-name="Rectangle 1 copy 2"/></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Square root" data-template-type="null" data-function-id="sqrt"><svg viewBox="0 0 567 567"><defs><style>.cls-1,.cls-2{fill-rule:evenodd}  .cls-1{stroke-width:4.667px}  .cls-2{stroke-width:7.417px}</style></defs><path id="Line_1" d="M3.707 306.883l-1.73-2.643 41.9-27.427 1.73 2.642z" class="cls-1" data-name="Line 1"/><path id="Line_2" d="M47.233 275.65l1.831-1.045 80.1 140.4-1.831 1.044z" class="cls-1" data-name="Line 2"/><path id="Line_3" d="M129.569 410.274l-3.113-1.374 111.707-252.923 3.113 1.375z" class="cls-2" data-name="Line 3"/><path id="Line_4" d="M241.471 154.67v-1.746h322.563v1.746H241.471z" class="cls-2" data-name="Line 4"/><path fill="none" fill-rule="evenodd" stroke-width="10.125" d="M288.978 190.824H495.53v206.552H288.978V190.824z"/></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Nth root" data-template-type="null" data-function-id="nsqrt"><svg viewBox="0 0 567 567"><defs><style>.cls-1,.cls-2,.cls-3{fill-rule:evenodd}  .cls-1{stroke-width:4.667px}  .cls-2{stroke-width:7.417px}  .cls-3{fill:none;stroke-width:10.125px}</style></defs><path id="Line_1" d="M3.707 306.883l-1.73-2.643 41.9-27.427 1.73 2.642z" class="cls-1" data-name="Line 1"/><path id="Line_2" d="M47.233 275.65l1.831-1.045 80.1 140.4-1.831 1.044z" class="cls-1" data-name="Line 2"/><path id="Line_3" d="M129.569 410.274l-3.113-1.374 111.707-252.923 3.113 1.375z" class="cls-2" data-name="Line 3"/><path id="Line_4" d="M241.471 154.67v-1.746h322.563v1.746H241.471z" class="cls-2" data-name="Line 4"/><path d="M288.978 190.824H495.53v206.552H288.978V190.824z" class="cls-3"/><path id="Rectangle_1_copy" d="M69.42 178.744h90.512v90.512H69.42v-90.512z" class="cls-3" data-name="Rectangle 1 copy"/></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Summation" data-template-type="three" data-latex-data="sum">&Sigma;</span>
+        <span class='_guimath_btn _guimath_function' title="Product" data-template-type="three" data-latex-data="prod">&Pi;</span>
+        <span class='_guimath_btn _guimath_function' title="Co product" data-template-type="three" data-latex-data="coprod">&coprod;</span>
+        <span class='_guimath_btn _guimath_function' title="Big cup (union)" data-template-type="three" data-latex-data="bigcup">&bigcup;</span>
+        <span class='_guimath_btn _guimath_function' title="Big cap (intersection)" data-template-type="three" data-latex-data="bigcap">&bigcap;</span>
+        <span class='_guimath_btn _guimath_function' title="Big vee (logical OR)" data-template-type="three" data-latex-data="bigvee">&bigvee;</span>
+        <span class='_guimath_btn _guimath_function' title="Big wedge (logical AND)" data-template-type="three" data-latex-data="bigwedge">&bigwedge;</span>
+        <span class='_guimath_btn _guimath_function' title="Integral" data-template-type="three" data-latex-data="int">&int;</span>
+        <span class='_guimath_btn _guimath_function' title="Double integral" data-template-type="three" data-latex-data="iint">&#8748</span>
+        <span class='_guimath_btn _guimath_function' title="Triple integral" data-template-type="three" data-latex-data="iiint">&iiint;</span>
+        <span class='_guimath_btn _guimath_function' title="Contour integral" data-template-type="three" data-latex-data="oint">&oint;</span>
+        <span class='_guimath_btn _guimath_function' title="Surface integral" data-template-type="three" data-latex-data="oiint">&DoubleContourIntegral;</span>
+        <span class='_guimath_btn _guimath_function' title="Volume integral" data-template-type="three" data-latex-data="oiiint">&Cconint;</span>
+
+        <span class='_guimath_btn _guimath_function' title="Limit" data-template-type="null" data-function-id="lim"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" font-weight="500" text-anchor="middle" transform="matrix(.75 0 0 .75 279.5 326.267)"><tspan x="0">lim</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Logarithm" data-template-type="null" data-function-id="log"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" font-weight="500" text-anchor="middle" transform="matrix(.75 0 0 .75 279.5 326.267)"><tspan x="0">log</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Natural logarithm" data-template-type="null" data-function-id="ln"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" font-weight="500" text-anchor="middle" transform="matrix(.75 0 0 .75 279.5 326.267)"><tspan x="0">ln</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Exponent" data-template-type="null" data-function-id="exp"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" font-weight="500" text-anchor="middle" transform="matrix(.75 0 0 .75 279.5 326.267)"><tspan x="0">exp</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Sine" data-template-type="trigonometric" data-latex-data="sin"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">sin</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Cosine" data-template-type="trigonometric" data-latex-data="cos"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">cos</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Tangent" data-template-type="trigonometric" data-latex-data="tan"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">tan</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Cosecant" data-template-type="trigonometric" data-latex-data="csc"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">csc</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Secant" data-template-type="trigonometric" data-latex-data="sec"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">sec</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Cotangent" data-template-type="trigonometric" data-latex-data="cot"><svg viewBox="0 0 567 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="310.5" text-anchor="middle" transform="translate(286.022 367.216) scale(1.235)"><tspan x="0">cot</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Inverse sine" data-template-type="trigonometric" data-latex-data="arcsin"><svg width="45" height="20" viewBox="0 0 2000 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" text-anchor="middle" transform="matrix(1.5 0 0 1.5 973.5 496)"><tspan x="0">arcsin</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Inverse cosine" data-template-type="trigonometric" data-latex-data="arccos"><svg width="45" height="20" viewBox="0 0 2000 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" text-anchor="middle" transform="matrix(1.5 0 0 1.5 973.5 496)"><tspan x="0">arccos</tspan></text></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Inverse tangent" data-template-type="trigonometric" data-latex-data="arctan"><svg width="45" height="20" viewBox="0 0 2000 567"><text fill="var(--default-font-color)" font-family="Cambria" font-size="500" text-anchor="middle" transform="matrix(1.5 0 0 1.5 973.5 496)"><tspan x="0">arctan</tspan></text></svg></span>
+    </div>
+</div>
+<div class='_guimath_tab _guimath_arrows_tab' data-tab-name="arrows" data-tab="6">
+    <div class='_guimath_grid' style='grid-template-columns: repeat(15, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_arrow' title="Left arrow" data-latex-data="\leftarrow">&leftarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Right arrow" data-latex-data="\rightarrow">&rightarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Left-right arrow" data-latex-data="\leftrightarrow">&leftrightarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Up arrow" data-latex-data="\uparrow">&uparrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Down arrow" data-latex-data="\downarrow">&downarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Up-down arrow" data-latex-data="\updownarrow">&updownarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Left double arrow" data-latex-data="\Leftarrow">&Leftarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Right double arrow" data-latex-data="\Rightarrow">&Rightarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Left-right double arrow" data-latex-data="\Leftrightarrow">&Leftrightarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Up double arrow" data-latex-data="\Uparrow">&Uparrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Down double arrow" data-latex-data="\Downarrow">&Downarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Up-down double arrow" data-latex-data="\Updownarrow">&Updownarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="North east arrow" data-latex-data="\nearrow">&nearrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="South east arrow" data-latex-data="\searrow">&searrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="North west arrow" data-latex-data="\nwarrow">&nwarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="South west arrow" data-latex-data="\swarrow">&swarrow;</span>
+
+        <span class='_guimath_btn _guimath_arrow' title="Left paired arrow" data-latex-data="\leftleftarrows">&leftleftarrows;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Right paired arrow" data-latex-data="\rightrightarrows">&rightrightarrows;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Left-right paired arrow" data-latex-data="\leftrightarrows">&leftrightarrows;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Right-left paired arrow" data-latex-data="\rightleftarrows">&rightleftarrows;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Left-right harpoon" data-latex-data="\leftrightharpoons">&leftrightharpoons;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Right-left harpoon" data-latex-data="\rightleftharpoons">&rightleftharpoons;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Up paired arrow" data-latex-data="\upuparrows">&upuparrows;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Down paired arrow" data-latex-data="\downdownarrows">&downdownarrows;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Up-down paired arrow" data-latex-data="\updownarrows">&udarr;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Down-up paired arrow" data-latex-data="\downuparrows">&duarr;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Maps to" data-latex-data="\mapsto">&mapsto;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Maps from" data-latex-data="\mapsfrom">&mapstoleft;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Left arrow with stroke" data-latex-data="\nleftarrow">&nleftarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Right arrow with stroke" data-latex-data="\nrightarrow">&nrightarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Left-right arrow with stroke" data-latex-data="\nleftrightarrow">&nleftrightarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Left double arrow with stroke" data-latex-data="\nLeftarrow">&nLeftarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Right double arrow with stroke" data-latex-data="\nRightarrow">&nRightarrow;</span>
+        <span class='_guimath_btn _guimath_arrow' title="Left-right double arrow with stroke" data-latex-data="\nLeftrightarrow">&nLeftrightarrow;</span>
+
+        <span class='_guimath_btn _guimath_template_arrow' title='Right arrow with over and under script' data-arrow-type='right'><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="30" width="60" height="60" fill="none" stroke="black" stroke-width="6"/><line x1="30" y1="110" x2="190" y2="110" stroke="black" stroke-width="6"/><polygon points="200,110 165,95 165,125" fill="black"/><rect x="80" y="130" width="60" height="60" fill="none" stroke="black" stroke-width="6"/></svg></span>
+        <span class='_guimath_btn _guimath_template_arrow' title='Right double arrow with over and under script' data-arrow-type='Right'><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="30" width="60" height="60" fill="none" stroke="black" stroke-width="6"/><line x1="30" y1="104" x2="170" y2="104" stroke="black" stroke-width="6"/><line x1="30" y1="116" x2="170" y2="116" stroke="black" stroke-width="6"/><polygon points="200,110 165,90 165,130" fill="black"/><rect x="80" y="130" width="60" height="60" fill="none" stroke="black" stroke-width="6"/></svg></span>
+        <span class='_guimath_btn _guimath_template_arrow' title='Left arrow with over and under script' data-arrow-type='left'><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="30" width="60" height="60" fill="none" stroke="black" stroke-width="6"/><line x1="30" y1="110" x2="190" y2="110" stroke="black" stroke-width="6"/><polygon points="20,110 55,95 55,125" fill="black"/><rect x="80" y="130" width="60" height="60" fill="none" stroke="black" stroke-width="6"/></svg></span>
+        <span class='_guimath_btn _guimath_template_arrow' title='Left double arrow with over and under script' data-arrow-type='Left'><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="30" width="60" height="60" fill="none" stroke="black" stroke-width="6"/><line x1="50" y1="104" x2="190" y2="104" stroke="black" stroke-width="6"/><line x1="50" y1="116" x2="190" y2="116" stroke="black" stroke-width="6"/><polygon points="20,110 55,90 55,130" fill="black"/><rect x="80" y="130" width="60" height="60" fill="none" stroke="black" stroke-width="6"/></svg></span>
+        <span class='_guimath_btn _guimath_template_arrow' title='Left right arrow with over and under script' data-arrow-type='leftright'><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="30" width="60" height="60" fill="none" stroke="black" stroke-width="6"/><line x1="30" y1="110" x2="190" y2="110" stroke="black" stroke-width="6"/><polygon points="200,110 165,95 165,125" fill="black"/><polygon points="20,110 55,95 55,125" fill="black"/><rect x="80" y="130" width="60" height="60" fill="none" stroke="black" stroke-width="6"/></svg></span>
+        <span class='_guimath_btn _guimath_template_arrow' title='Left right double arrow with over and under script' data-arrow-type='Leftright'><svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="30" width="60" height="60" fill="none" stroke="black" stroke-width="6"/><line x1="50" y1="104" x2="170" y2="104" stroke="black" stroke-width="6"/><line x1="50" y1="116" x2="170" y2="116" stroke="black" stroke-width="6"/><polygon points="20,110 55,90 55,130" fill="black"/><polygon points="200,110 165,90 165,130" fill="black"/><rect x="80" y="130" width="60" height="60" fill="none" stroke="black" stroke-width="6"/></svg></span>
+    </div>
+</div>
+<div class='_guimath_tab _guimath_scripts_tab' data-tab-name="scripts-brackets" data-tab="7">
+    <div class='_guimath_grid' style='grid-template-columns: repeat(15, minmax(2em, 1fr));'>
+        <span class='_guimath_btn _guimath_function' title="Subscript" data-template-type="null" data-function-id="sub"><svg viewBox="0 0 567 567"><defs><style>.cls-1{fill:none;stroke-width:12.875px;fill-rule:evenodd}</style></defs><path d="M27.09 82.836h285.083v285.083H27.09V82.836z" class="cls-1"/><path id="Rectangle_1_copy" d="M362.8 295.421h169.985V465.41H362.8V295.421z" class="cls-1" data-name="Rectangle 1 copy"/></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Superscript" data-template-type="null" data-function-id="sup"><svg viewBox="0 0 567 567"><defs><style>.cls-1{fill:none;stroke-width:12.875px;fill-rule:evenodd}</style></defs><path d="M27.09 468.164h285.083V183.081H27.09v285.083z" class="cls-1"/><path id="Rectangle_1_copy" d="M362.8 255.579h169.985V85.59H362.8v169.989z" class="cls-1" data-name="Rectangle 1 copy"/></svg></span>
+        <span class='_guimath_btn _guimath_function' title="Subscript and Superscript" data-template-type="null" data-function-id="subsup"><svg viewBox="0 0 200 200"><rect fill=none height=100 stroke-width=6 width=100 x=25 y=50 /><rect fill=none height=45 stroke-width=6 width=45 x=140 y=40 /><rect fill=none height=45 stroke-width=6 width=45 x=140 y=115 /></svg></span>
+        <span class='_guimath_btn _guimath_function' title='Subscript and Superscript left' data-template-type='null' data-function-id='subsupleft'><svg viewBox="0 0 200 200"><rect fill=none height=100 stroke-width=6 width=100 x=85 y=50 /><rect fill=none height=45 stroke-width=6 width=45 x=25 y=40 /><rect fill=none height=45 stroke-width=6 width=45 x=25 y=115 /></svg></span>
+
+        <span class='_guimath_btn _guimath_accent' title="Overbrace" data-template-type="overscript" data-latex-data="overbrace"><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=80 text-anchor=middle transform="rotate(90 100 55)" x=70 y=75>{</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title="Underbrace" data-template-type="underscript" data-latex-data="underbrace"><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=80 text-anchor=middle transform="rotate(90 100 55)" x=210 y=75>}</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=20 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Over right arrow' data-template-type='overscript' data-latex-data='vec'><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=100 text-anchor=middle transform="translate(30 -25)" x=70 y=75>→</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Over left arrow' data-template-type='overscript' data-latex-data='overleftarrow'><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=100 text-anchor=middle transform="translate(30 -25)" x=70 y=75>←</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Over left-right arrow' data-template-type='overscript' data-latex-data='overleftrightarrow'><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=100 text-anchor=middle transform="translate(30 -25)" x=70 y=75>↔</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Over left harpoon' data-template-type='overscript' data-latex-data='overleftharpoon'><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=100 text-anchor=middle transform="translate(30 -25)" x=70 y=75>↼</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Over right harpoon' data-template-type='overscript' data-latex-data='overrightharpoon'><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=100 text-anchor=middle transform="translate(30 -25)" x=70 y=75>⇀</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Tilde' data-template-type='overscript' data-latex-data='widetilde'><svg viewBox="0 0 200 200"><text fill="currentColor" font-family="Cambria, serif" font-size=100 text-anchor=middle transform="translate(30 -25)" x=70 y=75>~</text><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Dot' data-template-type='overscript' data-latex-data='dot'><svg viewBox="0 0 200 200"><circle cx="100" cy="25" r="6" fill="currentColor"/><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Double dot' data-template-type='overscript' data-latex-data='ddot'><svg viewBox="0 0 200 200"><circle cx="92" cy="25" r="6" fill="currentColor"/><circle cx="108" cy="25" r="6" fill="currentColor"/><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Triple dot' data-template-type='overscript' data-latex-data='dddot'><svg viewBox="0 0 200 200"><circle cx="85" cy="25" r="6" fill="currentColor"/><circle cx="100" cy="25" r="6" fill="currentColor"/><circle cx="115" cy="25" r="6" fill="currentColor"/><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Breve' data-template-type='overscript' data-latex-data='breve'><svg viewBox="0 0 200 200"><path d="M70 25 Q100 5 130 25" stroke-width="4" fill="none"/><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title="Hat" data-template-type="overscript" data-latex-data="widehat"><svg viewBox="0 0 200 200"><path d="M70 25 L100 5 L130 25" stroke-width="4" fill="none"/><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Acute' data-template-type='overscript' data-latex-data='acute'><svg viewBox="0 0 200 200"><line x1="90" y1="5" x2="120" y2="25" stroke-width="4"/><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Grave' data-template-type='overscript' data-latex-data='grave'><svg viewBox="0 0 200 200"><line x1="110" y1="5" x2="80" y2="25" stroke-width="4"/><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Bar' data-template-type='overscript' data-latex-data='overline'><svg viewBox="0 0 200 200"><line x1="65" y1="25" x2="135" y2="25" stroke-width="4"/><rect fill=none height=120 stroke-width=6 width=120 x=40 y=50 /></svg></span>
+        <span class='_guimath_btn _guimath_accent' title='Underbar' data-template-type='underscript' data-latex-data='underline'><svg viewBox="0 0 200 200"><rect fill=none height=120 stroke-width=6 width=120 x=40 y=40 /><line stroke-width=4 x1=65 x2=135 y1=180 y2=180 /></svg></span>
+
+        <span class='_guimath_btn _guimath_bracket' title='Parenthesis' data-template-type='bracket' data-bracket-type='parenthesis'><svg viewBox="0 0 200 200"><text fill=currentColor font-family=Cambria,serif font-size=120 text-anchor=middle transform="translate(25 128)">(</text><text fill=currentColor font-family=Cambria,serif font-size=120 text-anchor=middle transform="translate(175 128)">)</text><rect fill=none height=90 stroke=black stroke-width=3 width=90 x=55 y=55 /></svg></span>
+        <span class='_guimath_btn _guimath_bracket' title='Curly Brackets' data-template-type='bracket' data-bracket-type='curly'><svg viewBox="0 0 200 200"><text fill=currentColor font-family=Cambria,serif font-size=120 text-anchor=middle transform="translate(25 128)">{</text><text fill=currentColor font-family=Cambria,serif font-size=120 text-anchor=middle transform="translate(175 128)">}</text><rect fill=none height=90 stroke=black stroke-width=3 width=90 x=55 y=55 /></svg></span>
+        <span class='_guimath_btn _guimath_bracket' title='Square Brackets' data-template-type='bracket' data-bracket-type='square'><svg viewBox="0 0 200 200"><text fill=currentColor font-family=Cambria,serif font-size=120 text-anchor=middle transform="translate(25 128)">[</text><text fill=currentColor font-family=Cambria,serif font-size=120 text-anchor=middle transform="translate(175 128)">]</text><rect fill=none height=90 stroke=black stroke-width=3 width=90 x=55 y=55 /></svg></span>
+        <span class='_guimath_btn _guimath_bracket' title='Vertical Bars' data-template-type='bracket' data-bracket-type='bar'><svg viewBox="0 0 200 200"><text fill=currentColor font-family=Cambria,serif font-size=120 text-anchor=middle transform="translate(25 128)">|</text><text fill=currentColor font-family=Cambria,serif font-size=120 text-anchor=middle transform="translate(175 128)">|</text><rect fill=none height=90 stroke=black stroke-width=3 width=90 x=55 y=55 /></svg></span>
+        <span class='_guimath_btn _guimath_bracket' title='Angle Brackets' data-template-type='bracket' data-bracket-type='angle'><svg viewBox="0 0 200 200"><text fill=currentColor font-family=Cambria,serif font-size=120 text-anchor=middle transform="translate(25 128)">&lt;</text><text fill=currentColor font-family=Cambria,serif font-size=120 text-anchor=middle transform="translate(175 128)">&gt;</text><rect fill=none height=90 stroke=black stroke-width=3 width=90 x=55 y=55 /></svg></span>
+    </div>
 </div>
 <div id="_guimath_equation_display"></div>

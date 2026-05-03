@@ -8,7 +8,7 @@ nav_order: 1
 GUIMath allows your users to create mathematical equations on webpages using a GUI.
 
 {: .note}
-> This project was previously developed as MJXGUI and distributed as a standalone script. With this release, the library has been renamed and repackaged for npm as GUIMath, starting from a new release cycle at v0.1.0.
+> This project was previously developed as MJXGUI and distributed as a standalone script. The library has since been renamed and repackaged for npm as GUIMath, starting from a new release cycle at v0.1.0.
 > 
 > GUIMath v0.1.0 is equivalent to MJXGUI v2.1.0
 

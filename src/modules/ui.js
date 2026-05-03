@@ -4,124 +4,29 @@ import Cursor from './cursor.js';
 import editorHTML from '../html/editor.min.html';
 import formHTML from '../html/form-input.min.html';
 
-const symbolLatexMap = {
-    // Lowercase greek letters
-    alpha: '\\alpha',
-    beta: '\\beta',
-    gamma: '\\gamma',
-    delta: '\\delta',
-    epsilon: '\\epsilon',
-    zeta: '\\zeta',
-    eta: '\\eta',
-    theta: '\\theta',
-    iota: '\\iota',
-    kappa: '\\kappa',
-    lambda: '\\lambda',
-    mu: '\\mu',
-    nu: '\\nu',
-    xi: '\\xi',
-    omicron: '\\omicron',
-    pi: '\\pi',
-    rho: '\\rho',
-    sigma: '\\sigma',
-    tau: '\\tau',
-    upsilon: '\\upsilon',
-    phi: '\\phi',
-    chi: '\\chi',
-    psi: '\\psi',
-    omega: '\\omega',
-
-    // Uppercase greek letters
-    Alpha: 'A',
-    Beta: 'B',
-    Gamma: '\\Gamma',
-    Delta: '\\Delta',
-    Epsilon: 'E',
-    Zeta: 'Z',
-    Eta: 'H',
-    Theta: '\\Theta',
-    Iota: 'I',
-    Kappa: 'K',
-    Lambda: '\\Lambda',
-    Mu: 'M',
-    Nu: 'N',
-    Xi: '\\Xi',
-    Omicron: 'O',
-    Pi: '\\Pi',
-    Rho: 'P',
-    Sigma: '\\Sigma',
-    Tau: 'T',
-    Upsilon: '\\Upsilon',
-    Phi: '\\Phi',
-    Chi: 'X',
-    Psi: '\\Psi',
-    Omega: '\\Omega',
-
-    // Operators and symbols
-    times: '\\times',
-    div: '\\div',
-    centerdot: '\\cdot',
-    plusmn: '\\pm',
-    mnplus: '\\mp',
-    starf: '\\star',
-    bigcup: '\\bigcup',
-    bigcap: '\\bigcap',
-    cup: '\\cup',
-    cap: '\\cap',
-    lt: '\\lt',
-    gt: '\\gt',
-    leq: '\\leq',
-    GreaterEqual: '\\geq',
-    equals: '=',
-    approx: '\\approx',
-    NotEqual: '\\ne',
-    sub: '\\subset',
-    sup: '\\supset',
-    sube: '\\subseteq',
-    supe: '\\supseteq',
-    nsub: '\\not\\subset',
-    nsup: '\\not\\supset',
-    nsube: '\\not\\subseteq',
-    nsupe: '\\not\\supseteq',
-    propto: '\\propto',
-    parallel: '\\parallel',
-    npar: '\\nparallel',
-    asympeq: '\\asymp',
-    isin: '\\in',
-    notin: '\\notin',
-    exist: '\\exists',
-    nexist: '\\nexists',
-    perp: '\\perp',
-    angle: '\\angle',
-    angmsd: '\\measuredangle',
-    Leftarrow: '\\Leftarrow',
-    Rightarrow: '\\Rightarrow',
-    Leftrightarrow: '\\Leftrightarrow',
-    rightarrow: '\\to',
-    leftarrow: '\\gets',
-    leftrightarrow: '\\leftrightarrow',
-    longrightarrow: '\\longrightarrow',
-    longleftarrow: '\\longleftarrow',
-    longleftrightarrow: '\\longleftrightarrow',
-    uparrow: '\\uparrow',
-    downarrow: '\\downarrow',
-    updownarrow: '\\updownarrow',
-    PartialD: '\\partial',
-    hbar: '\\hbar',
-    real: '\\Re',
-    nabla: '\\nabla',
-    infin: '\\infty',
-};
-
 const functionComponentMap = {
     lim: ExpressionBackend.Limit,
+    log: ExpressionBackend.Logarithm,
+    ln: ExpressionBackend.NaturalLogarithm,
+    exp: ExpressionBackend.Exponent,
     sqrt: ExpressionBackend.Sqrt,
     nsqrt: ExpressionBackend.NthRoot,
     sub: ExpressionBackend.Subscript,
     sup: ExpressionBackend.Superscript,
     subsup: ExpressionBackend.SubSupRight,
+    subsupleft: ExpressionBackend.SubSupLeft,
     frac: ExpressionBackend.Fraction,
 };
+
+const validEditorTabNames = [
+    'greek-letters',
+    'double-struck-fraktur',
+    'arithmetic-operators',
+    'relational-operators',
+    'functions',
+    'arrows',
+    'scripts-brackets',
+];
 
 export default class GUIMath {
     constructor(
@@ -190,22 +95,26 @@ export default class GUIMath {
         });
 
         const symbols = this.editorWindow.querySelectorAll(
-            '.guimath-operator, .guimath-greek-letter',
+            '._guimath_operator, ._guimath_greek_letter, ._guimath_double_struck_letter, ._guimath_fraktur_letter, ._guimath_arrow',
         );
         const functions =
-            this.editorWindow.querySelectorAll('.guimath-function');
+            this.editorWindow.querySelectorAll('._guimath_function');
+        const accents = this.editorWindow.querySelectorAll('._guimath_accent');
+        const templateArrows = this.editorWindow.querySelectorAll(
+            '._guimath_template_arrow',
+        );
+        const brackets =
+            this.editorWindow.querySelectorAll('._guimath_bracket');
 
         symbols.forEach(symbol => {
             symbol.addEventListener('click', () => {
-                if (symbol.dataset.latexData in symbolLatexMap) {
-                    let _ = new ExpressionBackend.GUIMathSymbol(
-                        this.cursor.block,
-                        symbolLatexMap[symbol.dataset.latexData],
-                        symbol.innerHTML,
-                    );
-                    this.cursor.addComponent(_);
-                    this.cursor.updateDisplay();
-                }
+                let _ = new ExpressionBackend.GUIMathSymbol(
+                    this.cursor.block,
+                    symbol.dataset.latexData,
+                    symbol.innerHTML,
+                );
+                this.cursor.addComponent(_);
+                this.cursor.updateDisplay();
             });
         });
 
@@ -231,6 +140,40 @@ export default class GUIMath {
                         this.cursor.block,
                     );
                 }
+                this.cursor.addComponent(_);
+                this.cursor.updateDisplay();
+            });
+        });
+
+        accents.forEach(accent => {
+            accent.addEventListener('click', () => {
+                let _ = new ExpressionBackend.ScriptOneBlockComponent(
+                    this.cursor.block,
+                    accent.dataset.latexData,
+                    accent.dataset.templateType,
+                );
+                this.cursor.addComponent(_);
+                this.cursor.updateDisplay();
+            });
+        });
+
+        templateArrows.forEach(templateArrow => {
+            templateArrow.addEventListener('click', () => {
+                let _ = new ExpressionBackend.ArrowTwoBlockComponent(
+                    this.cursor.block,
+                    templateArrow.dataset.arrowType,
+                );
+                this.cursor.addComponent(_);
+                this.cursor.updateDisplay();
+            });
+        });
+
+        brackets.forEach(bracket => {
+            bracket.addEventListener('click', () => {
+                let _ = new ExpressionBackend.BracketOneBlockComponent(
+                    this.cursor.block,
+                    bracket.dataset.bracketType,
+                );
                 this.cursor.addComponent(_);
                 this.cursor.updateDisplay();
             });
@@ -272,9 +215,9 @@ export default class GUIMath {
             '.guimath-pseudo-mobile-keyboard',
         );
         const guimathTabButtons = editorDiv.querySelectorAll(
-            '.guimath_tab_container',
+            '._guimath_tab_container',
         );
-        const guimathTabs = editorDiv.querySelectorAll('.guimath_tab');
+        const guimathTabs = editorDiv.querySelectorAll('._guimath_tab');
 
         guimathTabButtons.forEach(btn => {
             btn.addEventListener('click', function () {
@@ -365,17 +308,33 @@ export default class GUIMath {
      @param componentClass A class that inherits from one of GUIMath's many component classes
      @param buttonContent HTML or text content that will be placed inside the rendered button
      @param title The title to show when a user hovers over the button
+     @param tabName The name of the tab where this symbol should be placed. Should be one of
+        `["greek-letters", "double-struck-fraktur", "arithmetic-operators", "relational-operators", "functions", "arrows", "scripts-brackets"]`
      */
-    registerFunction(componentClass, buttonContent, title = '') {
+    registerFunction(componentClass, buttonContent, title, tabName) {
+        if (!validEditorTabNames.includes(tabName)) {
+            // Do nothing if tab name is invalid
+            console.error(
+                'GUIMath.registerFunction received invalid tab name. Tab name should be one of ["greek-letters", "double-struck-fraktur", "arithmetic-operators", "relational-operators", "functions", "arrows", "scripts-brackets"]',
+            );
+            return;
+        }
+
         const el = document.createElement('span');
-        el.classList.add('guimath-btn', 'guimath-function');
+        el.classList.add('_guimath_btn', '_guimath_function');
         el.title = title;
         el.dataset.templateType = 'user-defined';
         el.dataset.functionId = 'user-defined';
         el.innerHTML = buttonContent;
-        this.editorWindow
-            .querySelector('._guimath_functions_tab')
-            .appendChild(el);
+        let tab = this.editorWindow.querySelector(
+            `._guimath_tab[data-tab-name="${tabName}"]`,
+        );
+        if (tab.querySelectorAll('._guimath_grid')) {
+            // Select the last _guimath_grid element inside `tab`
+            let _ = tab.querySelectorAll('._guimath_grid');
+            tab = _[_.length - 1];
+        }
+        tab.appendChild(el);
 
         el.addEventListener('click', () => {
             this.cursor.addComponent(new componentClass());
@@ -386,18 +345,34 @@ export default class GUIMath {
     /**
      * Adds a symbol to the UI that is not supported out of the box.
      @param latexData LaTeX code for the symbol
-     @param htmlData HTML or text content that will be placed inside the rendered button
+     @param htmlData HTML or text content representing the symbol
      @param title The title to show when a user hovers over the button
+     @param tabName The name of the tab where this symbol should be placed. Should be one of
+        `["greek-letters", "double-struck-fraktur", "arithmetic-operators", "relational-operators", "functions", "arrows", "scripts-brackets"]`
      */
-    registerSymbol(latexData, htmlData, title = '') {
+    registerSymbol(latexData, htmlData, title, tabName) {
+        if (!validEditorTabNames.includes(tabName)) {
+            // Do nothing if tab name is invalid
+            console.error(
+                'GUIMath.registerSymbol received invalid tab name. Tab name should be one of ["greek-letters", "double-struck-fraktur", "arithmetic-operators", "relational-operators", "functions", "arrows", "scripts-brackets"]',
+            );
+            return;
+        }
+
         const el = document.createElement('span');
-        el.classList.add('guimath-btn', 'guimath-symbol');
+        el.classList.add('_guimath_btn', 'guimath-symbol');
         el.title = title;
         el.dataset.latexData = latexData;
         el.innerHTML = htmlData;
-        this.editorWindow
-            .querySelector('._guimath_symbols_tab')
-            .appendChild(el);
+        let tab = this.editorWindow.querySelector(
+            `._guimath_tab[data-tab-name="${tabName}"]`,
+        );
+        if (tab.querySelectorAll('._guimath_grid')) {
+            // Select the last _guimath_grid element inside `tab`
+            let _ = tab.querySelectorAll('._guimath_grid');
+            tab = _[_.length - 1];
+        }
+        tab.appendChild(el);
 
         el.addEventListener('click', () => {
             let _ = new ExpressionBackend.GUIMathSymbol(

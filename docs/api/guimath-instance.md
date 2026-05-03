@@ -29,7 +29,7 @@ Currently, the following options are supported -
 | `id`            | String    | `""`          | Additional id to add to the GUIMath widget's root element.                                                                                                                                                                                    |
 
 ## Writing A Success Callback
-The success callback you supply is run when the user is done entering an equation and clicks on the “✔” button. This is where you will be able to access the LaTeX for the entered equation, and handle it however you want. It is recommended to supply this function after creating an GUIMath instance instead of passing it to the constructor, just because supplying it later lets you use both regular functions and arrow functions as the callback without having to worry about `this` in context.
+The success callback you supply is run when the user is done entering an equation and clicks on the “✔” button. This is where you will be able to access the LaTeX for the entered equation, and handle it however you want. It is recommended to supply this function after creating a GUIMath instance instead of passing it to the constructor, just because supplying it later lets you use both regular functions and arrow functions as the callback without having to worry about `this` in context.
 
 The success callback is passed two arguments - 
 
