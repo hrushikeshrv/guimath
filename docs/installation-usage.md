@@ -11,13 +11,8 @@ nav_order: 2
 {:toc}
 
 ## Installation
-GUIMath uses MathJax as a core dependency, so you need to include both MathJax as well as GUIMath into your webpage. GUIMath does not have a built-in renderer, and uses MathJax to render the equations as they are being built.
-
 ### CDN
-
-Make sure you include MathJax before including GUIMath.
-
-Then include the GUIMath javascript file and stylesheet. You can include GUIMath's stylesheet before your site's stylesheet, to allow your CSS to override GUIMath's CSS.
+Include the GUIMath javascript file and stylesheet. You can include GUIMath's stylesheet before your site's stylesheet, to allow your CSS to override GUIMath's CSS.
 
 The latest version of GUIMath can be found on [jsDelivr](https://www.jsdelivr.com/package/npm/guimath) or [unpkg](https://unpkg.com/browse/guimath/).
 
@@ -31,15 +26,6 @@ OR
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/guimath/dist/guimath.min.css">
 <script src="https://cdn.jsdelivr.net/npm/guimath/dist/guimath.umd.min.js"></script>
-```
-
-An example config is shown below using unpkg -
-
-```html
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/guimath/dist/guimath.css">
-<script src="https://unpkg.com/guimath/dist/guimath.min.js"></script>
 ```
 
 ### npm
