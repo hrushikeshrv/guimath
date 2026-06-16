@@ -153,7 +153,7 @@ export default class Cursor {
             let _ = new ExpressionBackend.GUIMathSymbol(
                 this.block,
                 '\\:\\:',
-                '',
+                ' ',
             );
             this.addComponent(_);
         } else if (event.key === '\\') {

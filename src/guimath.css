@@ -184,6 +184,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    align-items: center;
 }
 
 #_guimath_equation_display {
@@ -197,6 +198,7 @@
     max-width: 100%;
     align-items: center;
     justify-content: center;
+    white-space: pre;
 }
 
 ._guimath_grid {
@@ -284,6 +286,7 @@
     height: 1.2em;
     animation: _guimath_blink 1s steps(1) infinite;
     animation-play-state: paused;
+    margin: -0.1em -1px;
 }
 
 ._guimath_editor_window[data-focused="true"] ._guimath_cursor {
@@ -308,6 +311,10 @@
     font-size: 1.2em;
 }
 
+._guimath_symbol_html {
+    font-style: normal !important;
+}
+
 ._guimath_straight_text {
     font-style: normal !important;
     font-size: 1.2em;
@@ -326,10 +333,10 @@
 ._guimath_block::before {
     content: "";
     position: absolute;
-    top: 3px;
-    bottom: -1px;
+    top: 0;
+    bottom: -3px;
     left: -2px;
-    right: -2px;
+    right: -3px;
     border: 2px solid transparent;
     border-radius: 2px;
     transition: border-color ease 0.2s;
@@ -367,4 +374,9 @@
 ._guimath_accent_block {
     padding: 0;
     line-height: 0.5;
+}
+
+._guimath_sqrt_main_block {
+    border-top: 1px solid var(--default-font-color);
+    padding: 3px;
 }
