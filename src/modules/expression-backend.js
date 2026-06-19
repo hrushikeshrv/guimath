@@ -11,6 +11,16 @@ function isNumber(str) {
     return !isNaN(str) && !isNaN(parseFloat(str)) && isFinite(Number(str));
 }
 
+function isBracket(str) {
+    if (typeof str != 'string') return false;
+    const brackets = new Set(['(', ')', '{', '}', '[', ']', '<', '>']);
+    return brackets.has(str);
+}
+
+function shouldBeStraightText(str) {
+    return isBracket(str) || isNumber(str);
+}
+
 /**
  * @class
  * Thin wrapper around the Component class that collects all the components together in an Expression
@@ -110,7 +120,7 @@ export class Block {
     toHTML(cursorBlock = null, cursorPosition = null) {
         if (this.children.length === 0) {
             if (this === cursorBlock)
-                return '<span class="_guimath_cursor"></span>';
+                return '<span class="_guimath_active_block_marker"></span><span class="_guimath_cursor"></span>';
             return '';
         }
         let html = '';
@@ -399,11 +409,11 @@ export class TemplateThreeBlockComponent extends ThreeBlockComponent {
             this.parent.parent instanceof Component
         ) {
             return `
-                <div class="_guimath_component _guimath_flexbox_row">
+                <div class="_guimath_component _guimath_flexbox_row" style='align-items: stretch;'>
                     <div class='_guimath_block _guimath_large_block' style="margin-right: 0;">${
                         this.htmlData
                     }</div>
-                    <div class='_guimath_flexbox_column'>
+                    <div class='_guimath_flexbox_column' style='justify-content: space-between;'>
                         <div class='_guimath_block _guimath_small_block'>${this.blocks[1].toHTML(
                             cursorBlock,
                             cursorPosition,
@@ -413,7 +423,7 @@ export class TemplateThreeBlockComponent extends ThreeBlockComponent {
                             cursorPosition,
                         )}</div>
                     </div>
-                    <div class='_guimath_block'>${this.blocks[2].toHTML(
+                    <div class='_guimath_block' style='margin-left: 3px;'>${this.blocks[2].toHTML(
                         cursorBlock,
                         cursorPosition,
                     )}</div>
@@ -560,7 +570,7 @@ export class TextComponent extends Component {
     toHTML(cursorBlock = null, cursorPosition = null) {
         const content = this.blocks[0].toHTML(cursorBlock, cursorPosition);
         return `<span class="_guimath_text ${
-            isNumber(content) ? '_guimath_straight_text' : ''
+            shouldBeStraightText(content) ? '_guimath_straight_text' : ''
         }">${content}</span>`;
     }
 }
@@ -703,10 +713,11 @@ export class Fraction extends TwoBlockComponent {
     toHTML(cursorBlock = null, cursorPosition = null) {
         return `
         <div class="_guimath_component _guimath_flexbox_column">
-            <div class='_guimath_block' style='border-bottom: 2px solid var(--default-font-color); padding-bottom: 0.35em;'>${this.blocks[0].toHTML(
+            <div class='_guimath_block'>${this.blocks[0].toHTML(
                 cursorBlock,
                 cursorPosition,
             )}</div>
+            <div style='height: 0; width: 100%; border: 1px solid var(--default-font-color); margin: 0.35em 0;'></div>
             <div class='_guimath_block' style='padding-top: 0.05em;'>${this.blocks[1].toHTML(
                 cursorBlock,
                 cursorPosition,
@@ -840,16 +851,24 @@ export class Sqrt extends OneBlockComponent {
 
     toHTML(cursorBlock = null, cursorPosition = null) {
         return `
-        <math class="_guimath_component _guimath_flexbox_row">
-            <msqrt>
-                <mtext>
-                <div class='_guimath_block'>${this.blocks[0].toHTML(
-                    cursorBlock,
-                    cursorPosition,
-                )}</div>
-                </mtext>
-            </msqrt> 
-        </math>
+        <div class="_guimath_component _guimath_flexbox_row" style='align-items: stretch;'>
+            <div style="width: 10px; display: flex;">
+                <svg viewBox="0 0 10 20" preserveAspectRatio="none" style="display: block; width: 100%;">
+                <path 
+                    d="M1,12 L3,12 L6,19 L10,0" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    stroke-width="1.2" 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                />
+            </svg>
+            </div>
+            <div class='_guimath_block _guimath_sqrt_main_block'>${this.blocks[0].toHTML(
+                cursorBlock,
+                cursorPosition,
+            )}</div>
+        </div> 
         `;
     }
 }
@@ -865,20 +884,27 @@ export class NthRoot extends TwoBlockComponent {
 
     toHTML(cursorBlock = null, cursorPosition = null) {
         return `
-        <math class="_guimath_component _guimath_flexbox_row">
-            <mroot>
-                <mtext>
-                <div class='_guimath_block'>${this.blocks[1].toHTML(
+            <div class="_guimath_component _guimath_flexbox_row" style='align-items: stretch;'>
+                <div style="width: 10px; display: flex; position: relative;">
+                    <div class='_guimath_block _guimath_smaller_block' style='position: absolute; bottom: 45%; left: -15%;'>
+                        ${this.blocks[0].toHTML(cursorBlock, cursorPosition)}
+                    </div>
+                    <svg viewBox="0 0 10 20" preserveAspectRatio="none" style="display: block; width: 100%;">
+                        <path 
+                            d="M1,12 L3,12 L6,19 L10,0" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            stroke-width="1.2" 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                        />
+                    </svg>
+                </div>
+                <div class='_guimath_block _guimath_sqrt_main_block'>${this.blocks[1].toHTML(
                     cursorBlock,
                     cursorPosition,
                 )}</div>
-                </mtext>
-                <mn class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
-                    cursorBlock,
-                    cursorPosition,
-                )}</mn>
-            </mroot> 
-        </math>
+            </div> 
         `;
     }
 }
