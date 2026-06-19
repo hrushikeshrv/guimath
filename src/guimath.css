@@ -357,8 +357,19 @@
     font-size: 0.8em;
 }
 
-._guimath_small_block {
+._guimath_smaller_block ._guimath_block,
+._guimath_smaller_block ._guimath_text,
+._guimath_smaller_block ._guimath_straight_text {
+    font-size: 0.6em;
+}
+
+._guimath_small_block,
+._guimath_smaller_block {
     z-index: 2;
+}
+
+._guimath_smaller_block ._guimath_cursor {
+    height: 0.8em;
 }
 
 ._guimath_large_block {

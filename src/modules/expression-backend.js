@@ -884,20 +884,27 @@ export class NthRoot extends TwoBlockComponent {
 
     toHTML(cursorBlock = null, cursorPosition = null) {
         return `
-        <math class="_guimath_component _guimath_flexbox_row">
-            <mroot>
-                <mtext>
-                <div class='_guimath_block'>${this.blocks[1].toHTML(
+            <div class="_guimath_component _guimath_flexbox_row" style='align-items: stretch;'>
+                <div style="width: 10px; display: flex; position: relative;">
+                    <div class='_guimath_block _guimath_smaller_block' style='position: absolute; bottom: 45%; left: -15%;'>
+                        ${this.blocks[0].toHTML(cursorBlock, cursorPosition)}
+                    </div>
+                    <svg viewBox="0 0 10 20" preserveAspectRatio="none" style="display: block; width: 100%;">
+                        <path 
+                            d="M1,12 L3,12 L6,19 L10,0" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            stroke-width="1.2" 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                        />
+                    </svg>
+                </div>
+                <div class='_guimath_block _guimath_sqrt_main_block'>${this.blocks[1].toHTML(
                     cursorBlock,
                     cursorPosition,
                 )}</div>
-                </mtext>
-                <mn class='_guimath_block _guimath_small_block'>${this.blocks[0].toHTML(
-                    cursorBlock,
-                    cursorPosition,
-                )}</mn>
-            </mroot> 
-        </math>
+            </div> 
         `;
     }
 }
